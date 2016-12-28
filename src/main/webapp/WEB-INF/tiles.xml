@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+        template="/WEB-INF/jsp/layout.jsp">
+        <put-attribute name="flash" value="/WEB-INF/jsp/flash.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/jsp/scripts.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+        <put-attribute name="content" value="" />
+    </definition>
+    <definition name="menu" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Menu/menu.jsp" />
+    </definition> 
+    <definition name="adios" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Pages/adios.jsp" />
+    </definition>
+    <definition name="backlog_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/add.jsp">
+		    	<put-attribute name="form_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/form_backlog_item.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+	<definition name="backlog_delete" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/delete.jsp">
+				<put-attribute name="view_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/view_backlog_item.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+    <definition name="backlog_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/ProductBacklog/edit.jsp">
+	    		<put-attribute name="form_backlog_item" value="/WEB-INF/jsp/Vista/ProductBacklog/form_backlog_item.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="backlog_listar" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/ProductBacklog/listar.jsp" />
+    </definition>
+    <definition name="configuracion_index" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
+    </definition>
+    <definition name="configuracion_juegos" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/juegos.jsp" />
+    </definition>
+    <definition name="error_mensajeError" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
+    </definition>
+    <definition name="groups_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Groups/add.jsp">
+		    	<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="groups_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Groups/edit.jsp">
+	    		<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="groups_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
+    </definition>
+    <definition name="instalacion_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
+    </definition>
+    <definition name="instalacion_user_add" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/user_add.jsp" />
+    </definition>
+    <definition name="permisos_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
+    </definition>
+    <definition name="permisos_listar_permisos" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
+    </definition>
+    <definition name="personas_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Personas/add.jsp">
+		    	<put-attribute name="form_persona" value="/WEB-INF/jsp/Vista/Personas/form_persona.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="personas_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Personas/edit.jsp">
+	    		<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Personas/form_persona.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="personas_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Personas/index.jsp"/>
+    </definition>
+    <definition name="proyectos_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Proyectos/add.jsp">
+		    	<put-attribute name="form_proyecto" value="/WEB-INF/jsp/Vista/Proyectos/form_proyecto.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="proyectos_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Proyectos/edit.jsp">
+	    		<put-attribute name="form_proyecto" value="/WEB-INF/jsp/Vista/Proyectos/form_proyecto.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="proyectos_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Proyectos/index.jsp"/>
+    </definition>
+    <definition name="reuniones_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Reuniones/add.jsp">
+		    	<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Reuniones/form_reunion.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="reuniones_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Reuniones/edit.jsp">
+	    		<put-attribute name="form_reunion" value="/WEB-INF/jsp/Vista/Reuniones/form_reunion.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="reuniones_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/index.jsp"/>
+    </definition>
+    <definition name="reuniones_view" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Reuniones/view.jsp"/>
+    </definition>
+
+
+    <definition name="sprints_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Sprints/add.jsp">
+		    	<put-attribute name="form_sprint" value="/WEB-INF/jsp/Vista/Sprints/form_sprint.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="sprints_backlog" extends="base.definition">
+        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Sprints/sprint_backlog.jsp"/>
+    </definition>
+    <definition name="sprints_delete" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Sprints/delete.jsp">
+		    	<put-attribute name="view_sprint" value="/WEB-INF/jsp/Vista/Sprints/view_sprint.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="sprints_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Sprints/edit.jsp">
+	    		<put-attribute name="form_sprint" value="/WEB-INF/jsp/Vista/Sprints/form_sprint.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="sprints_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Sprints/index.jsp"/>
+    </definition>
+
+    
+    <definition name="users_add" extends="base.definition">
+    	<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Users/add.jsp">
+		    	<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+	    	</definition>
+    	</put-attribute>
+    </definition>
+    <definition name="users_edit" extends="base.definition">
+ 		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Users/edit.jsp">
+	    		<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+    		</definition>
+   		</put-attribute>
+   	</definition>
+    <definition name="users_index" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/index.jsp"/>
+    </definition>
+    <definition name="login" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login.jsp" />
+    </definition>
+    <definition name="login_denied" extends="base.definition">
+    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/denied.jsp" />
+    </definition>
+</tiles-definitions>
