@@ -58,7 +58,7 @@
 	</appender>
 	 -->
 
-    <logger name="agilemeetings" additivity="false">
+    <logger name="gamification" additivity="false">
 		<level value="trace" />
 		<!-- appender-ref ref="SSB_ROLLING_FILE" /-->
 		<appender-ref ref="STDOUT" />

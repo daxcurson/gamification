@@ -6,24 +6,11 @@
  
 <hibernate-configuration>
     <session-factory>
-    	<mapping class="agilemeetings.model.EstadoBacklogItem" />
-        <mapping class="agilemeetings.model.EstadoProyecto" />
-        <mapping class="agilemeetings.model.Group" />
-        <mapping class="agilemeetings.model.ItemSprint" />
-        <mapping class="agilemeetings.model.Juego" />
-        <mapping class="agilemeetings.model.JuegoReunion" />
-        <mapping class="agilemeetings.model.Permission" />
-        <mapping class="agilemeetings.model.PermissionGranted" />
-        <mapping class="agilemeetings.model.Persona" />
-        <mapping class="agilemeetings.model.PersonaReunion" />
-        <mapping class="agilemeetings.model.ProductBacklogItem"/>
-        <mapping class="agilemeetings.model.Proyecto" />
-        <mapping class="agilemeetings.model.Reunion" />
-        <mapping class="agilemeetings.model.Rol" />
-        <mapping class="agilemeetings.model.RolPersona" />
-        <mapping class="agilemeetings.model.Sprint" />
-        <mapping class="agilemeetings.model.TipoReunion" />
-        <mapping class="agilemeetings.model.User" />
+        <mapping class="gamification.model.Group" />
+        <mapping class="gamification.model.Permission" />
+        <mapping class="gamification.model.PermissionGranted" />
+        <mapping class="gamification.model.Persona" />
+        <mapping class="gamification.model.User" />
     </session-factory>
 	    
 </hibernate-configuration>

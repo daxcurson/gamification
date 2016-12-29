@@ -9,20 +9,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Agile Meetings</a>
+			<a class="navbar-brand" href="#">Gamification</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${pageContext.request.contextPath}/menu"><span class="glyphicon glyphicon-home"></span>Pantalla Inicial</a></li>
-				<sec:authorize access="hasRole('ROLE_PROYECTOS_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/proyectos/"><span class="glyphicon glyphicon-briefcase"></span>Proyectos</a></li>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_PERSONAS_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/personas/"><span class="glyphicon glyphicon-user"></span>Personas</a></li>
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_REUNIONES_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/reuniones/"><span class="glyphicon glyphicon-thumbs-up"></span>Reuniones</a></li>
-				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/configuracion/"><span class="glyphicon glyphicon-cog"></span>Configuraci&oacute;n</a></li>
 				</sec:authorize>

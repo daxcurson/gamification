@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="row">
-	<h1 class="txt-color-red login-header-big">Acceso al sistema Agile Meetings</h1>
+	<h1 class="txt-color-red login-header-big">Acceso al sistema Gamification</h1>
 	<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check" id="login-form">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<fieldset>
