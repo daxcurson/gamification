@@ -9,8 +9,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="personas")
-public class Persona 
+@Table(name="estudiantes")
+public class Estudiante 
 {
 	@Id
 	@Column(name="id")
@@ -30,7 +30,7 @@ public class Persona
 	/**
 	 * Valores por defecto de persona. No es usuario del sistema y esta habilitada.
 	 */
-	public Persona()
+	public Estudiante()
 	{
 		this.usuario_sistema=false;
 		this.habilitada=1;

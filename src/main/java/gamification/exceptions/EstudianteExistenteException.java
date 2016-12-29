@@ -1,6 +1,6 @@
 package gamification.exceptions;
 
-public class PersonaExistenteException extends Exception {
+public class EstudianteExistenteException extends Exception {
 
 	/**
 	 * 

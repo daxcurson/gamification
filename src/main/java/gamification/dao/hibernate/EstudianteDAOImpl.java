@@ -9,32 +9,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import gamification.dao.PersonaDAO;
-import gamification.model.Persona;
+import gamification.dao.EstudianteDAO;
+import gamification.model.Estudiante;
 
 @Repository
-public class PersonaDAOImpl implements PersonaDAO
+public class EstudianteDAOImpl implements EstudianteDAO
 {
-	private static Logger log=LogManager.getLogger(PersonaDAOImpl.class);
+	private static Logger log=LogManager.getLogger(EstudianteDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Override
-	public Persona getById(int id) 
+	public Estudiante getById(int id) 
 	{
 		log.trace("Estoy en PersonaDAOImpl.getById, id pedido:"+id);
-		return (Persona) sessionFactory.getCurrentSession().createQuery("from Persona where id="+id).getSingleResult();
+		return (Estudiante) sessionFactory.getCurrentSession().createQuery("from Persona where id="+id).getSingleResult();
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Persona> listarPersonas() 
+	public List<Estudiante> listarEstudiantes() 
 	{
-		log.trace("Estoy en PersonaDAOImpl.listarPersonas");
-		return (List<Persona>) sessionFactory.getCurrentSession().createQuery("from Persona").getResultList();
+		log.trace("Estoy en EstudianteDAOImpl.listarEstudiante");
+		return (List<Estudiante>) sessionFactory.getCurrentSession().createQuery("from Estudiante").getResultList();
 	}
 
 	@Override
 	@Transactional
-	public void agregar(Persona persona) 
+	public void agregar(Estudiante persona) 
 	{
 		// Si no va a ser usuario del sistema, fuerzo a que User sea nulo.
 		if(!persona.getUsuario_sistema())
@@ -43,7 +43,7 @@ public class PersonaDAOImpl implements PersonaDAO
 	}
 
 	@Override
-	public void grabar(Persona persona) 
+	public void grabar(Estudiante persona) 
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(persona);
 	}
