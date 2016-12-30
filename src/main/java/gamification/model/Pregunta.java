@@ -20,4 +20,23 @@ public class Pregunta
 	@ManyToOne
 	@JoinColumn(name="tipo_pregunta_id")
 	private TipoPregunta tipoPregunta;
+	private String textoPregunta;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getTextoPregunta() {
+		return textoPregunta;
+	}
+	public void setTextoPregunta(String textoPregunta) {
+		this.textoPregunta = textoPregunta;
+	}
+	public TipoPregunta getTipoPregunta() {
+		return tipoPregunta;
+	}
+	public void setTipoPregunta(TipoPregunta tipoPregunta) {
+		this.tipoPregunta = tipoPregunta;
+	}
 }

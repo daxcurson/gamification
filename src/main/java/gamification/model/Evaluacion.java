@@ -11,6 +11,8 @@ public class Evaluacion
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String descripcion;
+	@ManyToOne
+	@JoinColumn(name="curso_oferta_id")
 	private CursoOferta cursoOferta;
 	public int getId() {
 		return id;

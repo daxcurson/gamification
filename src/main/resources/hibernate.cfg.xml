@@ -5,12 +5,23 @@
 
  
 <hibernate-configuration>
-    <session-factory>
-        <mapping class="gamification.model.Group" />
-        <mapping class="gamification.model.Permission" />
-        <mapping class="gamification.model.PermissionGranted" />
-        <mapping class="gamification.model.Persona" />
-        <mapping class="gamification.model.User" />
-    </session-factory>
+	<session-factory>
+		<mapping class="gamification.model.Capacitador" />
+		<mapping class="gamification.model.Curso" />
+		<mapping class="gamification.model.CursoOferta" />
+		<mapping class="gamification.model.Estudiante" />
+		<mapping class="gamification.model.Evaluacion" />
+		<mapping class="gamification.model.EvaluacionTomada" />
+		<mapping class="gamification.model.Group" />
+		<mapping class="gamification.model.Inscripcion" />
+		<mapping class="gamification.model.Permission" />
+		<mapping class="gamification.model.PermissionGranted" />
+		<mapping class="gamification.model.Pregunta" />
+		<mapping class="gamification.model.PreguntaFormulada" />
+		<mapping class="gamification.model.Respuesta" />
+		<mapping class="gamification.model.TemaCurso" />
+		<mapping class="gamification.model.TipoPregunta" />
+		<mapping class="gamification.model.User" />
+	</session-factory>
 	    
 </hibernate-configuration>

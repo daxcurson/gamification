@@ -1,0 +1,47 @@
+package gamification.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+/**
+ * Una respuesta formulada a una pregunta en una Evaluacion tomada
+ * @author daxcurson
+ *
+ */
+@Entity
+@Table(name="respuestas_formuladas")
+public class RespuestaFormulada 
+{
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@ManyToOne
+	@JoinColumn(name="evaluacion_tomada_id")
+	private EvaluacionTomada evaluacion_tomada;
+	private String valor_respuesta;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public EvaluacionTomada getEvaluacion_tomada() {
+		return evaluacion_tomada;
+	}
+	public void setEvaluacion_tomada(EvaluacionTomada evaluacion_tomada) {
+		this.evaluacion_tomada = evaluacion_tomada;
+	}
+	public String getValor_respuesta() {
+		return valor_respuesta;
+	}
+	public void setValor_respuesta(String valor_respuesta) {
+		this.valor_respuesta = valor_respuesta;
+	}
+}
