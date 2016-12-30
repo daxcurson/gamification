@@ -50,19 +50,16 @@ ALTER TABLE `personas`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username_fc` (`username`),
-  ADD UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`),
   ADD KEY `FK_fm4cfgdt24toh89yw4rbnu1lb` (`group_id`);
 
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `group_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `personas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `group_permission`
   ADD CONSTRAINT `FK_14fbne1or7jokuvpatksjhlcv` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
-ALTER TABLE `users`
-  ADD CONSTRAINT `FK_fm4cfgdt24toh89yw4rbnu1lb` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
 
