@@ -6,6 +6,7 @@
  
 <hibernate-configuration>
 	<session-factory>
+	    <mapping class="gamification.model.Calificacion" />
 		<mapping class="gamification.model.Capacitador" />
 		<mapping class="gamification.model.Curso" />
 		<mapping class="gamification.model.CursoOferta" />
@@ -19,6 +20,7 @@
 		<mapping class="gamification.model.Pregunta" />
 		<mapping class="gamification.model.PreguntaFormulada" />
 		<mapping class="gamification.model.Respuesta" />
+		<mapping class="gamification.model.RespuestaFormulada" />
 		<mapping class="gamification.model.TemaCurso" />
 		<mapping class="gamification.model.TipoPregunta" />
 		<mapping class="gamification.model.User" />
