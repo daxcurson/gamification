@@ -127,4 +127,7 @@
 	<definition name="login_denied" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/denied.jsp" />
 	</definition>
+	<definition name="login_aceptado_facebook" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login_aceptado_facebook.jsp" />
+	</definition>
 </tiles-definitions>

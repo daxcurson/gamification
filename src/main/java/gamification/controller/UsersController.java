@@ -48,7 +48,7 @@ public class UsersController extends AppController
 	private UserDetailsService userService;
 	@Autowired
 	private GroupService groupService;
-
+	
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar usuarios",permission="ROLE_USERS_MOSTRAR_MENU")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_USERS_MOSTRAR_MENU')")
@@ -143,7 +143,8 @@ public class UsersController extends AppController
 	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
+	    if (auth != null)
+	    {
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
 	    return "redirect:/pages/adios";

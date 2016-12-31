@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page session="false" %>
 
 <div class="row">
 	<h1 class="txt-color-red login-header-big">Acceso al sistema Gamification</h1>
@@ -29,13 +30,16 @@
 <h5 class="text-center"> - Or sign in using -</h5>
 	<ul class="list-inline text-center">
 	<li>
+		<form action="<c:url value="/users/login_facebook" />" method="POST">
+			<button type="submit">Sign in with Facebook</button>
+		</form>
 		<a href="javascript:void(0);" class="btn">
-		<img src="${pageContext.request.contextPath}/img/login-google.png"/>
+		<img src="${pageContext.request.contextPath}/img/login-facebook.png"/>
 		</a>
 	</li>
 	<li>
 		<a href="javascript:void(0);" class="btn">
-		<img src="${pageContext.request.contextPath}/img/login-facebook.png"/>
+		<img src="${pageContext.request.contextPath}/img/login-google.png"/>
 		</a>
 	</li>
 	</ul>
