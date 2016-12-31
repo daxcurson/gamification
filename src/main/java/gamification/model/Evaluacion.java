@@ -13,7 +13,7 @@ public class Evaluacion
 	private String descripcion;
 	@ManyToOne
 	@JoinColumn(name="curso_oferta_id")
-	private CursoOferta cursoOferta;
+	private CursoOferta curso_oferta;
 	public int getId() {
 		return id;
 	}
@@ -26,10 +26,10 @@ public class Evaluacion
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public CursoOferta getCursoOferta() {
-		return cursoOferta;
+	public CursoOferta getCurso_oferta() {
+		return curso_oferta;
 	}
-	public void setCursoOferta(CursoOferta cursoOferta) {
-		this.cursoOferta = cursoOferta;
+	public void setCurso_oferta(CursoOferta cursoOferta) {
+		this.curso_oferta = cursoOferta;
 	}
 }
