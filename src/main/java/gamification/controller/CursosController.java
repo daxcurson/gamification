@@ -26,6 +26,7 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.CursoExistenteException;
 import gamification.model.Curso;
+import gamification.model.TemaCurso;
 import gamification.service.CursoService;
 
 @Controller
@@ -136,6 +137,97 @@ public class CursosController extends AppController
 				model.addAttribute("message","Ese nombre de curso ya existe, por favor elija otro");
 				modelo=this.cargarFormCurso("cursos_edit",curso);
 			}
+			return modelo;
+		}
+	}
+	@Descripcion(value="Listar temario del curso",permission="ROLE_TEMARIO_LISTAR")
+	@RequestMapping(value="/temario/{cursoId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_TEMARIO_LISTAR')")
+	public ModelAndView listarTemario(@PathVariable("cursoId") Integer cursoId)
+	{
+		ModelAndView m=new ModelAndView("cursos_temario_index");
+		Curso curso=cursoService.getCursoById(cursoId);
+		List<TemaCurso> temas=cursoService.listarTemas(cursoId);
+		m.addObject("curso",curso);
+		m.addObject("temario",temas);
+		return m;
+	}
+	private ModelAndView cargarFormTema(String vista,TemaCurso tema)
+	{
+		ModelAndView modelo=new ModelAndView(vista);
+		modelo.addObject("tema",tema);
+		return modelo;
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_TEMA_AGREGAR')")
+	@RequestMapping(value="/temario_add/{cursoId}",method=RequestMethod.GET)
+	public ModelAndView mostrarFormAgregarTema(Model model,
+			@PathVariable("cursoId") Integer cursoId
+			)
+	{
+		TemaCurso t=new TemaCurso();
+		ModelAndView modelo=this.cargarFormTema("cursos_temario_add",t);
+		return modelo;
+	}
+	@Descripcion(value="Agregar Tema de Curso",permission="ROLE_CURSOS_TEMA_AGREGAR")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_TEMA_AGREGAR')")
+	@RequestMapping(value = "/temario_add/{cursoId}", method = RequestMethod.POST)
+	public ModelAndView agregarTemaCurso(@Valid @ModelAttribute("tema")
+	@PathVariable("cursoId") Integer cursoId,
+	TemaCurso tema,
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormTema("cursos_temario_add",tema);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/cursos/temario/"+cursoId);
+			cursoService.agregarTemaCurso(tema,cursoId);
+			redirectAttributes.addFlashAttribute("message","Curso agregado exitosamente");
+			return modelo;
+		}
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_TEMA_EDIT')")
+	@RequestMapping(value="/temario_edit/{temaId}",method=RequestMethod.GET)
+	public ModelAndView mostrarFormEditarTema(@PathVariable("temaId") Integer temaId,
+			Model model)
+	{
+		// Busco el curso y lo cargo en el formulario.
+		TemaCurso tema=cursoService.getTemaById(temaId);
+		ModelAndView modelo=this.cargarFormTema("cursos_temario_edit",tema);
+		return modelo;
+	}
+	@Descripcion(value="Editar Tema de curso",permission="ROLE_CURSOS_TEMA_EDIT")
+	@RequestMapping(value="/temario_edit/{temaId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_TEMA_EDIT')")
+	public ModelAndView editarTema(@PathVariable("temaId") Integer temaId,
+			@Valid @ModelAttribute("tema") TemaCurso tema,
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormTema("cursos_temario_edit",tema);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/cursos/temario/"+tema.getCurso().getId());
+			cursoService.grabarTemaCurso(tema);
+			redirectAttributes.addFlashAttribute("message","Tema editado exitosamente");
 			return modelo;
 		}
 	}

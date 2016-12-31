@@ -20,18 +20,19 @@ corregidas por un Evaluador.
 <table class="table">
 <tr>
 <th>Id</th>
+<th>C&oacute;digo Curso</th>
 <th>Nombre</th>
-<th>Es usuario?</th>
-<th>Habilitada</th>
 <th>Acciones</th>
 </tr>
-<c:forEach items="${estudiantes}" var="estudiante">
+<c:forEach items="${cursos}" var="curso">
 <tr>
-<td><c:out value="${estudiante.id}"/></td>
-<td>${estudiante.nombre}</td>
-<td>${estudiante.user!=null ? "S&iacute;":"No" }</td>
-<td>${estudiante.habilitada==1 ? "S&iacute;":"No"}</td>
-<td><a href="${pageContext.request.contextPath}/estudiantes/edit/${estudiante.id}">Editar</a></td>
+<td><c:out value="${curso.id}"/></td>
+<td>${curso.codigo_curso}</td>
+<td>${curso.nombre}</td>
+<td>
+<a href="${pageContext.request.contextPath}/cursos/edit/${curso.id}">Editar</a> 
+<a href="${pageContext.request.contextPath}/cursos/temario/${curso.id}">Temario</a>
+</td>
 </tr>
 </c:forEach>
 </table>

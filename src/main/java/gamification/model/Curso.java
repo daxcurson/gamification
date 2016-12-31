@@ -19,7 +19,7 @@ public class Curso
 	private int id;
 	@NotEmpty
 	private String nombre;
-	private String horario;
+	private String codigo_curso;
 	public int getId() {
 		return id;
 	}
@@ -32,11 +32,11 @@ public class Curso
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getHorario() {
-		return horario;
+	public String getCodigo_curso() {
+		return codigo_curso;
 	}
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setCodigo_curso(String codigo) {
+		this.codigo_curso = codigo;
 	}
 	
 }

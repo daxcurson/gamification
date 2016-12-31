@@ -34,6 +34,9 @@
 	<definition name="capacitadores_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Capacitadores/index.jsp"/>
 	</definition>
+		<definition name="configuracion_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
+	</definition>
 	<definition name="cursos_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Cursos/add.jsp">
@@ -51,8 +54,22 @@
 	<definition name="cursos_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/index.jsp"/>
 	</definition>
-	<definition name="configuracion_index" extends="base.definition">
-		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
+	<definition name="cursos_temario_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/temario_add.jsp">
+				<put-attribute name="temario_form" value="/WEB-INF/jsp/Vista/Cursos/temario_form.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_temario_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/temario_edit.jsp">
+				<put-attribute name="temario_form" value="/WEB-INF/jsp/Vista/Cursos/temario_form.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_temario_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/temario_index.jsp"/>
 	</definition>
 	<definition name="error_mensajeError" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>

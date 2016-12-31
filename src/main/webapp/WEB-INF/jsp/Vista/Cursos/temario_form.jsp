@@ -5,13 +5,13 @@
 
 <fieldset>
 <div class="form-group">
-<label for="CursoCodigoCurso">C&oacute;digo de Curso</label>
-<form:input id="CursoCodigoCurso" class="form-control" path="codigo_curso"/>
-<form:errors path="codigo_curso"/>
+<label for="TemaNombre">Nombre</label>
+<form:input id="TemaNombre" class="form-control" path="nombre"/>
+<form:errors path="nombre"/>
 </div>
 <div class="form-group">
-<label for="CursoNombre">Nombre</label>
-<form:input id="CursoNombre" class="form-control" path="nombre"/>
-<form:errors path="nombre"/>
+<label for="TemaNombre">Descripci&oacute;n</label>
+<form:textarea cols="80" rows="10" path="descripcion" id="TemaDescripcion" class="form-control" />
+<form:errors path="descripcion"/>
 </div>
 </fieldset>
