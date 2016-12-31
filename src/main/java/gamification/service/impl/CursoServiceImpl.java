@@ -3,12 +3,14 @@ package gamification.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import gamification.dao.CursoDAO;
 import gamification.exceptions.CursoExistenteException;
 import gamification.model.Curso;
 import gamification.service.CursoService;
 
+@Service
 public class CursoServiceImpl implements CursoService 
 {
 	@Autowired
