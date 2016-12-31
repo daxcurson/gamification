@@ -4,8 +4,8 @@
 
 <fieldset>
 <div class="form-group">
-<label for="EstudianteNombre">Nombre</label>
-<form:input id="EstudianteNombre" class="form-control" path="nombre"/>
+<label for="CapacitadorNombre">Nombre</label>
+<form:input id="CapacitadorNombre" class="form-control" path="nombre"/>
 <form:errors path="nombre"/>
 </div>
 <div class="form-group">

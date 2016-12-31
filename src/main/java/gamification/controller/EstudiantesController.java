@@ -62,7 +62,7 @@ public class EstudiantesController extends AppController
 		modelo.addObject("estudiantes",estudianteService.listarEstudiantes());
 		return modelo;
 	}
-	
+
 	private ModelAndView cargarFormEstudiante(String vista,Estudiante estudiante)
 	{
 		ModelAndView modelo=new ModelAndView(vista);
@@ -98,7 +98,7 @@ public class EstudiantesController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("redirect:/personas/index");
+			ModelAndView modelo=new ModelAndView("redirect:/estudiantes/index");
 			try
 			{
 				estudianteService.agregarEstudiante(estudiante);
@@ -123,7 +123,7 @@ public class EstudiantesController extends AppController
 		return modelo;
 	}
 	@Descripcion(value="Editar Estudiante",permission="ROLE_ESTUDIANTES_EDIT")
-	@RequestMapping(value="/edit/{personaId}",method=RequestMethod.POST)
+	@RequestMapping(value="/edit/{estudianteId}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_ESTUDIANTES_EDIT')")
 	public ModelAndView editarEstudiante(@PathVariable("estudianteId") Integer estudianteId,
 			@Valid @ModelAttribute("estudiante") Estudiante estudiante,
@@ -142,7 +142,7 @@ public class EstudiantesController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("redirect:/personas/index");
+			ModelAndView modelo=new ModelAndView("redirect:/estudiantes/index");
 			try
 			{
 				estudianteService.grabarEstudiante(estudiante);

@@ -21,8 +21,8 @@ public class EstudianteDAOImpl implements EstudianteDAO
 	@Override
 	public Estudiante getById(int id) 
 	{
-		log.trace("Estoy en PersonaDAOImpl.getById, id pedido:"+id);
-		return (Estudiante) sessionFactory.getCurrentSession().createQuery("from Persona where id="+id).getSingleResult();
+		log.trace("Estoy en EstudianteDAOImpl.getById, id pedido:"+id);
+		return (Estudiante) sessionFactory.getCurrentSession().createQuery("from Estudiante where id="+id).getSingleResult();
 	}
 	@SuppressWarnings("unchecked")
 	@Override
@@ -36,9 +36,6 @@ public class EstudianteDAOImpl implements EstudianteDAO
 	@Transactional
 	public void agregar(Estudiante persona) 
 	{
-		// Si no va a ser usuario del sistema, fuerzo a que User sea nulo.
-		if(!persona.getUsuario_sistema())
-			persona.setUser(null);
 		sessionFactory.getCurrentSession().saveOrUpdate(persona);
 	}
 

@@ -14,6 +14,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${pageContext.request.contextPath}/menu"><span class="glyphicon glyphicon-home"></span>Pantalla Inicial</a></li>
+				<sec:authorize access="hasRole('ROLE_ESTUDIANTES_MOSTRAR_MENU')">
+					<li><a href="${pageContext.request.contextPath}/estudiantes/"><span class="glyphicon glyphicon-user"></span>Estudiantes</a></li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/configuracion/"><span class="glyphicon glyphicon-cog"></span>Configuraci&oacute;n</a></li>
 				</sec:authorize>

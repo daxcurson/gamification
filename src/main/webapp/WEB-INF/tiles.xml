@@ -1,96 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition name="base.definition"
-        template="/WEB-INF/jsp/layout.jsp">
-        <put-attribute name="flash" value="/WEB-INF/jsp/flash.jsp" />
-        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
-        <put-attribute name="scripts" value="/WEB-INF/jsp/scripts.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
-        <put-attribute name="content" value="" />
-    </definition>
-    <definition name="menu" extends="base.definition">
-        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Menu/menu.jsp" />
-    </definition> 
-    <definition name="adios" extends="base.definition">
-        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Pages/adios.jsp" />
-    </definition>
-    <definition name="configuracion_index" extends="base.definition">
-        <put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
-    </definition>
-    <definition name="error_mensajeError" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
-    </definition>
-    <definition name="estudiantes_add" extends="base.definition">
-    	<put-attribute name="content">
+	<definition name="base.definition"
+	template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="flash" value="/WEB-INF/jsp/flash.jsp" />
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="scripts" value="/WEB-INF/jsp/scripts.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+		<put-attribute name="content" value="" />
+	</definition>
+	<definition name="menu" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Menu/menu.jsp" />
+	</definition> 
+	<definition name="adios" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Pages/adios.jsp" />
+	</definition>
+	<definition name="capacitadores_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Capacitadores/add.jsp">
+				<put-attribute name="form_capacitador" value="/WEB-INF/jsp/Vista/Capacitadores/form_capacitador.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="capacitadores_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Capacitadores/edit.jsp">
+				<put-attribute name="form_capacitador" value="/WEB-INF/jsp/Vista/Capacitadores/form_capacitador.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="capacitadores_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Capacitadores/index.jsp"/>
+	</definition>
+	<definition name="cursos_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/add.jsp">
+				<put-attribute name="form_curso" value="/WEB-INF/jsp/Vista/Cursos/form_curso.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/edit.jsp">
+				<put-attribute name="form_curso" value="/WEB-INF/jsp/Vista/Cursos/form_curso.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/index.jsp"/>
+	</definition>
+	<definition name="configuracion_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Configuracion/index.jsp" />
+	</definition>
+	<definition name="error_mensajeError" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
+	</definition>
+	<definition name="estudiantes_add" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Estudiantes/add.jsp">
-		    	<put-attribute name="form_estudiante" value="/WEB-INF/jsp/Vista/Estudiantes/form_estudiante.jsp"/>
-	    	</definition>
-    	</put-attribute>
-    </definition>
-    <definition name="estudiantes_edit" extends="base.definition">
- 		<put-attribute name="content">
+				<put-attribute name="form_estudiante" value="/WEB-INF/jsp/Vista/Estudiantes/form_estudiante.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="estudiantes_edit" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Estudiantes/edit.jsp">
-	    		<put-attribute name="form_estudiante" value="/WEB-INF/jsp/Vista/Estudiantes/form_estudiante.jsp"/>
-    		</definition>
-   		</put-attribute>
-   	</definition>
-    <definition name="estudiantes_index" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Estudiantes/index.jsp"/>
-    </definition>
-    <definition name="groups_add" extends="base.definition">
-    	<put-attribute name="content">
+				<put-attribute name="form_estudiante" value="/WEB-INF/jsp/Vista/Estudiantes/form_estudiante.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="estudiantes_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Estudiantes/index.jsp"/>
+	</definition>
+	<definition name="groups_add" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Groups/add.jsp">
-		    	<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
-	    	</definition>
-    	</put-attribute>
-    </definition>
-    <definition name="groups_edit" extends="base.definition">
- 		<put-attribute name="content">
+				<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="groups_edit" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Groups/edit.jsp">
-	    		<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
-    		</definition>
-   		</put-attribute>
-   	</definition>
-    <definition name="groups_index" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
-    </definition>
-    <definition name="instalacion_index" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
-    </definition>
-    <definition name="instalacion_user_add" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/user_add.jsp" />
-    </definition>
-    <definition name="permisos_index" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
-    </definition>
-    <definition name="permisos_listar_permisos" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
-    </definition>
-    
-    <definition name="users_add" extends="base.definition">
-    	<put-attribute name="content">
+				<put-attribute name="form_group" value="/WEB-INF/jsp/Vista/Groups/form_group.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="groups_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
+	</definition>
+	<definition name="instalacion_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
+	</definition>
+	<definition name="instalacion_user_add" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/user_add.jsp" />
+	</definition>
+	<definition name="permisos_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/index.jsp"/>
+	</definition>
+	<definition name="permisos_listar_permisos" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Permisos/listar_permisos.jsp"/>
+	</definition>
+
+	<definition name="users_add" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Users/add.jsp">
-		    	<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
-	    	</definition>
-    	</put-attribute>
-    </definition>
-    <definition name="users_edit" extends="base.definition">
- 		<put-attribute name="content">
+				<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="users_edit" extends="base.definition">
+		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Users/edit.jsp">
-	    		<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
-    		</definition>
-   		</put-attribute>
-   	</definition>
-    <definition name="users_index" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/index.jsp"/>
-    </definition>
-    <definition name="login" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login.jsp" />
-    </definition>
-    <definition name="login_denied" extends="base.definition">
-    	<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/denied.jsp" />
-    </definition>
+				<put-attribute name="form_user" value="/WEB-INF/jsp/Vista/Users/form_user.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="users_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/index.jsp"/>
+	</definition>
+	<definition name="login" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/login.jsp" />
+	</definition>
+	<definition name="login_denied" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Users/denied.jsp" />
+	</definition>
 </tiles-definitions>

@@ -37,9 +37,9 @@ public class EstudianteServiceImpl implements EstudianteService
 	{
 		try
 		{
-			// Si es usuario del sistema, hay que grabar un usuario.
-			if(p.getUsuario_sistema())
-				userDAO.save(p.getUser());
+			// Todas las personas que se ingresaran van a ser usuarios del sistema.
+			p.setUsuario_sistema(true);
+			userDAO.save(p.getUser());
 			estudianteDAO.agregar(p);
 		}
         catch(ConstraintViolationException e)
