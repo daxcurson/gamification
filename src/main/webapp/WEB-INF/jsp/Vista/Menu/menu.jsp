@@ -14,6 +14,9 @@
 <sec:authorize access="hasRole('ROLE_CURSOS_MOSTRAR_MENU')">
 <li><a href="${pageContext.request.contextPath}/cursos/index">Cursos</a></li>
 </sec:authorize>
+<sec:authorize access="hasRole('ROLE_EVALUACIONES_MOSTRAR_MENU')">
+<li><a href="${pageContext.request.contextPath}/evaluaciones/index">Evaluaciones</a></li>
+</sec:authorize>
 <sec:authorize access="hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU')">
 <li><a href="${pageContext.request.contextPath}/configuracion/index">Configuraci&oacute;n</a></li>
 </sec:authorize>

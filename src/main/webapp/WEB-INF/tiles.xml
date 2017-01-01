@@ -108,6 +108,23 @@
 	<definition name="estudiantes_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Estudiantes/index.jsp"/>
 	</definition>
+	<definition name="evaluaciones_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Evaluaciones/add.jsp">
+				<put-attribute name="form_evaluacion" value="/WEB-INF/jsp/Vista/Evaluaciones/form_evaluacion.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="evaluaciones_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Evaluaciones/edit.jsp">
+				<put-attribute name="form_evaluaciones" value="/WEB-INF/jsp/Vista/Evaluaciones/form_evaluacion.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="evaluaciones_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Evaluaciones/index.jsp"/>
+	</definition>
 	<definition name="groups_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Groups/add.jsp">

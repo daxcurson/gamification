@@ -18,6 +18,7 @@
 <form:select path="user.group" id="UserGroup" class="form-control">
 <form:options items="${groups}" itemValue="id" itemLabel="groupName" />
 </form:select>
+<form:errors path="user.group"/>
 </div>
 <form:errors path=""/>
 <div class="form-group">

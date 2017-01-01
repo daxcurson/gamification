@@ -10,4 +10,5 @@ public interface CursoOfertaDAO
 	void agregarOferta(CursoOferta oferta);
 	CursoOferta getById(Integer ofertaId);
 	void grabarOferta(CursoOferta oferta);
+	List<CursoOferta> listarOfertasTodas();
 }

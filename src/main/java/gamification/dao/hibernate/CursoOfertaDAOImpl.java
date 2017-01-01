@@ -42,4 +42,10 @@ public class CursoOfertaDAOImpl implements CursoOfertaDAO
 		sessionFactory.getCurrentSession().saveOrUpdate(oferta);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CursoOferta> listarOfertasTodas() 
+	{
+		return (List<CursoOferta>) sessionFactory.getCurrentSession().createQuery("from CursoOferta").getResultList();
+	}
 }

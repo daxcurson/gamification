@@ -21,4 +21,5 @@ public interface CursoService
 	public void agregarCursoOferta(CursoOferta oferta, int cursoId);
 	public CursoOferta getCursoOfertaById(Integer ofertaId);
 	public void grabarCursoOferta(CursoOferta oferta);
+	public List<CursoOferta> listarOfertasTodas();
 }

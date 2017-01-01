@@ -97,4 +97,10 @@ public class CursoServiceImpl implements CursoService
 	{
 		cursoOfertaDAO.grabarOferta(oferta);
 	}
+
+	@Override
+	public List<CursoOferta> listarOfertasTodas() 
+	{
+		return cursoOfertaDAO.listarOfertasTodas();
+	}
 }

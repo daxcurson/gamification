@@ -1,5 +1,7 @@
 package gamification.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,12 +10,15 @@ import javax.validation.Valid;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +29,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
+import gamification.model.CursoOferta;
 import gamification.model.Evaluacion;
+import gamification.model.propertyeditor.CursoOfertaEditor;
+import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
 
 @Controller
@@ -36,6 +44,17 @@ public class EvaluacionesController extends AppController
 	private static Logger log=LogManager.getLogger(EvaluacionesController.class);
 	@Autowired
 	private EvaluacionService evaluacionService;
+	@Autowired
+	private CursoService cursoService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(CursoOferta.class, new CursoOfertaEditor(cursoService));
+	}
 	
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Mostrar lista de evaluaciones y menu",permission="ROLE_EVALUACIONES_MOSTRAR_MENU")
@@ -50,6 +69,7 @@ public class EvaluacionesController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("evaluacion",evaluacion);
+		modelo.addObject("cursos_ofertas",cursoService.listarOfertasTodas());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR')")
