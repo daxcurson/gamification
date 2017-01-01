@@ -6,7 +6,7 @@
 <h2>Ofertas del curso ${curso.nombre}</h2>
 
 <p>
-<a href="${pageContext.request.contextPath}/cursos/ofertas_add/${curso.id}">Agregar nueva oferta</a>
+<a href="${pageContext.request.contextPath}/cursos/oferta_add/${curso.id}">Agregar nueva oferta</a>
 </p>
 
 <p>

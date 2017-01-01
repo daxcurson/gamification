@@ -1,5 +1,7 @@
 package gamification.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,12 +10,15 @@ import javax.validation.Valid;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,17 +33,28 @@ import gamification.exceptions.CursoExistenteException;
 import gamification.model.Curso;
 import gamification.model.CursoOferta;
 import gamification.model.TemaCurso;
+import gamification.model.propertyeditor.CursoEditor;
 import gamification.service.CursoService;
 
 @Controller
 @RequestMapping(value="cursos")
-@SessionAttributes("curso")
+@SessionAttributes({"curso","oferta"})
 @DescripcionClase("Cursos")
 public class CursosController extends AppController
 {
 	private static Logger log=LogManager.getLogger(CursosController.class);
 	@Autowired
 	private CursoService cursoService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Curso.class, new CursoEditor(cursoService));
+	}
+	
 	
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Mostrar lista de cursos y menu",permission="ROLE_CURSOS_MOSTRAR_MENU")
@@ -192,7 +208,7 @@ public class CursosController extends AppController
 		{
 			ModelAndView modelo=new ModelAndView("redirect:/cursos/temario/"+cursoId);
 			cursoService.agregarTemaCurso(tema,cursoId);
-			redirectAttributes.addFlashAttribute("message","Curso agregado exitosamente");
+			redirectAttributes.addFlashAttribute("message","Tema agregado exitosamente");
 			return modelo;
 		}
 	}
@@ -250,6 +266,7 @@ public class CursosController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("oferta",oferta);
+		modelo.addObject("cursos_lista",cursoService.listarCursos());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_AGREGAR')")
@@ -266,8 +283,9 @@ public class CursosController extends AppController
 	@RequestMapping(value = "/oferta_add/{cursoId}", method = RequestMethod.POST)
 	public ModelAndView agregarCursoOferta(@Valid @ModelAttribute("oferta")
 	CursoOferta oferta,
+	BindingResult result,ModelMap model,
 	@PathVariable("cursoId") Integer cursoId,
-	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
