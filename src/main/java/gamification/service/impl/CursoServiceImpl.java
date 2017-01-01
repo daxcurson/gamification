@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gamification.dao.CursoDAO;
+import gamification.dao.CursoOfertaDAO;
 import gamification.dao.TemarioDAO;
 import gamification.exceptions.CursoExistenteException;
 import gamification.model.Curso;
+import gamification.model.CursoOferta;
 import gamification.model.TemaCurso;
 import gamification.service.CursoService;
 
@@ -19,6 +21,8 @@ public class CursoServiceImpl implements CursoService
 	private CursoDAO cursoDAO;
 	@Autowired
 	private TemarioDAO temarioDAO;
+	@Autowired
+	private CursoOfertaDAO cursoOfertaDAO;
 	@Override
 	public List<Curso> listarCursos() 
 	{
@@ -66,5 +70,31 @@ public class CursoServiceImpl implements CursoService
 	public void grabarTemaCurso(TemaCurso tema) 
 	{
 		temarioDAO.grabarTema(tema);
+	}
+
+	@Override
+	public List<CursoOferta> listarOfertas(Integer cursoId) 
+	{
+		return cursoOfertaDAO.listarOfertas(cursoId);
+	}
+
+	@Override
+	public void agregarCursoOferta(CursoOferta oferta, int cursoId) 
+	{
+		Curso c=cursoDAO.getCursoById(cursoId);
+		oferta.setCurso(c);
+		cursoOfertaDAO.agregarOferta(oferta);
+	}
+
+	@Override
+	public CursoOferta getCursoOfertaById(Integer ofertaId) 
+	{
+		return cursoOfertaDAO.getById(ofertaId);
+	}
+
+	@Override
+	public void grabarCursoOferta(CursoOferta oferta) 
+	{
+		cursoOfertaDAO.grabarOferta(oferta);
 	}
 }

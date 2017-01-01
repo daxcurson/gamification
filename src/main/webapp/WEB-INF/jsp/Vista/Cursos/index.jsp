@@ -30,8 +30,9 @@ corregidas por un Evaluador.
 <td>${curso.codigo_curso}</td>
 <td>${curso.nombre}</td>
 <td>
-<a href="${pageContext.request.contextPath}/cursos/edit/${curso.id}">Editar</a> 
-<a href="${pageContext.request.contextPath}/cursos/temario/${curso.id}">Temario</a>
+<a href="${pageContext.request.contextPath}/cursos/edit/${curso.id}">Editar</a> |
+<a href="${pageContext.request.contextPath}/cursos/temario/${curso.id}">Temario</a> |
+<a href="${pageContext.request.contextPath}/cursos/ofertas/${curso.id}">Ofertas</a> |
 </td>
 </tr>
 </c:forEach>

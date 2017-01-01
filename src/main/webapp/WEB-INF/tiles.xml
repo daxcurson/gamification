@@ -71,6 +71,23 @@
 	<definition name="cursos_temario_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/temario_index.jsp"/>
 	</definition>
+	<definition name="cursos_ofertas_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/ofertas_add.jsp">
+				<put-attribute name="oferta_form" value="/WEB-INF/jsp/Vista/Cursos/ofertas_form.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_ofertas_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/temario_edit.jsp">
+				<put-attribute name="oferta_form" value="/WEB-INF/jsp/Vista/Cursos/ofertas_form.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="cursos_ofertas_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/ofertas_index.jsp"/>
+	</definition>
 	<definition name="error_mensajeError" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Error/mensajeError.jsp"/>
 	</definition>

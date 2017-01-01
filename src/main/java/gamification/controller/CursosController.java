@@ -26,6 +26,7 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.CursoExistenteException;
 import gamification.model.Curso;
+import gamification.model.CursoOferta;
 import gamification.model.TemaCurso;
 import gamification.service.CursoService;
 
@@ -140,9 +141,9 @@ public class CursosController extends AppController
 			return modelo;
 		}
 	}
-	@Descripcion(value="Listar temario del curso",permission="ROLE_TEMARIO_LISTAR")
+	@Descripcion(value="Listar temario del curso",permission="ROLE_CURSOS_TEMARIO_LISTAR")
 	@RequestMapping(value="/temario/{cursoId}",method=RequestMethod.GET)
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_TEMARIO_LISTAR')")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_TEMARIO_LISTAR')")
 	public ModelAndView listarTemario(@PathVariable("cursoId") Integer cursoId)
 	{
 		ModelAndView m=new ModelAndView("cursos_temario_index");
@@ -231,4 +232,97 @@ public class CursosController extends AppController
 			return modelo;
 		}
 	}
+
+	@Descripcion(value="Listar ofertas del curso",permission="ROLE_CURSOS_OFERTAS_LISTAR")
+	@RequestMapping(value="/ofertas/{cursoId}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_LISTAR')")
+	public ModelAndView listarOfertasCurso(
+			@PathVariable("cursoId") Integer cursoId
+			)
+	{
+		ModelAndView modelo=new ModelAndView("cursos_ofertas_index");
+		// Leemos los usuarios que hay.
+		modelo.addObject("curso",cursoService.getCursoById(cursoId));
+		modelo.addObject("ofertas",cursoService.listarOfertas(cursoId));
+		return modelo;
+	}
+	private ModelAndView cargarFormCursoOferta(String vista,CursoOferta oferta)
+	{
+		ModelAndView modelo=new ModelAndView(vista);
+		modelo.addObject("oferta",oferta);
+		return modelo;
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_AGREGAR')")
+	@RequestMapping(value="/oferta_add/{cursoId}",method=RequestMethod.GET)
+	public ModelAndView mostrarFormAgregarOfertaCurso(Model model,
+			@PathVariable("cursoId") Integer cursoId
+			)
+	{
+		ModelAndView modelo=this.cargarFormCursoOferta("cursos_ofertas_add",new CursoOferta());
+		return modelo;
+	}
+	@Descripcion(value="Agregar Oferta de Curso",permission="ROLE_CURSOS_OFERTAS_AGREGAR")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_AGREGAR')")
+	@RequestMapping(value = "/oferta_add/{cursoId}", method = RequestMethod.POST)
+	public ModelAndView agregarCursoOferta(@Valid @ModelAttribute("oferta")
+	CursoOferta oferta,
+	@PathVariable("cursoId") Integer cursoId,
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormCursoOferta("cursos_ofertas_add",oferta);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/cursos/ofertas/"+cursoId);
+			cursoService.agregarCursoOferta(oferta,cursoId);
+			redirectAttributes.addFlashAttribute("message","Oferta de Curso agregada exitosamente");
+			return modelo;
+		}
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_EDIT')")
+	@RequestMapping(value="/oferta_edit/{ofertaId}",method=RequestMethod.GET)
+	public ModelAndView mostrarFormEditarOferta(@PathVariable("ofertaId") Integer ofertaId,
+			Model model)
+	{
+		// Busco el curso y lo cargo en el formulario.
+		CursoOferta oferta=cursoService.getCursoOfertaById(ofertaId);
+		ModelAndView modelo=this.cargarFormCursoOferta("cursos_ofertas_edit",oferta);
+		return modelo;
+	}
+	@Descripcion(value="Editar Oferta de Curso",permission="ROLE_CURSOS_OFERTAS_EDIT")
+	@RequestMapping(value="/oferta_edit/{ofertaId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_OFERTAS_EDIT')")
+	public ModelAndView editarCursoOferta(@PathVariable("ofertaId") Integer ofertaId,
+			@Valid @ModelAttribute("oferta") CursoOferta oferta,
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormCursoOferta("cursos_ofertas_edit",oferta);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/cursos/ofertas/"+oferta.getCurso().getId());
+			cursoService.grabarCursoOferta(oferta);
+			redirectAttributes.addFlashAttribute("message","Oferta de Curso editada exitosamente");
+			return modelo;
+		}
+	}
+
 }
