@@ -34,6 +34,7 @@ import gamification.model.Evaluacion;
 import gamification.model.propertyeditor.CursoOfertaEditor;
 import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
+import gamification.service.PreguntaService;
 
 @Controller
 @RequestMapping("evaluaciones")
@@ -46,6 +47,8 @@ public class EvaluacionesController extends AppController
 	private EvaluacionService evaluacionService;
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private PreguntaService preguntaService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
@@ -70,6 +73,7 @@ public class EvaluacionesController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("evaluacion",evaluacion);
 		modelo.addObject("cursos_ofertas",cursoService.listarOfertasTodas());
+		modelo.addObject("tipos_preguntas",preguntaService.listarTiposPreguntas());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR')")

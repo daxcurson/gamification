@@ -16,4 +16,42 @@
 </form:select>
 <form:errors path="curso_oferta"/>
 </div>
+<p>Preguntas:</p>
+<input type="button" value="Agregar Pregunta" id="BotonAgregarPregunta" />
+<div id="Preguntas">
+<table class="table">
+<tr><th>Elegir</th><th>Tipo Pregunta</th><th>Texto Pregunta</th><th>Opciones pregunta</th></tr>
+<c:choose>
+	<c:when test="${not empty preguntas}">
+		<c:forEach items="${preguntas}" var="pregunta">
+			<tr>
+			<td><input type="checkbox" name="preguntas[${pregunta.id}]" value="${pregunta.id}" /></td>
+			<td><c:out value="${pregunta.tipoPregunta.descripcion}" /></td>
+			<td><c:out value="${pregunta.texto_pregunta}" /></td>
+			<td>
+			<c:if test="${preguntas.tipoPregunta.codigo=='CMAGNET'}">
+				<c:out value="${pregunta.texto_ordenar}"/>
+			</c:if>
+			</td>
+			</tr>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<tr><td colspan="5" style="text-align:center">-- No hay Preguntas --</td></tr>
+	</c:otherwise>
+</c:choose>
+</table>
+</div>
+<div id="DialogoPregunta">
+<form method="post" action="${pageContext.request.contextPath}/evaluaciones/agregar_pregunta">
+<label for="tipo_pregunta" id="LabelTipoPregunta">Curso Ofrecido</label>
+<select name="tipo_pregunta" id="PreguntaTipoPregunta" class="form-control">
+<c:forEach items="${tipos_preguntas}" var="tipo">
+<option value="<c:out value="${tipo.id}"/>"><c:out value="${tipo.descripcion}"/></option>
+</c:forEach>
+</select>
+<label for="texto_pregunta" id="LabelPreguntaTextoPregunta">Texto de la pregunta</label>
+<input id="PreguntaTextoPregunta" class="form-control" name="texto_pregunta"/>
+</form>
+</div>
 </fieldset>

@@ -1,5 +1,8 @@
 package gamification.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +17,8 @@ public class Evaluacion
 	@ManyToOne
 	@JoinColumn(name="curso_oferta_id")
 	private CursoOferta curso_oferta;
+	@OneToMany(targetEntity=Pregunta.class,cascade={CascadeType.ALL},mappedBy="evaluacion")
+	private List<Pregunta> preguntas=new LinkedList<Pregunta>();
 	public int getId() {
 		return id;
 	}
@@ -31,5 +36,11 @@ public class Evaluacion
 	}
 	public void setCurso_oferta(CursoOferta cursoOferta) {
 		this.curso_oferta = cursoOferta;
+	}
+	public List<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+	public void setPreguntas(List<Pregunta> preguntas) {
+		this.preguntas = preguntas;
 	}
 }

@@ -118,7 +118,7 @@
 	<definition name="evaluaciones_edit" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Evaluaciones/edit.jsp">
-				<put-attribute name="form_evaluaciones" value="/WEB-INF/jsp/Vista/Evaluaciones/form_evaluacion.jsp"/>
+				<put-attribute name="form_evaluacion" value="/WEB-INF/jsp/Vista/Evaluaciones/form_evaluacion.jsp"/>
 			</definition>
 		</put-attribute>
 	</definition>

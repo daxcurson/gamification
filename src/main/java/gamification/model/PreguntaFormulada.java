@@ -24,5 +24,17 @@ public class PreguntaFormulada
 	private int id;
 	@ManyToOne
 	@JoinColumn(name="evaluacion_tomada_id")
-	private EvaluacionTomada evaluacionTomada;
+	private EvaluacionTomada evaluacion_tomada;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public EvaluacionTomada getEvaluacion_tomada() {
+		return evaluacion_tomada;
+	}
+	public void setEvaluacion_tomada(EvaluacionTomada evaluacion_tomada) {
+		this.evaluacion_tomada = evaluacion_tomada;
+	}
 }
