@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -31,6 +32,7 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.model.CursoOferta;
 import gamification.model.Evaluacion;
+import gamification.model.Pregunta;
 import gamification.model.propertyeditor.CursoOfertaEditor;
 import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
@@ -74,6 +76,7 @@ public class EvaluacionesController extends AppController
 		modelo.addObject("evaluacion",evaluacion);
 		modelo.addObject("cursos_ofertas",cursoService.listarOfertasTodas());
 		modelo.addObject("tipos_preguntas",preguntaService.listarTiposPreguntas());
+		modelo.addObject("pregunta",new Pregunta());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR')")
@@ -144,5 +147,13 @@ public class EvaluacionesController extends AppController
 			redirectAttributes.addFlashAttribute("message","Evaluacion editada exitosamente");
 			return modelo;
 		}
+	}
+	@Descripcion(value="Agregar pregunta en evaluacion",permission="ROLE_EVALUACIONES_AGREGAR_PREGuNTA")
+	@RequestMapping(value="/agregar_pregunta",method=RequestMethod.POST)
+	@PreAuthorize("isAuthorized() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
+	public @ResponseBody ModelAndView agregarPregunta(@ModelAttribute("pregunta") Pregunta pregunta,
+			BindingResult result,ModelMap model)
+	{
+		return null;
 	}
 }

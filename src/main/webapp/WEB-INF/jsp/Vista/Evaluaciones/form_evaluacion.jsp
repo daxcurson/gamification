@@ -17,7 +17,7 @@
 <form:errors path="curso_oferta"/>
 </div>
 <p>Preguntas:</p>
-<input type="button" value="Agregar Pregunta" id="BotonAgregarPregunta" />
+<input type="button" value="Agregar Pregunta" id="BotonAgregarPregunta" onclick="javascript:abrir_dialogo_pregunta()" />
 <div id="Preguntas">
 <table class="table">
 <tr><th>Elegir</th><th>Tipo Pregunta</th><th>Texto Pregunta</th><th>Opciones pregunta</th></tr>
@@ -41,17 +41,5 @@
 	</c:otherwise>
 </c:choose>
 </table>
-</div>
-<div id="DialogoPregunta">
-<form method="post" action="${pageContext.request.contextPath}/evaluaciones/agregar_pregunta">
-<label for="tipo_pregunta" id="LabelTipoPregunta">Curso Ofrecido</label>
-<select name="tipo_pregunta" id="PreguntaTipoPregunta" class="form-control">
-<c:forEach items="${tipos_preguntas}" var="tipo">
-<option value="<c:out value="${tipo.id}"/>"><c:out value="${tipo.descripcion}"/></option>
-</c:forEach>
-</select>
-<label for="texto_pregunta" id="LabelPreguntaTextoPregunta">Texto de la pregunta</label>
-<input id="PreguntaTextoPregunta" class="form-control" name="texto_pregunta"/>
-</form>
 </div>
 </fieldset>

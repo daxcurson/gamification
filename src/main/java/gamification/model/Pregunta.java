@@ -14,9 +14,9 @@ public class Pregunta
 	private int id;
 	@ManyToOne
 	@JoinColumn(name="tipo_pregunta_id")
-	private TipoPregunta tipoPregunta;
+	private TipoPregunta tipo_pregunta;
 	@Column(name="texto_pregunta")
-	private String textoPregunta;
+	private String texto_pregunta;
 	@ManyToOne
 	@JoinColumn(name="evaluacion_id")
 	private Evaluacion evaluacion;
@@ -27,17 +27,17 @@ public class Pregunta
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTextoPregunta() {
-		return textoPregunta;
+	public String getTexto_pregunta() {
+		return texto_pregunta;
 	}
-	public void setTextoPregunta(String textoPregunta) {
-		this.textoPregunta = textoPregunta;
+	public void setTexto_pregunta(String textoPregunta) {
+		this.texto_pregunta = textoPregunta;
 	}
-	public TipoPregunta getTipoPregunta() {
-		return tipoPregunta;
+	public TipoPregunta getTipo_pregunta() {
+		return tipo_pregunta;
 	}
-	public void setTipoPregunta(TipoPregunta tipoPregunta) {
-		this.tipoPregunta = tipoPregunta;
+	public void setTipo_pregunta(TipoPregunta tipoPregunta) {
+		this.tipo_pregunta = tipoPregunta;
 	}
 	public Evaluacion getEvaluacion() {
 		return evaluacion;

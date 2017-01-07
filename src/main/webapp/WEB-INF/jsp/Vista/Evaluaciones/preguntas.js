@@ -3,7 +3,7 @@ $(document).ready(function()
 	$('#DialogoPregunta').dialog({
 		//position: {my: "top", at: "top", of: comentarios_estudiante},
 		autoOpen: false,
-		modal: true,
+		modal: false,
 		buttons: [
 		{
 			text:"Agregar Pregunta",
@@ -52,4 +52,12 @@ function agregar_pregunta_llamar_sistema()
  */
 function leer_preguntas()
 {
+}
+/**
+ * Abre el dialogo para agregar una pregunta
+ * @returns
+ */
+function abrir_dialogo_pregunta()
+{
+	$('#DialogoPregunta').dialog("open");
 }
