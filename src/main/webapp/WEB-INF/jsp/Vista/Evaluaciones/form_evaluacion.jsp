@@ -17,7 +17,7 @@
 <form:errors path="curso_oferta"/>
 </div>
 <p>Preguntas:</p>
-<input type="button" value="Agregar Pregunta" id="BotonAgregarPregunta" onclick="javascript:abrir_dialogo_pregunta()" />
+<a href="${pageContext.request.contextPath}/evaluaciones/add_pregunta">Agregar pregunta</a>
 <div id="Preguntas">
 <table class="table">
 <tr><th>Elegir</th><th>Tipo Pregunta</th><th>Texto Pregunta</th><th>Opciones pregunta</th></tr>

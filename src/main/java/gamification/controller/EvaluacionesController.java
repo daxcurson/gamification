@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -148,12 +148,44 @@ public class EvaluacionesController extends AppController
 			return modelo;
 		}
 	}
-	@Descripcion(value="Agregar pregunta en evaluacion",permission="ROLE_EVALUACIONES_AGREGAR_PREGuNTA")
-	@RequestMapping(value="/agregar_pregunta",method=RequestMethod.POST)
-	@PreAuthorize("isAuthorized() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
-	public @ResponseBody ModelAndView agregarPregunta(@ModelAttribute("pregunta") Pregunta pregunta,
-			BindingResult result,ModelMap model)
+	private ModelAndView cargarFormAgregarPregunta(String view,Pregunta p)
 	{
-		return null;
+		ModelAndView v=new ModelAndView(view);
+		v.addObject("pregunta",new Pregunta());
+		return v;
+	}
+	@Descripcion(value="Agregar pregunta en evaluacion",permission="ROLE_EVALUACIONES_AGREGAR_PREGUNTA")
+	@RequestMapping(value="/add_pregunta",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
+	public ModelAndView mostrarFormAgregarPregunta()
+	{
+		return this.cargarFormAgregarPregunta("evaluaciones_add_pregunta",new Pregunta());
+	}
+	@RequestMapping(value="/add_pregunta",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
+	public ModelAndView agregarPregunta(
+			@SessionAttribute("evaluacion") Evaluacion evaluacion,
+			@ModelAttribute("pregunta") Pregunta pregunta,
+			BindingResult result,ModelMap model,
+			final RedirectAttributes redirectAttributes
+			)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormAgregarPregunta("evaluaciones_add_pregunta",pregunta);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones/add");
+			redirectAttributes.addFlashAttribute("message","Pregunta agregada");
+			return modelo;
+		}
 	}
 }
