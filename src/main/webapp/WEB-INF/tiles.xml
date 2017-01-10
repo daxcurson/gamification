@@ -126,6 +126,7 @@
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Evaluaciones/edit.jsp">
 				<put-attribute name="form_evaluacion" value="/WEB-INF/jsp/Vista/Evaluaciones/form_evaluacion.jsp"/>
+				<put-attribute name="form_preguntas" value="/WEB-INF/jsp/Vista/Evaluaciones/form_preguntas.jsp"/>
 			</definition>
 		</put-attribute>
 	</definition>

@@ -11,5 +11,6 @@
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<form:input id="EvaluacionId" class="form-control" path="id"/>
 	<tiles:insertAttribute name="form_evaluacion"/>
+	<tiles:insertAttribute name="form_preguntas"/>
 	<input type="submit" name="editar_evaluacion" value="Editar Evaluacion">
 </form:form>
