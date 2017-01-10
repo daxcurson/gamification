@@ -26,7 +26,7 @@
 	</webflow:flow-executor>
 	<!-- The registry of executable flow definitions -->
 	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
-		<webflow:flow-location path="/WEB-INF/flow/evaluaciones/evaluacion-flow.xml" />
+		<webflow:flow-location id="evaluacionesFlow" path="/WEB-INF/flow/evaluaciones/evaluacion-flow.xml" />
 	</webflow:flow-registry>
 	<!-- Plugs in a custom creator for Web Flow views -->
 	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" />
@@ -39,4 +39,8 @@
 	<!-- Installs a listener to apply Spring Security authorities -->
 	<bean id="securityFlowExecutionListener"
 		class="org.springframework.webflow.security.SecurityFlowExecutionListener" />
+	
+	<bean id="evaluacionBean" 
+class="gamification.model.Evaluacion" 
+scope="prototype" />
 </beans>

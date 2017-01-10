@@ -4,8 +4,24 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+	<input name="id" />
+	<decision-state id="createOrEdit">
+		<if test="id == null" then="create" else="edit" />
+	</decision-state>
+
+	<action-state id="create">
+		<evaluate expression="evaluacionBean" result="flowScope.evaluacion" />
+		<transition to="evaluacion_entrar_datos" />
+	</action-state>
+
+<action-state id="edit">
+<evaluate expression="evaluacionService.getEvaluacionById(id)"
+result="flowScope.evaluacion" />
+<transition to="evaluacion_entrar_datos" />
+</action-state>
+
 	<!-- Datos generales de la evaluacion: de que curso es, por ejemplo. -->
-	<view-state id="evaluacion_entrar_datos" model="evaluacion">
+	<view-state id="evaluacion_entrar_datos" model="evaluacion" view="evaluaciones_add">
 		<transition on="submit" to="evaluacion_revisar_evaluacion"/>
 		<transition on="agregar_pregunta" to="evaluacion_nueva_pregunta"/>
 		<transition on="cancelar" to="evaluacion_cancelada" bind="false"/>
