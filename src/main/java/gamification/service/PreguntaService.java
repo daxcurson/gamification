@@ -6,5 +6,6 @@ import gamification.model.TipoPregunta;
 
 public interface PreguntaService 
 {
-	List<TipoPregunta> listarTiposPreguntas();
+	public List<TipoPregunta> listarTiposPreguntas();
+	public TipoPregunta getTipoPreguntaById(int id);
 }

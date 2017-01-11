@@ -19,4 +19,9 @@ public class PreguntaServiceImpl implements PreguntaService
 	{
 		return tipoPreguntaDAO.listarTiposPregunta();
 	}
+	@Override
+	public TipoPregunta getTipoPreguntaById(int id) 
+	{
+		return tipoPreguntaDAO.getById(id);
+	}
 }

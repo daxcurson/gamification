@@ -8,4 +8,5 @@ public interface TipoPreguntaDAO
 {
 
 	public List<TipoPregunta> listarTiposPregunta();
+	public TipoPregunta getById(int id);
 }

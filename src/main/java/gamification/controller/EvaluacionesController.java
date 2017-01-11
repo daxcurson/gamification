@@ -75,7 +75,6 @@ public class EvaluacionesController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("evaluacion",evaluacion);
 		modelo.addObject("cursos_ofertas",cursoService.listarOfertasTodas());
-		modelo.addObject("tipos_preguntas",preguntaService.listarTiposPreguntas());
 		modelo.addObject("pregunta",new Pregunta());
 		return modelo;
 	}
@@ -127,7 +126,7 @@ public class EvaluacionesController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_EDIT')")
 	public ModelAndView editarEvaluacion(@PathVariable("evaluacionId") Integer evaluacionId,
 			@Valid @ModelAttribute("evaluacion") Evaluacion evaluacion,
-			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+			BindingResult result,Model model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -151,19 +150,25 @@ public class EvaluacionesController extends AppController
 	private ModelAndView cargarFormAgregarPregunta(String view,Pregunta p)
 	{
 		ModelAndView v=new ModelAndView(view);
-		v.addObject("pregunta",new Pregunta());
+		v.addObject("pregunta",p);
+		v.addObject("tipos_preguntas",preguntaService.listarTiposPreguntas());
 		return v;
 	}
 	@Descripcion(value="Agregar pregunta en evaluacion",permission="ROLE_EVALUACIONES_AGREGAR_PREGUNTA")
-	@RequestMapping(value="/add_pregunta",method=RequestMethod.GET)
+	@RequestMapping(value="/add_pregunta/{evaluacionId}",method=RequestMethod.GET)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
-	public ModelAndView mostrarFormAgregarPregunta()
+	public ModelAndView mostrarFormAgregarPregunta(@PathVariable("evaluacionId") int evaluacion_id,Model model)
 	{
-		return this.cargarFormAgregarPregunta("evaluaciones_add_pregunta",new Pregunta());
+		Evaluacion e=evaluacionService.getEvaluacionById(evaluacion_id);
+		model.addAttribute("evaluacion",e);
+		Pregunta p=new Pregunta();
+		p.setEvaluacion(e);
+		return this.cargarFormAgregarPregunta("evaluaciones_add_pregunta",p);
 	}
-	@RequestMapping(value="/add_pregunta",method=RequestMethod.POST)
+	@RequestMapping(value="/add_pregunta/{evaluacionId}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR_PREGUNTA')")
 	public ModelAndView agregarPregunta(
+			@PathVariable("evaluacionId") int evaluacion_id,
 			@SessionAttribute("evaluacion") Evaluacion evaluacion,
 			@ModelAttribute("pregunta") Pregunta pregunta,
 			BindingResult result,ModelMap model,
@@ -183,6 +188,7 @@ public class EvaluacionesController extends AppController
 		}
 		else
 		{
+			// Aqui hay que agregar pregunta
 			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones/add");
 			redirectAttributes.addFlashAttribute("message","Pregunta agregada");
 			return modelo;

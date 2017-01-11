@@ -25,4 +25,10 @@ public class TipoPreguntaDAOImpl implements TipoPreguntaDAO
 		log.trace("Estoy en listarTiposPregunta()");
 		return (List<TipoPregunta>) sessionFactory.getCurrentSession().createQuery("from TipoPregunta").getResultList();
 	}
+
+	@Override
+	public TipoPregunta getById(int id) 
+	{
+		return (TipoPregunta) sessionFactory.getCurrentSession().createQuery("from TipoPregunta where id="+id);
+	}
 }
