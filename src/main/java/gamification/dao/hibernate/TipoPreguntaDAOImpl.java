@@ -29,6 +29,6 @@ public class TipoPreguntaDAOImpl implements TipoPreguntaDAO
 	@Override
 	public TipoPregunta getById(int id) 
 	{
-		return (TipoPregunta) sessionFactory.getCurrentSession().createQuery("from TipoPregunta where id="+id);
+		return (TipoPregunta) sessionFactory.getCurrentSession().createQuery("from TipoPregunta where id="+id).getSingleResult();
 	}
 }

@@ -11,3 +11,5 @@
 </form:select>
 <form:label path="texto_pregunta" id="LabelPreguntaTextoPregunta">Texto de la pregunta</form:label>
 <form:input id="PreguntaTextoPregunta" class="form-control" path="texto_pregunta"/>
+<form:label path="texto_ordenar" id="LabelPreguntaTextoOrdenar">Informaci&oacute;n adicional de la pregunta</form:label>
+<form:textarea cols="80" rows="10" id="PreguntaTextoOrdenar" class="form-control" path="texto_ordenar"/>

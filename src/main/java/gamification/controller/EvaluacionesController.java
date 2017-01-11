@@ -33,7 +33,9 @@ import gamification.documentation.DescripcionClase;
 import gamification.model.CursoOferta;
 import gamification.model.Evaluacion;
 import gamification.model.Pregunta;
+import gamification.model.TipoPregunta;
 import gamification.model.propertyeditor.CursoOfertaEditor;
+import gamification.model.propertyeditor.TipoPreguntaEditor;
 import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
 import gamification.service.PreguntaService;
@@ -59,6 +61,7 @@ public class EvaluacionesController extends AppController
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 		binder.registerCustomEditor(CursoOferta.class, new CursoOfertaEditor(cursoService));
+		binder.registerCustomEditor(TipoPregunta.class, new TipoPreguntaEditor(preguntaService));
 	}
 	
 	@RequestMapping({"/","/index"})
@@ -189,7 +192,7 @@ public class EvaluacionesController extends AppController
 		else
 		{
 			// Aqui hay que agregar pregunta
-			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones/add");
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones/edit/"+evaluacion_id);
 			redirectAttributes.addFlashAttribute("message","Pregunta agregada");
 			return modelo;
 		}

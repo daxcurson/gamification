@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="evaluaciones")
@@ -20,6 +21,7 @@ public class Evaluacion implements Serializable
 	private int id;
 	private String descripcion;
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name="curso_oferta_id")
 	private CursoOferta curso_oferta;
 	@OneToMany(targetEntity=Pregunta.class,cascade={CascadeType.ALL},mappedBy="evaluacion")

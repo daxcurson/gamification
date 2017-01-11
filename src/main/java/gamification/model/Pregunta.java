@@ -17,6 +17,8 @@ public class Pregunta
 	private TipoPregunta tipo_pregunta;
 	@Column(name="texto_pregunta")
 	private String texto_pregunta;
+	@Column(name="texto_ordenar")
+	private String texto_ordenar;
 	@ManyToOne
 	@JoinColumn(name="evaluacion_id")
 	private Evaluacion evaluacion;
@@ -44,5 +46,11 @@ public class Pregunta
 	}
 	public void setEvaluacion(Evaluacion evaluacion) {
 		this.evaluacion = evaluacion;
+	}
+	public String getTexto_ordenar() {
+		return texto_ordenar;
+	}
+	public void setTexto_ordenar(String texto_ordenar) {
+		this.texto_ordenar = texto_ordenar;
 	}
 }
