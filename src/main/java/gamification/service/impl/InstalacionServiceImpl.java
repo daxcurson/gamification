@@ -47,7 +47,7 @@ public class InstalacionServiceImpl implements InstalacionService
 		// un usuario porque para crear uno hay que entrar a la pantalla de
 		// permisos!!!
 		Group adminGroup=new Group();
-		adminGroup.setGroupName("Administradores");
+		adminGroup.setGroup_name("Administradores");
 		groupService.save(adminGroup);
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_ADMIN");
 		permissionService.grantOrRevokePermission(adminGroup, "ROLE_USER");

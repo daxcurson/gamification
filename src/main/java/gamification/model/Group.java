@@ -26,7 +26,7 @@ public class Group
 	private int id;
 	
 	@Column(name="group_name")
-	private String groupName;
+	private String group_name;
 	
 	@Column(name="created")
 	private Date created;
@@ -47,13 +47,13 @@ public class Group
 	{
 		id=i;
 	}
-	public String getGroupName()
+	public String getGroup_name()
 	{
-		return this.groupName;
+		return this.group_name;
 	}
-	public void setGroupName(String g)
+	public void setGroup_name(String g)
 	{
-		groupName=g;
+		group_name=g;
 	}
 	public Date getCreated()
 	{

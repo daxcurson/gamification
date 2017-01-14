@@ -7,3 +7,18 @@
 <p>
 <a href="${pageContext.request.contextPath}/groups/add">Agregar nuevo grupo</a>
 </p>
+
+<table class="table">
+<tr>
+<th>Id</th>
+<th>Nombre</th>
+<th>Acciones</th>
+</tr>
+<c:forEach items="${groups}" var="group">
+<tr>
+<td><c:out value="${group.id}"/></td>
+<td>${group.group_name}</td>
+<td><a href="${pageContext.request.contextPath}/groups/edit/${group.id}">Editar</a></td>
+</tr>
+</c:forEach>
+</table>

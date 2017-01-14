@@ -78,7 +78,6 @@ public class EvaluacionesController extends AppController
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("evaluacion",evaluacion);
 		modelo.addObject("cursos_ofertas",cursoService.listarOfertasTodas());
-		modelo.addObject("pregunta",new Pregunta());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_AGREGAR')")
@@ -192,6 +191,7 @@ public class EvaluacionesController extends AppController
 		else
 		{
 			// Aqui hay que agregar pregunta
+			preguntaService.agregarPregunta(pregunta, evaluacion);
 			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones/edit/"+evaluacion_id);
 			redirectAttributes.addFlashAttribute("message","Pregunta agregada");
 			return modelo;

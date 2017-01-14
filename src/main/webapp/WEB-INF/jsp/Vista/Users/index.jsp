@@ -13,7 +13,7 @@ A continuaci&oacute;n se listan los usuarios del sistema y a qu&eacute; grupo
 pertenecen. Para definir los permisos de los grupos, haga click <a href="${pageContext.request.contextPath}/permisos/listar_permisos">aqu&iacute;</a>.
 </p>
 
-<table>
+<table class="table">
 <tr>
 <th>Id</th>
 <th>Nombre</th>

@@ -5,9 +5,9 @@ import java.beans.PropertyEditorSupport;
 import gamification.model.TipoPregunta;
 import gamification.service.PreguntaService;
 
-public class TipoPreguntaEditor extends PropertyEditorSupport {
-
-	private final PreguntaService preguntaService;
+public class TipoPreguntaEditor extends PropertyEditorSupport 
+{
+	private PreguntaService preguntaService;
 	public TipoPreguntaEditor(PreguntaService service) 
 	{
 		this.preguntaService=service;

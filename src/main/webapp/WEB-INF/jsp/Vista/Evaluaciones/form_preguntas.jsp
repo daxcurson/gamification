@@ -9,14 +9,14 @@
 <table class="table">
 <tr><th>Elegir</th><th>Tipo Pregunta</th><th>Texto Pregunta</th><th>Opciones pregunta</th></tr>
 <c:choose>
-	<c:when test="${not empty preguntas}">
-		<c:forEach items="${preguntas}" var="pregunta">
+	<c:when test="${not empty evaluacion.preguntas}">
+		<c:forEach items="${evaluacion.preguntas}" var="pregunta">
 			<tr>
 			<td><input type="checkbox" name="preguntas[${pregunta.id}]" value="${pregunta.id}" /></td>
-			<td><c:out value="${pregunta.tipoPregunta.descripcion}" /></td>
+			<td><c:out value="${pregunta.tipo_pregunta.descripcion}" /></td>
 			<td><c:out value="${pregunta.texto_pregunta}" /></td>
 			<td>
-			<c:if test="${preguntas.tipoPregunta.codigo=='CMAGNET'}">
+			<c:if test="${preguntas.tipo_pregunta.codigo=='CMAGNET'}">
 				<c:out value="${pregunta.texto_ordenar}"/>
 			</c:if>
 			</td>

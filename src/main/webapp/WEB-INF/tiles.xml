@@ -157,6 +157,9 @@
 	<definition name="groups_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
 	</definition>
+	<definition name="inscripciones_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Inscripciones/index.jsp"/>
+	</definition>
 	<definition name="instalacion_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Instalacion/index.jsp" />
 	</definition>

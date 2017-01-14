@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gamification.dao.EvaluacionDAO;
+import gamification.dao.EvaluacionTomadaDAO;
 import gamification.model.Evaluacion;
+import gamification.model.EvaluacionTomada;
 import gamification.service.EvaluacionService;
 
 @Service
@@ -14,6 +16,8 @@ public class EvaluacionServiceImpl implements EvaluacionService
 {
 	@Autowired
 	private EvaluacionDAO evaluacionDAO;
+	@Autowired
+	private EvaluacionTomadaDAO evaluacionTomadaDAO;
 	@Override
 	public List<Evaluacion> listarEvaluaciones() 
 	{
@@ -36,5 +40,11 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	public void grabarEvaluacion(Evaluacion evaluacion) 
 	{
 		evaluacionDAO.grabarEvaluacion(evaluacion);
+	}
+
+	@Override
+	public List<EvaluacionTomada> listarEvaluacionesTomadas(int estudiante_id) 
+	{
+		return evaluacionTomadaDAO.listarEvaluacionesTomadas(estudiante_id);
 	}
 }

@@ -9,13 +9,13 @@
 
 <h1>Permisos</h1>
 
-<table>
+<table class="table">
 <tr><th>M&oacute;dulo</th><th>Permiso</th>
 <%
 // Aca recorro la lista de grupos
 %>
 <c:forEach items="${groups}" var="group">
-<th><c:out value="${group.groupName}"/></th>
+<th><c:out value="${group.group_name}"/></th>
 </c:forEach>
 </tr>
 <c:forEach items="${controllers}" var="controllerItem">

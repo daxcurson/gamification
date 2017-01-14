@@ -42,7 +42,9 @@ public class GroupsController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_GROUPS_MOSTRAR_MENU')")
 	public ModelAndView mostrarMenu()
 	{
-		return new ModelAndView("users_index");
+		ModelAndView model=new ModelAndView("groups_index");
+		model.addObject("groups",groupService.listGroups());
+		return model;
 	}
 	private ModelAndView cargarFormGrupo(Group group)
 	{
