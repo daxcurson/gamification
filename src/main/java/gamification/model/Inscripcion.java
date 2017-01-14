@@ -21,7 +21,7 @@ public class Inscripcion
 	private int id;
 	@ManyToOne
 	@JoinColumn(name="curso_oferta_id")
-	private CursoOferta cursoOferta;
+	private CursoOferta curso_oferta;
 	@ManyToOne
 	@JoinColumn(name="estudiante_id")
 	private Estudiante estudiante;
@@ -34,11 +34,11 @@ public class Inscripcion
 	public void setId(int id) {
 		this.id = id;
 	}
-	public CursoOferta getCursoOferta() {
-		return cursoOferta;
+	public CursoOferta getCurso_oferta() {
+		return curso_oferta;
 	}
-	public void setCursoOferta(CursoOferta curso) {
-		this.cursoOferta = curso;
+	public void setCurso_oferta(CursoOferta curso) {
+		this.curso_oferta = curso;
 	}
 	public Estudiante getEstudiante() {
 		return estudiante;
