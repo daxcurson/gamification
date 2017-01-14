@@ -25,7 +25,7 @@ pertenecen. Para definir los permisos de los grupos, haga click <a href="${pageC
 <tr>
 <td><c:out value="${user.id}"/></td>
 <td>${user.username}</td>
-<td>${user.group.groupName}</td>
+<td>${user.group.group_name}</td>
 <td>${user.enabled==1 ? "S&iacute;":"No"}</td>
 <td><a href="${pageContext.request.contextPath}/users/edit/${user.id}">Editar</a></td>
 </tr>

@@ -6,7 +6,7 @@
 <form:errors path=""/>
 <div class="form-group">
 <label for="GroupName">Nombre</label>
-<form:input id="GroupName" class="form-control" path="groupName"/>
-<form:errors path="groupName"/>
+<form:input id="GroupName" class="form-control" path="group_name"/>
+<form:errors path="group_name"/>
 </div>
 </fieldset>

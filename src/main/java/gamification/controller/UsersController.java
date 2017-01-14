@@ -22,6 +22,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.UsuarioExistenteException;
+import gamification.model.Group;
 import gamification.model.User;
+import gamification.model.propertyeditor.GroupEditor;
 import gamification.service.GroupService;
 import gamification.service.UserDetailsService;
 import gamification.documentation.Descripcion;
@@ -48,6 +52,12 @@ public class UsersController extends AppController
 	private UserDetailsService userService;
 	@Autowired
 	private GroupService groupService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) 
+	{
+		binder.registerCustomEditor(Group.class, new GroupEditor(groupService));
+	}
 	
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar usuarios",permission="ROLE_USERS_MOSTRAR_MENU")

@@ -26,6 +26,7 @@ import gamification.documentation.DescripcionClase;
 import gamification.exceptions.GrupoExistenteException;
 import gamification.model.Group;
 import gamification.service.GroupService;
+import gamification.service.PermissionService;
 
 @Controller
 @RequestMapping("groups")
@@ -36,6 +37,8 @@ public class GroupsController extends AppController
 	private static Logger log=LogManager.getLogger(GroupsController.class);
 	@Autowired
 	private GroupService groupService;
+	@Autowired
+	private PermissionService permissionService;
 
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Listar grupos",permission="ROLE_GROUPS_MOSTRAR_MENU")
@@ -62,7 +65,7 @@ public class GroupsController extends AppController
 	@Descripcion(value="Agregar grupo",permission="ROLE_GROUPS_AGREGAR")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_GROUPS_AGREGAR')")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView addUser(@Valid @ModelAttribute("group")
+	public ModelAndView addGroup(@Valid @ModelAttribute("group")
 	Group group,
 	BindingResult result,ModelMap model, final RedirectAttributes redirectAttributes)
 	{
@@ -79,10 +82,12 @@ public class GroupsController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("groups_index");
+			ModelAndView modelo=new ModelAndView("redirect:/groups/index");
 			try
 			{
 				groupService.save(group);
+				// Todo grupo tiene que tener el permiso de ROLE_USER.
+				permissionService.grantOrRevokePermission(group, "ROLE_USER");
 				redirectAttributes.addFlashAttribute("message","Grupo agregado exitosamente");
 			}
 			catch(GrupoExistenteException e)

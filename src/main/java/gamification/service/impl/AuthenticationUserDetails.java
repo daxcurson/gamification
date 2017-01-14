@@ -17,7 +17,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	private int id;
     private final String login;
     private final String passwordHash;
     private final boolean enabled;
@@ -87,7 +87,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
         return login;
     }
 
-	public Long getId() {
+	public int getId() {
 		log.trace("Estoy en getId");
 		return id;
 	}

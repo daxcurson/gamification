@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
-import gamification.model.User;
 import gamification.service.InscripcionService;
+import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping("inscripciones")
@@ -28,7 +28,7 @@ public class InscripcionesController
 	public ModelAndView mostrarMenu()
 	{
 		ModelAndView modelo=new ModelAndView("inscripciones_index");
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		modelo.addObject("inscripciones",inscripcionService.listarInscripcionesEstudiante(user.getId()));
 		return modelo;
 	}

@@ -48,6 +48,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<li>
+						<sec:authentication var="user" property="principal"/>
+						Usuario: ${user.username}
+					</li>
+					<li>
 						<c:url value="/users/logout" var="logoutUrl"/>
 						<a href="${logoutUrl}"><span class="glyphicon glyphicon-off"></span>Salir</a>
 					</li>
