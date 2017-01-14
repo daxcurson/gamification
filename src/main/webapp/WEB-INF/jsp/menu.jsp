@@ -49,7 +49,9 @@
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<li>
 						<sec:authentication var="user" property="principal"/>
+						<p class="navbar-text">
 						Usuario: ${user.username}
+						</p>
 					</li>
 					<li>
 						<c:url value="/users/logout" var="logoutUrl"/>

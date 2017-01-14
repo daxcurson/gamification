@@ -26,4 +26,16 @@ public class InscripcionServiceImpl implements InscripcionService
 		return null;
 	}
 
+	@Override
+	public void grabarInscripcion(Inscripcion inscripcion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void agregarInscripcion(Inscripcion inscripcion) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
