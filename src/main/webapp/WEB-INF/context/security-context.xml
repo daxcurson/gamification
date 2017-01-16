@@ -37,16 +37,21 @@
 
 		<!-- logout -->
 		<!-- 
+			logout-url="/users/logout"
 		--> 
 		<security:logout invalidate-session="true"
 			logout-url="/j_spring_security_logout" 
 			logout-success-url="/pages/adios" 
+			delete-cookies="JSESSIONID"
 			/>
 		<security:csrf token-repository-ref="tokenRepository"/>
 		<security:headers disabled="true"/>
 		<!-- Agregamos Remember me -->
-		<security:remember-me token-validity-seconds="1209600" 
-		remember-me-parameter="remember-me" data-source-ref="dataSource" />
+		<security:remember-me
+			key="${remember_me.key}" 
+			token-validity-seconds="1209600" 
+			remember-me-parameter="remember-me" 
+			data-source-ref="dataSource" />
 	</security:http>
 	<bean id="tokenRepository"
 		class="org.springframework.security.web.csrf.CookieCsrfTokenRepository"

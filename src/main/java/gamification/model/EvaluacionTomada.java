@@ -24,8 +24,8 @@ public class EvaluacionTomada
 	private CursoOferta cursoOferta;
 	private Date fecha_evaluacion;
 	@ManyToOne
-	@JoinColumn(name="estudiante_id")
-	private Estudiante estudiante;
+	@JoinColumn(name="inscripcion_id")
+	private Inscripcion inscripcion;
 	public int getId() {
 		return id;
 	}
@@ -44,10 +44,10 @@ public class EvaluacionTomada
 	public void setFecha_evaluacion(Date fecha_evaluacion) {
 		this.fecha_evaluacion = fecha_evaluacion;
 	}
-	public Estudiante getEstudiante() {
-		return estudiante;
+	public Inscripcion getInscripcion() {
+		return inscripcion;
 	}
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
+	public void setInscripcion(Inscripcion inscripcion) {
+		this.inscripcion=inscripcion;
 	}
 }

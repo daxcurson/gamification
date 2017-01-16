@@ -1,14 +1,17 @@
 package gamification.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,8 @@ public class Inscripcion
 	private Estudiante estudiante;
 	private Date fecha_inscripcion;
 	private boolean activa;
+	@OneToMany(targetEntity=EvaluacionTomada.class,mappedBy="inscripcion",fetch=FetchType.LAZY)
+	private List<EvaluacionTomada> evaluaciones;
 	
 	public int getId() {
 		return id;
@@ -57,5 +62,11 @@ public class Inscripcion
 	}
 	public void setActiva(boolean activa) {
 		this.activa = activa;
+	}
+	public List<EvaluacionTomada> getEvaluaciones() {
+		return evaluaciones;
+	}
+	public void setEvaluaciones(List<EvaluacionTomada> evaluaciones) {
+		this.evaluaciones = evaluaciones;
 	}
 }

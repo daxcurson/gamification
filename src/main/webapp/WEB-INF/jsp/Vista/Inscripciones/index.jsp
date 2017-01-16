@@ -21,7 +21,7 @@
 <tr class="collapse row1">
 <td colspan="5">
 <table class="table table-bordered">
-<c:forEach items="${evaluaciones_tomadas}" var="evaluacion_tomada">
+<c:forEach items="${inscripcion.evaluaciones}" var="evaluacion_tomada">
 <tr><td>Intento: <c:out value="${evaluacion_tomada.fecha_evaluacion}"/></td><td>Calificacion</td><td>Evaluador</td></tr>
 </c:forEach>
 </table>
