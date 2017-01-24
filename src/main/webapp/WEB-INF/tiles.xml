@@ -157,6 +157,20 @@
 	<definition name="groups_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Groups/index.jsp"/>
 	</definition>
+	<definition name="inscripciones_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Inscripciones/add.jsp">
+				<put-attribute name="form_inscripcion" value="/WEB-INF/jsp/Vista/Inscripciones/form_inscripcion.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	<definition name="inscripciones_edit" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/Inscripciones/edit.jsp">
+				<put-attribute name="form_inscripcion" value="/WEB-INF/jsp/Vista/Inscripciones/form_inscripcion.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
 	<definition name="inscripciones_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Inscripciones/index.jsp"/>
 	</definition>

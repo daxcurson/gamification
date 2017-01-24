@@ -27,7 +27,7 @@ public class Inscripcion
 	private CursoOferta curso_oferta;
 	@ManyToOne
 	@JoinColumn(name="estudiante_id")
-	private Estudiante estudiante;
+	private Persona estudiante;
 	private Date fecha_inscripcion;
 	private boolean activa;
 	@OneToMany(targetEntity=EvaluacionTomada.class,mappedBy="inscripcion",fetch=FetchType.LAZY)
@@ -45,11 +45,11 @@ public class Inscripcion
 	public void setCurso_oferta(CursoOferta curso) {
 		this.curso_oferta = curso;
 	}
-	public Estudiante getEstudiante() {
+	public Persona getEstudiante() {
 		return estudiante;
 	}
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
+	public void setEstudiante(Persona persona) {
+		this.estudiante = persona;
 	}
 	public Date getFecha_inscripcion() {
 		return fecha_inscripcion;

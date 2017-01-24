@@ -33,7 +33,7 @@ public class CapacitadorServiceImpl implements CapacitadorService
 		try
 		{
 			capacitador.setUsuario_sistema(true);
-			userDAO.save(capacitador.getUsuario());
+			userDAO.save(capacitador.getUser());
 			capacitadorDAO.agregar(capacitador);
 		}
 		catch(ConstraintViolationException e)
@@ -43,15 +43,14 @@ public class CapacitadorServiceImpl implements CapacitadorService
 	}
 
 	@Override
-	public Capacitador getCapacitadorById(Integer capacitadorId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Capacitador getCapacitadorById(Integer capacitadorId) 
+	{
+		return capacitadorDAO.getById(capacitadorId);
 	}
 
 	@Override
-	public void grabarCapacitador(Capacitador capacitador) throws CapacitadorExistenteException {
-		// TODO Auto-generated method stub
-
+	public void grabarCapacitador(Capacitador capacitador) throws CapacitadorExistenteException 
+	{
+		capacitadorDAO.grabar(capacitador);
 	}
-
 }

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gamification.dao.EstudianteDAO;
 import gamification.dao.UserDAO;
 import gamification.exceptions.EstudianteExistenteException;
 import gamification.model.Estudiante;
+import gamification.model.User;
 import gamification.service.EstudianteService;
 
 @Service
@@ -39,7 +41,13 @@ public class EstudianteServiceImpl implements EstudianteService
 		{
 			// Todas las personas que se ingresaran van a ser usuarios del sistema.
 			p.setUsuario_sistema(true);
-			userDAO.save(p.getUser());
+			User user=p.getUser();
+			user.setEnabled(1);
+			// Hay que encriptar el password antes de grabarlo!!!
+	        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
+	        user.setPassword(pwe.encode(user.getPassword()));
+	        user.setConfirm_password(user.getPassword());
+			userDAO.save(user);
 			estudianteDAO.agregar(p);
 		}
         catch(ConstraintViolationException e)

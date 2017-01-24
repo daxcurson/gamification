@@ -28,6 +28,8 @@ public class User
 	@Transient
 	private String confirm_password;
 	private int enabled;
+	@OneToOne(mappedBy="user")
+	private Persona persona;
 
 	@OneToOne
 	private Group group;
@@ -81,5 +83,11 @@ public class User
 	}
 	public void setConfirm_password(String confirm_password) {
 		this.confirm_password = confirm_password;
+	}
+	public Persona getPersona() {
+		return persona;
+	}
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 }

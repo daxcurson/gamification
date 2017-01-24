@@ -151,6 +151,7 @@ public class EstudiantesController extends AppController
 			catch(EstudianteExistenteException e)
 			{
 				model.addAttribute("message","Ese nombre de estudiante ya existe, por favor elija otro");
+				model.addAttribute("type","danger");
 				modelo=this.cargarFormEstudiante("estudiantes_edit",estudiante);
 			}
 			return modelo;

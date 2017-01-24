@@ -17,6 +17,7 @@
 		<mapping class="gamification.model.Inscripcion" />
 		<mapping class="gamification.model.Permission" />
 		<mapping class="gamification.model.PermissionGranted" />
+		<mapping class="gamification.model.Persona" />
 		<mapping class="gamification.model.Pregunta" />
 		<mapping class="gamification.model.PreguntaFormulada" />
 		<mapping class="gamification.model.Respuesta" />

@@ -23,6 +23,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
     private final boolean enabled;
     private HashSet<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
     private static Logger log=LogManager.getLogger(AuthenticationUserDetails.class);
+    private User user;
 
     public AuthenticationUserDetails(User user) 
     {
@@ -38,6 +39,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
         	log.trace("Obtuve el permiso "+pg.getAuthority());
         	this.grantedAuthorities.add(pg);
         }
+        this.setUser(user);
     }
 
     @Override
@@ -90,5 +92,13 @@ public class AuthenticationUserDetails implements org.springframework.security.c
 	public int getId() {
 		log.trace("Estoy en getId");
 		return id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

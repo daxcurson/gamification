@@ -2,4 +2,4 @@
 
 <p>Gracias por utilizar el sistema.</p>
 
-<p>Para volver a ingresar, haga click <a href="${pageContext.request.contextPath}">aqu&iacute;</a></p>
+<p>Para volver a ingresar, haga click <a href="${pageContext.request.contextPath}/users/login">aqu&iacute;</a></p>
