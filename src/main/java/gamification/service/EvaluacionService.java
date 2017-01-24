@@ -12,4 +12,5 @@ public interface EvaluacionService
 	Evaluacion getEvaluacionById(Integer evaluacionId);
 	void grabarEvaluacion(Evaluacion evaluacion);
 	List<EvaluacionTomada> listarEvaluacionesTomadas(int estudiante_id);
+	void tomarEvaluacion(EvaluacionTomada evaluacion);
 }

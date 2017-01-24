@@ -140,6 +140,13 @@
 	<definition name="evaluaciones_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Evaluaciones/index.jsp"/>
 	</definition>
+	<definition name="evaluaciones_tomadas_add" extends="base.definition">
+		<put-attribute name="content">
+			<definition template="/WEB-INF/jsp/Vista/EvaluacionesTomadas/add.jsp">
+				<put-attribute name="form_pregunta" value="/WEB-INF/jsp/Vista/EvaluacionesTomadas/form_evaluacion_tomada.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
 	<definition name="groups_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Groups/add.jsp">

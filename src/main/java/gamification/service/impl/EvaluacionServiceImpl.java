@@ -47,4 +47,10 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	{
 		return evaluacionTomadaDAO.listarEvaluacionesTomadas(estudiante_id);
 	}
+
+	@Override
+	public void tomarEvaluacion(EvaluacionTomada evaluacion) {
+		// TODO Auto-generated method stub
+		
+	}
 }

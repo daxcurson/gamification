@@ -26,6 +26,9 @@ public class EvaluacionTomada
 	@ManyToOne
 	@JoinColumn(name="inscripcion_id")
 	private Inscripcion inscripcion;
+	@ManyToOne
+	@JoinColumn(name="evaluacion_id")
+	private Evaluacion evaluacion;
 	public int getId() {
 		return id;
 	}
@@ -49,5 +52,11 @@ public class EvaluacionTomada
 	}
 	public void setInscripcion(Inscripcion inscripcion) {
 		this.inscripcion=inscripcion;
+	}
+	public Evaluacion getEvaluacion() {
+		return evaluacion;
+	}
+	public void setEvaluacion(Evaluacion evaluacion) {
+		this.evaluacion = evaluacion;
 	}
 }
