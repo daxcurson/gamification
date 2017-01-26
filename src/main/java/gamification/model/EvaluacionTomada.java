@@ -21,7 +21,7 @@ public class EvaluacionTomada
 	private int id;
 	@ManyToOne
 	@JoinColumn(name="curso_oferta_id")
-	private CursoOferta cursoOferta;
+	private CursoOferta curso_oferta;
 	private Date fecha_evaluacion;
 	@ManyToOne
 	@JoinColumn(name="inscripcion_id")
@@ -35,11 +35,11 @@ public class EvaluacionTomada
 	public void setId(int id) {
 		this.id = id;
 	}
-	public CursoOferta getCursoOferta() {
-		return cursoOferta;
+	public CursoOferta getCurso_oferta() {
+		return curso_oferta;
 	}
-	public void setCursoOferta(CursoOferta cursoOferta) {
-		this.cursoOferta = cursoOferta;
+	public void setCurso_oferta(CursoOferta cursoOferta) {
+		this.curso_oferta = cursoOferta;
 	}
 	public Date getFecha_evaluacion() {
 		return fecha_evaluacion;

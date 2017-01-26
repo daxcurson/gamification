@@ -5,15 +5,11 @@
 
 <fieldset>
 <div class="form-group">
-<form:label path="descripcion" id="LabelUserGroup">Descripci&oacute;n de la Evaluaci&oacute;n</form:label>
-<form:input id="EvaluacionDescripcion" class="form-control" path="descripcion"/>
-<form:errors path="descripcion"/>
-</div>
-<div class="form-group">
-<form:label path="curso_oferta" id="LabelEvaluacionCursoOferta">Curso Ofrecido</form:label>
-<form:select path="curso_oferta" id="EvaluacionCursoOferta" class="form-control">
-<form:options items="${cursos_ofertas}" itemValue="id" itemLabel="curso.codigo_curso" />
-</form:select>
-<form:errors path="curso_oferta"/>
+<form:label path="evaluacion.descripcion" id="LabelUserGroup">Descripci&oacute;n de la Evaluaci&oacute;n</form:label>
+<form:input id="EvaluacionDescripcion" class="form-control" path="evaluacion.descripcion"/>
+<form:errors path="evaluacion.descripcion"/>
 </div>
 </fieldset>
+<c:forEach items="${evaluacion_tomada.evaluacion.preguntas}" var="pregunta">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/code_magnet.jsp" %>
+</c:forEach>

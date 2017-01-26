@@ -20,6 +20,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
+import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
 import gamification.model.User;
 import gamification.service.EvaluacionService;
@@ -64,19 +66,32 @@ public class EvaluacionesTomadasController
 	private ModelAndView cargarFormEvaluacion(String vista,EvaluacionTomada evaluacion)
 	{
 		ModelAndView m=new ModelAndView(vista);
-		m.addObject("evaluacion",evaluacion);
+		m.addObject("evaluacion_tomada",evaluacion);
 		return m;
 	}
+	/**
+	 * Muestra el formulario de una evaluacion que el estudiante puede tomar.
+	 * @param evaluacionId Indica el id de la evaluacion que el estudiante desea tomar.
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
-	@RequestMapping(value="/add",method=RequestMethod.GET)
-	public ModelAndView mostrarFormTomarEvaluacion()
+	@RequestMapping(value="/{evaluacionId}/add",method=RequestMethod.GET)
+	public ModelAndView mostrarFormTomarEvaluacion(
+			@PathVariable("evaluacionId") int evaluacionId
+	)
 	{
-		return this.cargarFormEvaluacion("evaluaciones_tomadas_add", new EvaluacionTomada());
+		// Hay que buscar los datos de la evaluacion, y asignarlo a la evaluacion
+		// tomada.
+		EvaluacionTomada t=new EvaluacionTomada();
+		Evaluacion e=evaluacionService.getEvaluacionById(evaluacionId);
+		t.setEvaluacion(e);
+		return this.cargarFormEvaluacion("evaluaciones_tomadas_add", t);
 	}
 	@Descripcion(value="Dar evaluacion como estudiante",permission="ROLE_EVALUACIONES_TOMADAS_ADD")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/{evaluacionId}/add", method = RequestMethod.POST)
 	public ModelAndView agregarEvaluacionTomada(@Valid @ModelAttribute("evaluacion_tomada")
+	@PathVariable("evaluacionId") int evaluacionId,
 	EvaluacionTomada evaluacion,
 	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{

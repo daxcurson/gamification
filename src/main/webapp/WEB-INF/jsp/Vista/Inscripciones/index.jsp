@@ -10,19 +10,19 @@
 </p>
 
 <table class="table">
-<tr><th></th><th>C&oacute;digo del Curso</th><th>Nombre del Curso</th><th>Fechas en oferta</th><th>Acciones</th></tr>
+<tr><th></th><th>C&oacute;digo del Curso</th><th>Nombre del Curso</th><th>Fechas en oferta</th></tr>
 <c:forEach items="${inscripciones}" var="inscripcion">
 <tr class="clickable" data-toggle="collapse" id="row1" data-target=".row1">
 <td><i class="glyphicon glyphicon-plus"></i></td>
 <td><c:out value="${inscripcion.curso_oferta.curso.codigo_curso}"/></td>
 <td><c:out value="${inscripcion.curso_oferta.curso.nombre}"/></td>
-<td><c:out value="${inscripcion.curso_oferta.fecha_comienzo}"/>-<c:out value="${inscripcion.curso_oferta.fecha_fin}"/></td><td><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/add">Tomar Evaluaci&oacute;n</a></td>
+<td><c:out value="${inscripcion.curso_oferta.fecha_comienzo}"/>-<c:out value="${inscripcion.curso_oferta.fecha_fin}"/></td>
 </tr>
 <tr class="collapse row1">
 <td colspan="5">
 <table class="table table-bordered">
-<c:forEach items="${inscripcion.evaluaciones}" var="evaluacion_tomada">
-<tr><td>Intento: <c:out value="${evaluacion_tomada.fecha_evaluacion}"/></td><td>Calificacion</td><td>Evaluador</td></tr>
+<c:forEach items="${inscripcion.curso_oferta.evaluaciones}" var="evaluacion_a_tomar">
+<tr><td><c:out value="${evaluacion_a_tomar.descripcion}"/></td><td>Calificacion</td><td>Evaluador</td><td><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/${evaluacion_a_tomar.id}/add">Tomar Evaluaci&oacute;n</a></td></tr>
 </c:forEach>
 </table>
 </td>

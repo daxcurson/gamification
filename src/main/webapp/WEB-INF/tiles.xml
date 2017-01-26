@@ -143,7 +143,7 @@
 	<definition name="evaluaciones_tomadas_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/EvaluacionesTomadas/add.jsp">
-				<put-attribute name="form_pregunta" value="/WEB-INF/jsp/Vista/EvaluacionesTomadas/form_evaluacion_tomada.jsp"/>
+				<put-attribute name="form_evaluacion_tomada" value="/WEB-INF/jsp/Vista/EvaluacionesTomadas/form_evaluacion_tomada.jsp"/>
 			</definition>
 		</put-attribute>
 	</definition>
