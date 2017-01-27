@@ -12,6 +12,8 @@ import java.util.List;
  */
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="curso_ofertas")
 public class CursoOferta 
@@ -51,6 +53,7 @@ public class CursoOferta
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+	@JsonBackReference
 	public List<Evaluacion> getEvaluaciones() {
 		return evaluaciones;
 	}
