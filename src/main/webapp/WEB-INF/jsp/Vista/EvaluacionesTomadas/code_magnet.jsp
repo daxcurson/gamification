@@ -7,6 +7,15 @@
 <script src="${pageContext.request.contextPath}/js/jquery.fn.sortable.js"></script>
 
 <script type="text/javascript">
+$.fn.randomize = function(selector)
+{
+	var $elems = selector ? $(this).find(selector) : $(this).children();
+	for (var i = $elems.length; i >= 0; i--) {
+		$(this).append($elems[Math.random() * i | 0]);
+	}
+
+	return this;
+}
 $(document).ready(function()
 {
 	$('#pregunta-${pregunta.id}').sortable({
@@ -33,8 +42,8 @@ $(document).ready(function()
 				localStorage.setItem(sortable.options.group.name, order.join('|'));
 			}
 		}
-	}
-);
+	});
+	$("#pregunta-${pregunta.id}").randomize();
 });
 </script>
 
