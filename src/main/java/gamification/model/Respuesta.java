@@ -25,6 +25,8 @@ public class Respuesta
 	@ManyToOne
 	@JoinColumn(name="pregunta_id")
 	private Pregunta pregunta;
+	@JoinColumn(name="evaluacion_tomada_id")
+	private EvaluacionTomada evaluacion_tomada;
 	private String valor_respuesta;
 	public int getId() {
 		return id;

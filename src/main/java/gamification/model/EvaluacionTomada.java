@@ -1,6 +1,7 @@
 package gamification.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,10 @@ public class EvaluacionTomada
 	@ManyToOne
 	@JoinColumn(name="evaluacion_id")
 	private Evaluacion evaluacion;
+	
+	@OneToMany
+	private List<Respuesta> respuestas;
+	
 	public int getId() {
 		return id;
 	}
@@ -58,5 +64,11 @@ public class EvaluacionTomada
 	}
 	public void setEvaluacion(Evaluacion evaluacion) {
 		this.evaluacion = evaluacion;
+	}
+	public List<Respuesta> getRespuestas() {
+		return respuestas;
+	}
+	public void setRespuestas(List<Respuesta> respuestas) {
+		this.respuestas = respuestas;
 	}
 }

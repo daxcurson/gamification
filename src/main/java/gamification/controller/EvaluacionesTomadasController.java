@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -63,6 +64,12 @@ public class EvaluacionesTomadasController
 		modelo.addObject("evaluaciones",evaluacionService.listarEvaluacionesTomadas(user.getId()));
 		return modelo;
 	}
+	/**
+	 * Metodo interno para cargar el formulario de evaluacion. 
+	 * @param vista Cual vista se desea, puede ser add, o edit, o la que sea.
+	 * @param evaluacion el objeto evaluacion, que puede ser nuevo o leido de la base de datos.
+	 * @return Devuelve el ModelAndView del examen.
+	 */
 	private ModelAndView cargarFormEvaluacion(String vista,EvaluacionTomada evaluacion)
 	{
 		ModelAndView m=new ModelAndView(vista);
@@ -90,8 +97,8 @@ public class EvaluacionesTomadasController
 	@Descripcion(value="Dar evaluacion como estudiante",permission="ROLE_EVALUACIONES_TOMADAS_ADD")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
 	@RequestMapping(value = "/{evaluacionId}/add", method = RequestMethod.POST)
-	public ModelAndView agregarEvaluacionTomada(@Valid @ModelAttribute("evaluacion_tomada")
-	@PathVariable("evaluacionId") int evaluacionId,
+	public ModelAndView agregarEvaluacionTomada(@PathVariable("evaluacionId") int evaluacionId,
+	@Valid @ModelAttribute("evaluacion_tomada")
 	EvaluacionTomada evaluacion,
 	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
@@ -113,5 +120,19 @@ public class EvaluacionesTomadasController
 			redirectAttributes.addFlashAttribute("message","Evaluacion agregada exitosamente");
 			return modelo;
 		}
+	}
+	/**
+	 * Recibe el orden de las filas de un Code Magnet. Lo guarda en la respuesta a la
+	 * pregunta, porque se supone que esto se hace para cuando se entrega el examen.
+	 * @param preguntaId id de la pregunta cuya respuesta se desea registrar.
+	 * @return
+	 */
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
+	@RequestMapping(value = "/{evaluacionId}/grabar_orden_pregunta/{preguntaId}", method = RequestMethod.POST)
+	public @ResponseBody String grabarOrdenPreguntas(@PathVariable("preguntaId") int preguntaId,
+			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion
+			)
+	{
+		return "success";
 	}
 }
