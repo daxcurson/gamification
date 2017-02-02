@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,8 +31,11 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
+import gamification.model.Respuesta;
 import gamification.model.User;
+import gamification.model.propertyeditor.RespuestaEditor;
 import gamification.service.EvaluacionService;
+import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping("evaluaciones_tomadas")
@@ -51,6 +53,7 @@ public class EvaluacionesTomadasController
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Respuesta.class, new RespuestaEditor());
 	}
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Mostrar lista de evaluaciones tomadas y menu",permission="ROLE_EVALUACIONES_TOMADAS_MOSTRAR_MENU")
@@ -60,7 +63,8 @@ public class EvaluacionesTomadasController
 		ModelAndView modelo=new ModelAndView("evaluaciones_tomadas_index");
 		// Aqui pregunto al sistema cual es el usuario del sistema, y
 		// pido las evaluaciones que este estudiante haya tomado.
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		AuthenticationUserDetails auth = (AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user=auth.getUser();
 		modelo.addObject("evaluaciones",evaluacionService.listarEvaluacionesTomadas(user.getId()));
 		return modelo;
 	}
@@ -120,19 +124,5 @@ public class EvaluacionesTomadasController
 			redirectAttributes.addFlashAttribute("message","Evaluacion agregada exitosamente");
 			return modelo;
 		}
-	}
-	/**
-	 * Recibe el orden de las filas de un Code Magnet. Lo guarda en la respuesta a la
-	 * pregunta, porque se supone que esto se hace para cuando se entrega el examen.
-	 * @param preguntaId id de la pregunta cuya respuesta se desea registrar.
-	 * @return
-	 */
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
-	@RequestMapping(value = "/{evaluacionId}/grabar_orden_pregunta/{preguntaId}", method = RequestMethod.POST)
-	public @ResponseBody String grabarOrdenPreguntas(@PathVariable("preguntaId") int preguntaId,
-			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion
-			)
-	{
-		return "success";
 	}
 }

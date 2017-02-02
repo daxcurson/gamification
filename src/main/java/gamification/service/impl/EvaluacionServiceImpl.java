@@ -49,8 +49,12 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	}
 
 	@Override
-	public void tomarEvaluacion(EvaluacionTomada evaluacion) {
-		// TODO Auto-generated method stub
-		
+	public void tomarEvaluacion(EvaluacionTomada evaluacion) 
+	{
+	}
+
+	@Override
+	public void guardarOrdenMagnet(EvaluacionTomada evaluacion) 
+	{
 	}
 }

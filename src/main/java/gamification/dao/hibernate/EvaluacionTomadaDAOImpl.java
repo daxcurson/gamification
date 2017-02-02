@@ -25,7 +25,12 @@ public class EvaluacionTomadaDAOImpl implements EvaluacionTomadaDAO
 	@Override
 	public List<EvaluacionTomada> listarEvaluacionesTomadas(int estudiante_id) 
 	{
-		return (List<EvaluacionTomada>)sessionFactory.getCurrentSession().createQuery("from EvaluacionTomada where estudiante.id="+estudiante_id).getResultList();
+		// Las evaluaciones tomadas por un estudiante estan relacionadas con la inscripcion,
+		// no directamente con el estudiante. Uso un join para ir a buscar las
+		// evaluaciones tomadas en todas las inscripciones.
+		return (List<EvaluacionTomada>)sessionFactory.getCurrentSession().createQuery(
+				"select eval from EvaluacionTomada eval,Inscripcion insc where "
+				+ "eval.inscripcion.id=insc.id and insc.estudiante.id="+estudiante_id).getResultList();
 	}
 
 }

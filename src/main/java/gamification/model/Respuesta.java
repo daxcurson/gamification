@@ -25,6 +25,7 @@ public class Respuesta
 	@ManyToOne
 	@JoinColumn(name="pregunta_id")
 	private Pregunta pregunta;
+	@ManyToOne
 	@JoinColumn(name="evaluacion_tomada_id")
 	private EvaluacionTomada evaluacion_tomada;
 	private String valor_respuesta;
@@ -45,5 +46,11 @@ public class Respuesta
 	}
 	public void setValor_respuesta(String valor_respuesta) {
 		this.valor_respuesta = valor_respuesta;
+	}
+	public EvaluacionTomada getEvaluacion_tomada() {
+		return evaluacion_tomada;
+	}
+	public void setEvaluacion_tomada(EvaluacionTomada evaluacion_tomada) {
+		this.evaluacion_tomada = evaluacion_tomada;
 	}
 }

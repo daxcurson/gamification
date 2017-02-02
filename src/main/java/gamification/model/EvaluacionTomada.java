@@ -1,6 +1,7 @@
 package gamification.model;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class EvaluacionTomada
 	private Evaluacion evaluacion;
 	
 	@OneToMany
-	private List<Respuesta> respuestas;
+	private List<Respuesta> respuestas=new LinkedList<Respuesta>();
 	
 	public int getId() {
 		return id;

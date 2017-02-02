@@ -15,7 +15,12 @@
 <% pageContext.setAttribute("newLineChar", "\n"); %>
 <ul id="pregunta-${pregunta.id}" class="list-group">
 <c:forTokens items="${pregunta.texto_ordenar}" delims="${newLineChar}" var="linea">
-<li class="list-group-item" data-id="${fila}"><span class="glyphicon glyphicon-move" aria-hidden="true"></span><c:out value="${linea}"/></li>
+<li class="list-group-item" data-id="${fila}"><span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+<div>
+<c:out value="${linea}"/>
+</div>
+</li>
 <c:set var="fila" value="${fila+1}"/>
 </c:forTokens>
 </ul>
+<form:input path="respuestas[${pregunta.id}]" type="hidden" id="respuestas-${pregunta.id}"/>

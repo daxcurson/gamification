@@ -11,5 +11,7 @@
 </div>
 </fieldset>
 <c:forEach items="${evaluacion_tomada.evaluacion.preguntas}" var="pregunta">
+<c:if test="${pregunta.tipo_pregunta.codigo=='CMAGNET'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/code_magnet.jsp" %>
+</c:if>
 </c:forEach>
