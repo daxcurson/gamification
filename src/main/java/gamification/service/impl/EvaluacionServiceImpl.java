@@ -51,10 +51,7 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	@Override
 	public void tomarEvaluacion(EvaluacionTomada evaluacion) 
 	{
+		evaluacionTomadaDAO.agregar(evaluacion);
 	}
 
-	@Override
-	public void guardarOrdenMagnet(EvaluacionTomada evaluacion) 
-	{
-	}
 }

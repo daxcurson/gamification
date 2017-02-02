@@ -10,7 +10,7 @@
 <%@include file="/WEB-INF/jsp/Vista/Evaluaciones/preguntas.js" %>
 </script>
 
-<form:form method="post" action="add" commandName="evaluacion_tomada" id="form_evaluacion">
+<form:form method="post" commandName="evaluacion_tomada" id="form_evaluacion">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<tiles:insertAttribute name="form_evaluacion_tomada"/>
 	<input type="submit" name="agregar_evaluacion" value="Entregar examen">

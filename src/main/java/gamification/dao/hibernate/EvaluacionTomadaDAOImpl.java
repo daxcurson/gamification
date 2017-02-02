@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.EvaluacionTomadaDAO;
 import gamification.model.EvaluacionTomada;
@@ -33,4 +34,15 @@ public class EvaluacionTomadaDAOImpl implements EvaluacionTomadaDAO
 				+ "eval.inscripcion.id=insc.id and insc.estudiante.id="+estudiante_id).getResultList();
 	}
 
+	@Override
+	@Transactional
+	public void agregar(EvaluacionTomada evaluacion) 
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(evaluacion);
+	}
+	@Override
+	public void grabar(EvaluacionTomada evaluacion)
+	{
+		sessionFactory.getCurrentSession().saveOrUpdate(evaluacion);
+	}
 }

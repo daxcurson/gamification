@@ -13,5 +13,4 @@ public interface EvaluacionService
 	void grabarEvaluacion(Evaluacion evaluacion);
 	List<EvaluacionTomada> listarEvaluacionesTomadas(int estudiante_id);
 	void tomarEvaluacion(EvaluacionTomada evaluacion);
-	void guardarOrdenMagnet(EvaluacionTomada evaluacion);
 }
