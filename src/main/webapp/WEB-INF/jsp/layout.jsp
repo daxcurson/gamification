@@ -25,16 +25,17 @@
   </head>
 
   <body>
+    <div class="content">
+	    <!-- Fixed navbar -->
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	    <tiles:insertAttribute name="menu"/>
+	    </nav>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-    <tiles:insertAttribute name="menu"/>
-    </nav>
+		<tiles:insertAttribute name="flash"/>
 
-	<tiles:insertAttribute name="flash"/>
-
-    <div class="container theme-showcase" role="main">
-    <tiles:insertAttribute name="content"/>
+	    <div class="container theme-showcase" role="main">
+	    <tiles:insertAttribute name="content"/>
+	    </div>
     </div>
   </body>
 </html>
