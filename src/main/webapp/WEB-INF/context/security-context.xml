@@ -17,6 +17,7 @@
 
 		<!-- intercepted urls -->
 		<security:intercept-url pattern="/users/login" access="permitAll" />
+		<security:intercept-url pattern="/users/logindenied" access="permitAll" />
 		<security:intercept-url pattern="/j_spring_security_check" access="permitAll" />
 		<security:intercept-url pattern="/pages/**" access="permitAll" />
 		<security:intercept-url pattern="/css/**" access="permitAll" />
