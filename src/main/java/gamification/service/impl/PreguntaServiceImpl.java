@@ -19,6 +19,12 @@ public class PreguntaServiceImpl implements PreguntaService
 	private TipoPreguntaDAO tipoPreguntaDAO;
 	@Autowired
 	private PreguntaDAO preguntaDAO;
+	
+	@Override
+	public Pregunta getById(int id)
+	{
+		return preguntaDAO.getById(id);
+	}
 	@Override
 	public List<TipoPregunta> listarTiposPreguntas() 
 	{

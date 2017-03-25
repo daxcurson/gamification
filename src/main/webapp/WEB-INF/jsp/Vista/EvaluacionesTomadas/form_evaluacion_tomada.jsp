@@ -10,8 +10,11 @@
 <form:errors path="evaluacion.descripcion"/>
 </div>
 </fieldset>
-<c:forEach items="${evaluacion_tomada.evaluacion.preguntas}" var="pregunta">
+<c:forEach items="${evaluacion_tomada.evaluacion.preguntas}" var="pregunta" varStatus="preguntaNro">
 <c:if test="${pregunta.tipo_pregunta.codigo=='CMAGNET'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/code_magnet.jsp" %>
+</c:if>
+<c:if test="${pregunta.tipo_pregunta.codigo=='MCHOICE'}">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/multiple_choice.jsp" %>
 </c:if>
 </c:forEach>

@@ -2,11 +2,14 @@ package gamification.model.propertyeditor;
 
 import java.beans.PropertyEditorSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import gamification.model.TipoPregunta;
 import gamification.service.PreguntaService;
 
 public class TipoPreguntaEditor extends PropertyEditorSupport 
 {
+	@Autowired
 	private PreguntaService preguntaService;
 	public TipoPreguntaEditor(PreguntaService service) 
 	{

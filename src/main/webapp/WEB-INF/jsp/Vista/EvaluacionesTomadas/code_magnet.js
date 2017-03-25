@@ -9,10 +9,10 @@ $.fn.randomize = function(selector)
 }
 $(document).ready(function()
 {
-	$('#pregunta-${pregunta.id}').sortable({
+	$('#pregunta-${preguntaNro.index}').sortable({
 		animation: 150,
 		handle:".glyphicon-move",
-		group: "pregunta-${pregunta.id}",
+		group: "pregunta-${preguntaNro.index}",
 		store: {
 			/**
 			 * Get the order of elements. Called once during initialization.
@@ -34,18 +34,18 @@ $(document).ready(function()
 			}
 		}
 	});
-	$("#pregunta-${pregunta.id}").randomize();
+	$("#pregunta-${preguntaNro.index}").randomize();
 });
 $('#form_evaluacion').on('submit',function()
 {
 	// Recorremos los renglones, en el orden que esten, y los agregamos como texto
 	// a un hidden para que despues se envie con el form.
 	var texto="";
-	$('#pregunta-${pregunta.id} li').each(function(index)
+	$('#pregunta-${preguntaNro.index} li').each(function(index)
 	{
 		texto+=$(this).find("div").html();
 	});
-	$('#respuestas-${pregunta.id}').val(texto);
+	$('#respuestas-${preguntaNro.index}').val(texto);
 	return true;
 }
 );

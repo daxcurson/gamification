@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class EvaluacionTomada
 	@JoinColumn(name="evaluacion_id")
 	private Evaluacion evaluacion;
 	
-	@OneToMany
+	@OneToMany(cascade={CascadeType.ALL},mappedBy="evaluacion_tomada")
 	private List<Respuesta> respuestas=new LinkedList<Respuesta>();
 	
 	public int getId() {

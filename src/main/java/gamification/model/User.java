@@ -1,5 +1,7 @@
 package gamification.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,13 +12,12 @@ import gamification.model.validator.PasswordsEqualConstraint;
 @Table(name="users",uniqueConstraints = @UniqueConstraint(name = "username_uc"
 ,columnNames = "username"))
 @PasswordsEqualConstraint(message = "Los passwords no coinciden")
-public class User
+public class User implements Serializable
 {
 	/**
 	 * 
 	 */
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7775568520866798787L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

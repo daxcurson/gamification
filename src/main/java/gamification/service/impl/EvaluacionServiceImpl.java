@@ -1,19 +1,25 @@
 package gamification.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.EvaluacionDAO;
 import gamification.dao.EvaluacionTomadaDAO;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
+import gamification.model.Respuesta;
 import gamification.service.EvaluacionService;
 
 @Service
 public class EvaluacionServiceImpl implements EvaluacionService 
 {
+	private static Logger log=LogManager.getLogger(EvaluacionServiceImpl.class);
 	@Autowired
 	private EvaluacionDAO evaluacionDAO;
 	@Autowired
@@ -49,8 +55,19 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	}
 
 	@Override
+	@Transactional
 	public void tomarEvaluacion(EvaluacionTomada evaluacion) 
 	{
+		// La fecha de la evaluacion tiene que estar cargada!!!
+		evaluacion.setFecha_evaluacion(new Date());
+		// Me voy a asegurar que todas las preguntas de la evaluacion
+		// tengan configurado el link hacia la EvaluacionTomada.
+		List<Respuesta> lista=evaluacion.getRespuestas();
+		for(Respuesta r:lista)
+		{
+			r.setEvaluacion_tomada(evaluacion);
+			log.trace("La respuesta tiene una pregunta??? Seria esta: "+r.getPregunta());
+		}
 		evaluacionTomadaDAO.agregar(evaluacion);
 	}
 

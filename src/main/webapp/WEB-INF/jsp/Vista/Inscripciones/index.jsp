@@ -22,7 +22,7 @@
 <td colspan="5">
 <table class="table table-bordered">
 <c:forEach items="${inscripcion.curso_oferta.evaluaciones}" var="evaluacion_a_tomar">
-<tr><td><c:out value="${evaluacion_a_tomar.descripcion}"/></td><td>Calificacion</td><td>Evaluador</td><td><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/${inscripcion.curso_oferta.id}/add/${evaluacion_a_tomar.id}">Tomar Evaluaci&oacute;n</a></td></tr>
+<tr><td><c:out value="${evaluacion_a_tomar.descripcion}"/></td><td>Calificacion</td><td>Evaluador</td><td><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/${inscripcion.id}/add/${evaluacion_a_tomar.id}">Tomar Evaluaci&oacute;n</a></td></tr>
 </c:forEach>
 </table>
 </td>

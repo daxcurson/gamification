@@ -1,5 +1,6 @@
 package gamification.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +19,13 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="groups")
-public class Group 
+public class Group implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2295196331571546077L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")

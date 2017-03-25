@@ -155,6 +155,7 @@ public class UsersController extends AppController
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null)
 	    {
+	    	log.trace("Realizando accion de Logout");
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
 	    return "redirect:/pages/adios";

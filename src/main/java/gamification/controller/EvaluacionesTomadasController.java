@@ -31,11 +31,16 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
-import gamification.model.Respuesta;
+import gamification.model.Inscripcion;
+import gamification.model.Pregunta;
+//import gamification.model.Respuesta;
 import gamification.model.User;
-import gamification.model.propertyeditor.RespuestaEditor;
+import gamification.model.propertyeditor.PreguntaEditor;
+//import gamification.model.propertyeditor.RespuestaEditor;
 import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
+import gamification.service.InscripcionService;
+import gamification.service.PreguntaService;
 import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
@@ -49,6 +54,10 @@ public class EvaluacionesTomadasController
 	private EvaluacionService evaluacionService;
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private InscripcionService inscripcionService;
+	@Autowired
+	private PreguntaService preguntaService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
@@ -56,7 +65,8 @@ public class EvaluacionesTomadasController
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-		binder.registerCustomEditor(Respuesta.class, new RespuestaEditor());
+		//binder.registerCustomEditor(Respuesta.class, new RespuestaEditor());
+		binder.registerCustomEditor(Pregunta.class, new PreguntaEditor(preguntaService));
 	}
 	@RequestMapping({"/","/index"})
 	@Descripcion(value="Mostrar lista de evaluaciones tomadas y menu",permission="ROLE_EVALUACIONES_TOMADAS_MOSTRAR_MENU")
@@ -89,10 +99,10 @@ public class EvaluacionesTomadasController
 	 * @return
 	 */
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
-	@RequestMapping(value="/{cursoOfertaId}/add/{evaluacionId}",method=RequestMethod.GET)
+	@RequestMapping(value="/{inscripcionId}/add/{evaluacionId}",method=RequestMethod.GET)
 	public ModelAndView mostrarFormTomarEvaluacion(
 			@PathVariable("evaluacionId") int evaluacionId,
-			@PathVariable("cursoOfertaId") int cursoOfertaId
+			@PathVariable("inscripcionId") int inscripcionId
 	)
 	{
 		// Hay que buscar los datos de la evaluacion, y asignarlo a la evaluacion
@@ -100,12 +110,14 @@ public class EvaluacionesTomadasController
 		EvaluacionTomada t=new EvaluacionTomada();
 		Evaluacion e=evaluacionService.getEvaluacionById(evaluacionId);
 		t.setEvaluacion(e);
-		t.setCurso_oferta(cursoService.getCursoOfertaById(cursoOfertaId));
+		Inscripcion i=inscripcionService.getInscripcionById(inscripcionId);
+		t.setInscripcion(i);
+		t.setCurso_oferta(cursoService.getCursoOfertaById(i.getCurso_oferta().getId()));
 		return this.cargarFormEvaluacion("evaluaciones_tomadas_add", t);
 	}
 	@Descripcion(value="Dar evaluacion como estudiante",permission="ROLE_EVALUACIONES_TOMADAS_ADD")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
-	@RequestMapping(value = "/{cursoOfertaId}/add/{evaluacionId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{inscripcionId}/add/{evaluacionId}", method = RequestMethod.POST)
 	public ModelAndView agregarEvaluacionTomada(@PathVariable("evaluacionId") int evaluacionId,
 	@Valid @ModelAttribute("evaluacion_tomada")
 	EvaluacionTomada evaluacion,
