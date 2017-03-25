@@ -2,14 +2,14 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h2>Estudiantes</h2>
+<h2>Asistentes a Cursos</h2>
 
 <p>
-<a href="${pageContext.request.contextPath}/estudiantes/add">Agregar nuevo estudiante</a>
+<a href="${pageContext.request.contextPath}/estudiantes/add">Agregar nuevo asistente</a>
 </p>
 
 <p>
-A continuaci&oacute;n se listan los estudiantes. Para definir grupos y permisos, haga 
+A continuaci&oacute;n se listan los asistentes a cursos. Para definir grupos y permisos, haga 
 click <a href="${pageContext.request.contextPath}/users/index">aqu&iacute;</a>.
 </p>
 

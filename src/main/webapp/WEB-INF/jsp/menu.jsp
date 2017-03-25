@@ -15,7 +15,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${pageContext.request.contextPath}/menu"><span class="glyphicon glyphicon-home"></span>Pantalla Inicial</a></li>
 				<sec:authorize access="hasRole('ROLE_ESTUDIANTES_MOSTRAR_MENU')">
-					<li><a href="${pageContext.request.contextPath}/estudiantes/"><span class="glyphicon glyphicon-user"></span>Estudiantes</a></li>
+					<li><a href="${pageContext.request.contextPath}/estudiantes/"><span class="glyphicon glyphicon-user"></span>Asistentes</a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CURSOS_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/cursos/"><span class="glyphicon glyphicon-user"></span>Cursos</a></li>

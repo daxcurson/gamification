@@ -9,7 +9,7 @@
 
 <ul>
 <sec:authorize access="hasRole('ROLE_ESTUDIANTES_MOSTRAR_MENU')">
-<li><a href="${pageContext.request.contextPath}/estudiantes/index">Estudiantes</a></li>
+<li><a href="${pageContext.request.contextPath}/estudiantes/index">Asistentes</a></li>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_CURSOS_MOSTRAR_MENU')">
 <li><a href="${pageContext.request.contextPath}/cursos/index">Cursos</a></li>
