@@ -28,6 +28,7 @@
 		<mapping class="gamification.model.Respuesta" />
 		<mapping class="gamification.model.TemaCurso" />
 		<mapping class="gamification.model.TipoPregunta" />
+		<mapping class="gamification.model.Token" />
 		<mapping class="gamification.model.User" />
 	</session-factory>
 	    

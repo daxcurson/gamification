@@ -153,12 +153,15 @@ public class UsersController extends AppController
 	public String logout(HttpServletRequest request, HttpServletResponse response)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null)
-	    {
-	    	log.trace("Realizando accion de Logout");
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/pages/adios";
+		if (auth != null)
+		{
+			log.trace("Realizando accion de Logout");
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+			log.trace("Acciones realizadas, nos vemos pronto!");
+		}
+		else
+			log.trace("Autenticacion nula, no hago nada");
+		return "redirect:/users/login";
 	}
 	private ModelAndView cargarFormUsuario(String vista,User user)
 	{
