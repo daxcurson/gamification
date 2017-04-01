@@ -16,9 +16,7 @@
 			<td><c:out value="${pregunta.tipo_pregunta.descripcion}" /></td>
 			<td><c:out value="${pregunta.texto_pregunta}" /></td>
 			<td>
-			<c:if test="${preguntas.tipo_pregunta.codigo=='CMAGNET'}">
-				<c:out value="${pregunta.texto_ordenar}"/>
-			</c:if>
+			<c:out value="${pregunta.texto_ordenar}"/>
 			</td>
 			</tr>
 		</c:forEach>

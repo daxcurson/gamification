@@ -364,7 +364,7 @@ function Crossword(words_in, clues_in){
 
     // I got this sorting idea from http://stackoverflow.com/questions/943113/algorithm-to-generate-a-crossword/1021800#1021800
     // seems to work well
-    word_elements.sort(function(a, B)/>/>{ return b.word.length - a.word.length; });
+    word_elements.sort(function(a, B){ return b.word.length - a.word.length; });
 }
 
 var CrosswordUtils = {

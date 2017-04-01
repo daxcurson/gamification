@@ -17,4 +17,7 @@
 <c:if test="${pregunta.tipo_pregunta.codigo=='MCHOICE'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/multiple_choice.jsp" %>
 </c:if>
+<c:if test="${pregunta.tipo_pregunta.codigo=='COMPLETAR'}">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/completar_parrafo.jsp" %>
+</c:if>
 </c:forEach>

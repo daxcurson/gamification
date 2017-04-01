@@ -236,7 +236,6 @@ function addLegendToPage(groups)
         </div>
     </div>
     <div class="clear"></div>
-</div>
 </body>
 
 </html>
