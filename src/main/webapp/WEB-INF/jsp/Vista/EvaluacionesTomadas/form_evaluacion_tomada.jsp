@@ -20,4 +20,7 @@
 <c:if test="${pregunta.tipo_pregunta.codigo=='COMPLETAR'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/completar_parrafo.jsp" %>
 </c:if>
+<c:if test="${pregunta.tipo_pregunta.codigo=='UNIRDEF'}">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/unir_definicion.jsp" %>
+</c:if>
 </c:forEach>
