@@ -26,7 +26,7 @@ click <a href="${pageContext.request.contextPath}/users/index">aqu&iacute;</a>.
 <td><c:out value="${estudiante.id}"/></td>
 <td>${estudiante.nombre}</td>
 <td>${estudiante.user!=null ? "S&iacute;":"No" }</td>
-<td>${estudiante.habilitada==true ? "S&iacute;":"No"}</td>
+<td>${estudiante.habilitada==1 ? "S&iacute;":"No"}</td>
 <td><a href="${pageContext.request.contextPath}/estudiantes/edit/${estudiante.id}">Editar</a></td>
 </tr>
 </c:forEach>
