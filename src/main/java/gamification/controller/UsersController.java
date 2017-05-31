@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.UsuarioExistenteException;
@@ -182,7 +183,7 @@ public class UsersController extends AppController
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView addUser(@Valid @ModelAttribute("user")
 	User user,
-	BindingResult result,ModelMap model)
+	BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -201,11 +202,11 @@ public class UsersController extends AppController
 			try
 			{
 				userService.save(user);
-				model.addAttribute("message","Usuario agregado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Usuario agregado exitosamente");
 			}
 			catch(UsuarioExistenteException e)
 			{
-				model.addAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
+				redirectAttributes.addFlashAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
 				modelo=this.cargarFormUsuario("users_add",user);
 			}
 			return modelo;
@@ -226,7 +227,7 @@ public class UsersController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_USERS_EDIT')")
 	public ModelAndView editarUser(@PathVariable("userId") Integer userId,
 			@Valid @ModelAttribute("user") User user,
-			BindingResult result,ModelMap model)
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
 		{
@@ -245,11 +246,11 @@ public class UsersController extends AppController
 			try
 			{
 				userService.save(user);
-				model.addAttribute("message","Usuario editado exitosamente");
+				redirectAttributes.addFlashAttribute("message","Usuario editado exitosamente");
 			}
 			catch(UsuarioExistenteException e)
 			{
-				model.addAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
+				redirectAttributes.addFlashAttribute("message","Ese nombre de usuario ya existe, por favor elija otro");
 				modelo=this.cargarFormUsuario("users_edit",user);
 			}
 			return modelo;
