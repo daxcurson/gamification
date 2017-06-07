@@ -26,4 +26,7 @@
 <c:if test="${pregunta.tipo_pregunta.codigo=='YOUTUBE'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/youtube.jsp" %>
 </c:if>
+<c:if test="${pregunta.tipo_pregunta.codigo=='BLOCKLY'}">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/blockly.jsp" %>
+</c:if>
 </c:forEach>

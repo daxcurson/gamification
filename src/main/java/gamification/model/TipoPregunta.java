@@ -17,6 +17,7 @@ public class TipoPregunta
 	private int id;
 	private String descripcion;
 	private String codigo;
+	private String archivo_vista;
 	public int getId() {
 		return id;
 	}
@@ -34,5 +35,11 @@ public class TipoPregunta
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	public String getArchivo_vista() {
+		return archivo_vista;
+	}
+	public void setArchivo_vista(String archivo_vista) {
+		this.archivo_vista = archivo_vista;
 	}
 }
