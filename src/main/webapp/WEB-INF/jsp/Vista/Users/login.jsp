@@ -30,9 +30,6 @@
 <h5 class="text-center"> - Or sign in using -</h5>
 	<ul class="list-inline text-center">
 	<li>
-		<form action="<c:url value="/users/login_facebook" />" method="POST">
-			<button type="submit">Sign in with Facebook</button>
-		</form>
 		<a href="javascript:void(0);" class="btn">
 		<img src="${pageContext.request.contextPath}/img/login-facebook.png"/>
 		</a>
