@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,6 +22,9 @@ public class Curso
 	@NotEmpty
 	private String nombre;
 	private String codigo_curso;
+	@ManyToOne
+	@JoinColumn(name="capacitador_id")
+	private Capacitador capacitador;
 	public int getId() {
 		return id;
 	}
@@ -37,6 +42,12 @@ public class Curso
 	}
 	public void setCodigo_curso(String codigo) {
 		this.codigo_curso = codigo;
+	}
+	public Capacitador getCapacitador() {
+		return capacitador;
+	}
+	public void setCapacitador(Capacitador capacitador) {
+		this.capacitador = capacitador;
 	}
 	
 }

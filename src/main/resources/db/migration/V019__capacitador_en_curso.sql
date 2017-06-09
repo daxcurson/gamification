@@ -1,0 +1,1 @@
+ALTER TABLE `cursos` ADD `capacitador_id` INT NULL AFTER `codigo_curso`;

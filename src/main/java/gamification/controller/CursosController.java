@@ -30,10 +30,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.CursoExistenteException;
+import gamification.model.Capacitador;
 import gamification.model.Curso;
 import gamification.model.CursoOferta;
 import gamification.model.TemaCurso;
+import gamification.model.propertyeditor.CapacitadorEditor;
 import gamification.model.propertyeditor.CursoEditor;
+import gamification.service.CapacitadorService;
 import gamification.service.CursoService;
 
 @Controller
@@ -45,6 +48,8 @@ public class CursosController extends AppController
 	private static Logger log=LogManager.getLogger(CursosController.class);
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private CapacitadorService capacitadorService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
@@ -53,6 +58,7 @@ public class CursosController extends AppController
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 		binder.registerCustomEditor(Curso.class, new CursoEditor(cursoService));
+		binder.registerCustomEditor(Capacitador.class, new CapacitadorEditor(capacitadorService));
 	}
 	
 	
@@ -70,6 +76,8 @@ public class CursosController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView(vista);
 		modelo.addObject("curso",curso);
+		// Vamos a leer la lista de capacitadores.
+		modelo.addObject("capacitadores",capacitadorService.listarCapacitadores());
 		return modelo;
 	}
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CURSOS_AGREGAR')")
@@ -342,5 +350,11 @@ public class CursosController extends AppController
 			return modelo;
 		}
 	}
-
+	@RequestMapping(value="/cursos/mis_cursos")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_MIS_CURSOS')")
+	public ModelAndView listarMisCursos()
+	{
+		ModelAndView modelo=new ModelAndView("cursos_mis_cursos");
+		return modelo;
+	}
 }

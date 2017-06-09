@@ -14,4 +14,11 @@
 <form:input id="CursoNombre" class="form-control" path="nombre"/>
 <form:errors path="nombre"/>
 </div>
+<div class="form-group">
+<label for="CursoCapacitador">capacitador</label>
+<form:select path="capacitador" id="CursoCapacitador" class="form-control">
+<form:options items="${capacitadores}" itemValue="id" itemLabel="nombre" />
+</form:select>
+<form:errors path="capacitador"/>
+</div>
 </fieldset>

@@ -20,6 +20,9 @@
 				<sec:authorize access="hasRole('ROLE_CURSOS_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/cursos/"><span class="glyphicon glyphicon-user"></span>Cursos</a></li>
 				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_MIS_CURSOS')">
+					<li><a href="${pageContext.request.contextPath}/cursos/mis_cursos"><span class="glyphicon glyphicon-user"></span>Mis Cursos</a></li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CAPACITADORES_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/capacitadores/"><span class="glyphicon glyphicon-user"></span>Capacitadores</a></li>
 				</sec:authorize>

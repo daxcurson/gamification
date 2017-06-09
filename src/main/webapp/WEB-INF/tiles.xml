@@ -54,6 +54,9 @@
 	<definition name="cursos_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/index.jsp"/>
 	</definition>
+	<definition name="cursos_mis_cursos" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Cursos/mis_cursos.jsp"/>
+	</definition>
 	<definition name="cursos_temario_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Cursos/temario_add.jsp">
