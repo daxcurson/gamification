@@ -48,4 +48,11 @@ public class CursoDAOImpl implements CursoDAO
 		sessionFactory.getCurrentSession().saveOrUpdate(curso);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Curso> listarCursosCapacitador(Integer capacitadorId) 
+	{
+		return (List<Curso>) sessionFactory.getCurrentSession().createQuery("from Curso where capacitador_id="+capacitadorId).getResultList();
+	}
+
 }

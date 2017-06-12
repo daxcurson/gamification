@@ -71,4 +71,15 @@ public class EvaluacionServiceImpl implements EvaluacionService
 		evaluacionTomadaDAO.agregar(evaluacion);
 	}
 
+	@Override
+	public List<EvaluacionTomada> listarEvaluacionesCorregir(int curso_id) 
+	{
+		return evaluacionTomadaDAO.listarEvaluacionesCorregir(curso_id);
+	}
+
+	@Override
+	public EvaluacionTomada getEvaluacionTomadaById(int evaluacion_tomada_id) 
+	{
+		return evaluacionTomadaDAO.getById(evaluacion_tomada_id);
+	}
 }

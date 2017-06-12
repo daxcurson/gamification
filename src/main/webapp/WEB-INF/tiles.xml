@@ -143,6 +143,12 @@
 	<definition name="evaluaciones_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Evaluaciones/index.jsp"/>
 	</definition>
+	<definition name="evaluaciones_capacitador_index" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/EvaluacionesCapacitador/index.jsp"/>
+	</definition>
+	<definition name="evaluaciones_capacitador_corregir" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/EvaluacionesCapacitador/corregir.jsp"/>
+	</definition>
 	<definition name="evaluaciones_tomadas_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/EvaluacionesTomadas/add.jsp">

@@ -3,6 +3,7 @@ package gamification.service;
 import java.util.List;
 
 import gamification.exceptions.CursoExistenteException;
+import gamification.model.Capacitador;
 import gamification.model.Curso;
 import gamification.model.CursoOferta;
 import gamification.model.TemaCurso;
@@ -22,4 +23,5 @@ public interface CursoService
 	public CursoOferta getCursoOfertaById(Integer ofertaId);
 	public void grabarCursoOferta(CursoOferta oferta);
 	public List<CursoOferta> listarOfertasTodas();
+	public List<Curso> listarCursosCapacitador(Capacitador c);
 }

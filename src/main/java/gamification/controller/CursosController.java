@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -38,6 +39,7 @@ import gamification.model.propertyeditor.CapacitadorEditor;
 import gamification.model.propertyeditor.CursoEditor;
 import gamification.service.CapacitadorService;
 import gamification.service.CursoService;
+import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping(value="cursos")
@@ -350,11 +352,15 @@ public class CursosController extends AppController
 			return modelo;
 		}
 	}
-	@RequestMapping(value="/cursos/mis_cursos")
+	@Descripcion(value="Capacitador: lista de mis cursos",permission="ROLE_MIS_CURSOS")
+	@RequestMapping(value="/mis_cursos")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_MIS_CURSOS')")
 	public ModelAndView listarMisCursos()
 	{
 		ModelAndView modelo=new ModelAndView("cursos_mis_cursos");
+		AuthenticationUserDetails user=(AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Capacitador c=(Capacitador) user.getUser().getPersona();
+		modelo.addObject("mis_cursos",cursoService.listarCursosCapacitador(c));
 		return modelo;
 	}
 }

@@ -45,4 +45,13 @@ public class EvaluacionTomadaDAOImpl implements EvaluacionTomadaDAO
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(evaluacion);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EvaluacionTomada> listarEvaluacionesCorregir(int curso_id) {
+		return (List<EvaluacionTomada>)sessionFactory.getCurrentSession().createQuery(
+				"select eval from EvaluacionTomada eval,CursoOferta oferta,Curso curso where "
+				+ "eval.curso_oferta.id=oferta.id "
+				+ "and oferta.curso.id=curso.id").getResultList();
+		}
 }

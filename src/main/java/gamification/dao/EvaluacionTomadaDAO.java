@@ -10,4 +10,5 @@ public interface EvaluacionTomadaDAO
 	public List<EvaluacionTomada> listarEvaluacionesTomadas(int estudiante_id);
 	public void agregar(EvaluacionTomada evaluacion);
 	public void grabar(EvaluacionTomada evaluacion);
+	public List<EvaluacionTomada> listarEvaluacionesCorregir(int curso_id);
 }
