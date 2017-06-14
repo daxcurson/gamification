@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.CursoDAO;
 import gamification.dao.CursoOfertaDAO;
@@ -94,6 +95,7 @@ public class CursoServiceImpl implements CursoService
 	}
 
 	@Override
+	@Transactional
 	public void grabarCursoOferta(CursoOferta oferta) 
 	{
 		cursoOfertaDAO.grabarOferta(oferta);

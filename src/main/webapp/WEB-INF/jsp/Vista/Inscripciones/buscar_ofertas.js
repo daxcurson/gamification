@@ -15,7 +15,7 @@ function tabla_ofertas(ofertas)
 	$.each(ofertas,function(index,oferta)
 	{
 		options+='<option value="'+oferta.id+'">'+
-		oferta.fecha_comienzo+'-'+oferta.fecha_fin+
+		moment.unix(oferta.fecha_comienzo/1000).format('DD/MM/YYYY')+'-'+moment.unix(oferta.fecha_fin/1000).format('DD/MM/YYYY')+
 		'</option>';
 	}
 	);

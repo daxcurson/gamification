@@ -28,6 +28,7 @@ public abstract class Persona
 	@OneToOne
 	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name="user_id")
+	@JsonBackReference
 	protected User user;
 	protected boolean usuario_sistema;
 	protected boolean habilitada;

@@ -83,7 +83,7 @@
 	</definition>
 	<definition name="cursos_ofertas_edit" extends="base.definition">
 		<put-attribute name="content">
-			<definition template="/WEB-INF/jsp/Vista/Cursos/temario_edit.jsp">
+			<definition template="/WEB-INF/jsp/Vista/Cursos/ofertas_edit.jsp">
 				<put-attribute name="oferta_form" value="/WEB-INF/jsp/Vista/Cursos/ofertas_form.jsp"/>
 			</definition>
 		</put-attribute>
