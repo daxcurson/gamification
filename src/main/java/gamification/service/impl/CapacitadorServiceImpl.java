@@ -5,12 +5,14 @@ import java.util.List;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gamification.dao.CapacitadorDAO;
 import gamification.dao.UserDAO;
 import gamification.exceptions.CapacitadorExistenteException;
 import gamification.model.Capacitador;
+import gamification.model.User;
 import gamification.service.CapacitadorService;
 
 @Service
@@ -33,6 +35,13 @@ public class CapacitadorServiceImpl implements CapacitadorService
 		try
 		{
 			capacitador.setUsuario_sistema(true);
+			User user=capacitador.getUser();
+			user.setEnabled(1);
+			// Hay que encriptar el password antes de grabarlo!!!
+	        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
+	        user.setPassword(pwe.encode(user.getPassword()));
+	        user.setConfirm_password(user.getPassword());
+
 			userDAO.save(capacitador.getUser());
 			capacitadorDAO.agregar(capacitador);
 		}
