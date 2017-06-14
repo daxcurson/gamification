@@ -17,8 +17,8 @@ gamification.model.Pregunta p=(gamification.model.Pregunta)pageContext.getAttrib
 String texto=p.getTexto_ordenar();
 java.util.StringTokenizer tokenizer=new java.util.StringTokenizer(texto,"\r\n\r\n");
 int i=0;
-java.util.List<String> definiciones=new java.util.LinkedList();
-java.util.List<String> textos=new java.util.LinkedList();
+java.util.List<String> definiciones=new java.util.LinkedList<String>();
+java.util.List<String> textos=new java.util.LinkedList<String>();
 while(tokenizer.hasMoreElements())
 {
 	if(i%2==0)
