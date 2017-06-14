@@ -8,5 +8,8 @@ $(document).ready(function()
 });
 $('#form_evaluacion').on('submit',function()
 {
+	var code = Blockly.PHP.workspaceToCode(workspace);
+	$('#respuestas-${preguntaNro.index}').val(code);
+	return true;
 }
 );
