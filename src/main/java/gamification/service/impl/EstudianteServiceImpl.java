@@ -63,6 +63,10 @@ public class EstudianteServiceImpl implements EstudianteService
 	{
 		try
 		{
+			User user=p.getUser();
+	        BCryptPasswordEncoder pwe=new BCryptPasswordEncoder();
+	        user.setPassword(pwe.encode(user.getPassword()));
+	        user.setConfirm_password(user.getPassword());
 			estudianteDAO.grabar(p);
 		}
         catch(ConstraintViolationException e)
