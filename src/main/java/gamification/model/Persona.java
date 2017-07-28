@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -32,6 +33,8 @@ public abstract class Persona
 	protected User user;
 	protected boolean usuario_sistema;
 	protected boolean habilitada;
+	@NotEmpty
+	protected String nombre;
 
 	public int getId() {
 		return id;
@@ -57,5 +60,11 @@ public abstract class Persona
 	}
 	public void setHabilitada(boolean habilitada) {
 		this.habilitada = habilitada;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 }

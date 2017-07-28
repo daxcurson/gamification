@@ -111,6 +111,9 @@
 	<definition name="estudiantes_index" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Estudiantes/index.jsp"/>
 	</definition>
+	<definition name="estudiantes_mi_perfil" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/Estudiantes/mi_perfil.jsp"/>
+	</definition>
 	<definition name="evaluaciones_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/Evaluaciones/add.jsp">

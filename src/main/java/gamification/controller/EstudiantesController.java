@@ -157,4 +157,16 @@ public class EstudiantesController extends AppController
 			return modelo;
 		}
 	}
+	@Descripcion(value="Mostrar perfil de Estudiante",permission="ROLE_ESTUDIANTES_MI_PERFIL")
+	@RequestMapping(value="/mi_perfil/{estudianteId}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_ESTUDIANTES_MI_PERFIL')")
+	public ModelAndView mostrarPerfilEstudiante()
+	{
+		ModelAndView m=new ModelAndView("estudiantes_mi_perfil");
+		// Aqui tienen:
+		// mis cursos aprobados,
+		// mis logros,
+		// mis evaluaciones tomadas.
+		return m;
+	}
 }
