@@ -78,7 +78,7 @@ public class EvaluacionesTomadasController
 		// pido las evaluaciones que este estudiante haya tomado.
 		AuthenticationUserDetails auth = (AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user=auth.getUser();
-		modelo.addObject("evaluaciones",evaluacionService.listarEvaluacionesTomadas(user.getId()));
+		modelo.addObject("evaluaciones_tomadas",evaluacionService.listarEvaluacionesTomadas(user.getId()));
 		return modelo;
 	}
 	/**
