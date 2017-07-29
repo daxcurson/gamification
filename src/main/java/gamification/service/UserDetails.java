@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import gamification.model.Group;
+
 public interface UserDetails extends Serializable 
 {
     Collection<GrantedAuthority> getAuthorities();
@@ -13,4 +15,5 @@ public interface UserDetails extends Serializable
     boolean isAccountNonLocked();
     boolean isCredentialsNonExpired();
     boolean isEnabled();
+	Group getGroup();
 }

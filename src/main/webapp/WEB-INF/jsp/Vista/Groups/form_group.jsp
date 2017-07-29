@@ -9,4 +9,9 @@
 <form:input id="GroupName" class="form-control" path="group_name"/>
 <form:errors path="group_name"/>
 </div>
+<div class="form-group">
+<label for="VistaPrincipal">Vista Principal</label>
+<form:input id="VistaPrincipal" class="form-control" path="vista_principal"/>
+<form:errors path="vista_principal"/>
+</div>
 </fieldset>

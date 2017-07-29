@@ -44,7 +44,9 @@ public class Group implements Serializable
     @Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
     private Set<Permission> permissions=new HashSet<Permission>();
 
-	
+	@Column(name="vista_principal")
+	private String vista_principal;
+
 	public int getId()
 	{
 		return id;
@@ -88,5 +90,11 @@ public class Group implements Serializable
 	 */
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+	public String getVista_principal() {
+		return vista_principal;
+	}
+	public void setVista_principal(String vista_principal) {
+		this.vista_principal = vista_principal;
 	}
 }

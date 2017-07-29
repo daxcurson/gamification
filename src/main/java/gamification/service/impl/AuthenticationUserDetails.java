@@ -10,9 +10,11 @@ import gamification.model.Group;
 import gamification.model.Permission;
 import gamification.model.PermissionGranted;
 import gamification.model.User;
+import gamification.service.UserDetails;
 
 
-public class AuthenticationUserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class AuthenticationUserDetails implements org.springframework.security.core.userdetails.UserDetails,UserDetails
+{
     /**
 	 * 
 	 */
@@ -24,6 +26,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
     private HashSet<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
     private static Logger log=LogManager.getLogger(AuthenticationUserDetails.class);
     private User user;
+    private Group group;
 
     public AuthenticationUserDetails(User user) 
     {
@@ -33,6 +36,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
         this.enabled = (user.getEnabled()==1 ? true:false);
         // Convierto los permisos leidos de la base, para el grupo al que pertenece el usuario, en Authorities.
         Group g=user.getGroup();
+        this.group=g;
         for(Permission p:g.getPermissions())
         {
         	PermissionGranted pg=new PermissionGranted(p.getAuthority());
@@ -100,5 +104,11 @@ public class AuthenticationUserDetails implements org.springframework.security.c
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public Group getGroup() 
+	{
+		return this.group;
 	}
 }

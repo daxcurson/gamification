@@ -11,14 +11,14 @@
 
 <table class="table">
 <tr><th></th><th>C&oacute;digo del Curso</th><th>Nombre del Curso</th><th>Fechas en oferta</th></tr>
-<c:forEach items="${inscripciones}" var="inscripcion">
-<tr class="clickable" data-toggle="collapse" id="row1" data-target=".row1">
+<c:forEach items="${inscripciones}" var="inscripcion" varStatus="fila">
+<tr class="clickable" data-toggle="collapse" id="row${fila.index}" data-target=".row${fila.index}">
 <td><i class="glyphicon glyphicon-plus"></i></td>
 <td><c:out value="${inscripcion.curso_oferta.curso.codigo_curso}"/></td>
 <td><c:out value="${inscripcion.curso_oferta.curso.nombre}"/></td>
 <td><c:out value="${inscripcion.curso_oferta.fecha_comienzo}"/>-<c:out value="${inscripcion.curso_oferta.fecha_fin}"/></td>
 </tr>
-<tr class="collapse row1">
+<tr class="collapse row${fila.index}">
 <td colspan="5">
 <table class="table table-bordered">
 <c:forEach items="${inscripcion.curso_oferta.evaluaciones}" var="evaluacion_a_tomar">
