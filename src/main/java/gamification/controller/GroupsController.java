@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -89,6 +90,48 @@ public class GroupsController extends AppController
 				// Todo grupo tiene que tener el permiso de ROLE_USER.
 				permissionService.grantOrRevokePermission(group, "ROLE_USER");
 				redirectAttributes.addFlashAttribute("message","Grupo agregado exitosamente");
+			}
+			catch(GrupoExistenteException e)
+			{
+				model.addAttribute("message","Ese nombre de grupo ya existe, por favor elija otro");
+				modelo=this.cargarFormGrupo(group);
+			}
+			return modelo;
+		}
+	}
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_GROUPS_EDITAR')")
+	@RequestMapping(value="/edit/{groupId}",method=RequestMethod.GET)
+	public ModelAndView mostrarFormEditarGrupo(@PathVariable("groupId") int groupId)
+	{
+		Group group=this.groupService.getById(groupId);
+		ModelAndView vista=this.cargarFormGrupo(group);
+		return vista;
+	}
+	@Descripcion(value="Editar grupo",permission="ROLE_GROUPS_EDITAR")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_GROUPS_EDITAR')")
+	@RequestMapping(value = "/edit/{groupId}", method = RequestMethod.POST)
+	public ModelAndView editGroup(@Valid @ModelAttribute("group")
+	Group group,
+	BindingResult result,ModelMap model, final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarFormGrupo(group);
+			return modelo;
+		}
+		else
+		{
+			ModelAndView modelo=new ModelAndView("redirect:/groups/index");
+			try
+			{
+				groupService.save(group);
+				redirectAttributes.addFlashAttribute("message","Grupo editado exitosamente");
 			}
 			catch(GrupoExistenteException e)
 			{
