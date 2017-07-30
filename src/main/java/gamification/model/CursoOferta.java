@@ -1,5 +1,6 @@
 package gamification.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="curso_ofertas")
-public class CursoOferta 
+public class CursoOferta implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8002665802621175656L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

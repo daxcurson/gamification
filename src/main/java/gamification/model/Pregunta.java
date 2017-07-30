@@ -1,13 +1,19 @@
 package gamification.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="preguntas")
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name="tipo_pregunta_id",discriminatorType=DiscriminatorType.INTEGER)
-public class Pregunta 
+public class Pregunta implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7126884776617945782L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

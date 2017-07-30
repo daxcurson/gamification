@@ -1,5 +1,6 @@
 package gamification.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="inscripciones")
-public class Inscripcion 
+public class Inscripcion implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5408664970943991434L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")

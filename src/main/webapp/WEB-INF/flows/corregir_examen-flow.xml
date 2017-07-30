@@ -4,15 +4,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow 
 		http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
 
-<var name="correccion" class="gamification.model.Correccion"/>
-<input name="examenTomadoId" type="int" required="true"/>
+	<var name="correccion" class="gamification.model.Correccion"/>
+	<input name="examenTomadoId" type="int" required="true"/>
 
-<on-start>
-<evaluate expression="correccionExamenComponent.getEvaluacionTomada(examenTomadoId)" result="flowScope.evaluacion_tomada"/>
-</on-start>
+	<on-start>
+		<evaluate expression="correccionExamenComponent.getEvaluacionTomada(examenTomadoId)" result="flowScope.evaluacion_tomada"/>
+		<evaluate expression="evaluacion_tomada.getInscripcion().getEstudiante()" result="flowScope.estudiante"/>
+		<evaluate expression="evaluacion_tomada.getCurso_oferta().getCurso()" result="flowScope.curso"/>
+	</on-start>
 
-<view-state id="mostrar-examen" view="evaluacion_tomada_corregir" model="correccion">
-<secured attributes="ROLE_CAPACITADORES_CORREGIR_EXAMEN" />
-</view-state>
+	<view-state id="mostrar-examen" view="evaluaciones_capacitador_corregir" model="correccion">
+		<secured attributes="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR" />
+	</view-state>
 
 </flow>

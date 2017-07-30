@@ -1,5 +1,7 @@
 package gamification.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -9,8 +11,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="temas_cursos")
-public class TemaCurso 
+public class TemaCurso implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2818515031270953292L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

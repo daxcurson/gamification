@@ -1,5 +1,7 @@
 package gamification.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="cursos")
-public class Curso 
+public class Curso implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3517769445392068551L;
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

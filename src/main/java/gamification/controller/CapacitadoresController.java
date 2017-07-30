@@ -156,12 +156,4 @@ public class CapacitadoresController extends AppController
 			return modelo;
 		}
 	}
-	@Descripcion(value="Corregir examen",permission="ROLE_CAPACITADORES_CORREGIR_EXAMEN")
-	@RequestMapping(value="/corregir_examen/{examenTomadoId}",method=RequestMethod.POST)
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CAPACITADORES_CORREGIR_EXAMEN')")
-	public ModelAndView mostrarPantallaCorregirExamen()
-	{
-		ModelAndView v=new ModelAndView();
-		return v;
-	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name="personas")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Persona 
 {

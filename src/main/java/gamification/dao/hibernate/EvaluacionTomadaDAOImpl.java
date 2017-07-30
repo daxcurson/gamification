@@ -19,7 +19,7 @@ public class EvaluacionTomadaDAOImpl implements EvaluacionTomadaDAO
 	@Override
 	public EvaluacionTomada getById(int id) 
 	{
-		return (EvaluacionTomada)sessionFactory.getCurrentSession().createQuery("from EvaluacionTomada where id="+id);
+		return (EvaluacionTomada)sessionFactory.getCurrentSession().createQuery("from EvaluacionTomada where id="+id).getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")

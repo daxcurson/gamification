@@ -1,8 +1,10 @@
 package gamification.model;
 
+import java.io.Serializable;
+
 import org.springframework.security.core.GrantedAuthority;
 
-public class PermissionGranted implements GrantedAuthority
+public class PermissionGranted implements GrantedAuthority,Serializable
 {
 	private String authority;
 	/**
