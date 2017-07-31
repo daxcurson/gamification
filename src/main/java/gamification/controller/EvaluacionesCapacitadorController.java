@@ -56,7 +56,9 @@ public class EvaluacionesCapacitadorController extends AppController
 	private ModelAndView cargarExamen(String vista,EvaluacionTomada examen)
 	{
 		ModelAndView v=new ModelAndView(vista);
-		v.addObject("examen",examen);
+		v.addObject("evaluacion_tomada",examen);
+		v.addObject("curso",examen.getCurso_oferta().getCurso());
+		v.addObject("estudiante",examen.getInscripcion().getEstudiante());
 		return v;
 	}
 	@RequestMapping(value="/corregir/{evaluacion_tomada_id}")

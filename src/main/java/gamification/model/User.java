@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import gamification.model.validator.PasswordsEqualConstraint;
@@ -17,6 +19,7 @@ public class User implements Serializable
 	/**
 	 * 
 	 */
+	private static Logger log=LogManager.getLogger(User.class);
 	private static final long serialVersionUID = 7775568520866798787L;
 	@Id
 	@Column(name="id")
@@ -86,6 +89,10 @@ public class User implements Serializable
 		this.confirm_password = confirm_password;
 	}
 	public Persona getPersona() {
+		if(persona!=null)
+			log.trace("Mi persona de id "+persona.getId()+" se llama "+persona.getNombre());
+		else
+			log.trace("Soy el usuario de nombre "+this.username+" y la persona es nula");
 		return persona;
 	}
 	public void setPersona(Persona persona) {

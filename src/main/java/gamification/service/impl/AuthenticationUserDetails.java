@@ -99,6 +99,7 @@ public class AuthenticationUserDetails implements org.springframework.security.c
 	}
 
 	public User getUser() {
+		log.trace("estoy en AuthenticationUserDetails.getUser");
 		return user;
 	}
 

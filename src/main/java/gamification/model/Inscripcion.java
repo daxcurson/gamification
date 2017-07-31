@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="inscripciones")
 public class Inscripcion implements Serializable
@@ -23,6 +26,7 @@ public class Inscripcion implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 5408664970943991434L;
+	private static Logger log=LogManager.getLogger(Inscripcion.class);
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -30,9 +34,9 @@ public class Inscripcion implements Serializable
 	@ManyToOne
 	@JoinColumn(name="curso_oferta_id")
 	private CursoOferta curso_oferta;
-	@ManyToOne
+	@ManyToOne(targetEntity=Estudiante.class,fetch=FetchType.EAGER)
 	@JoinColumn(name="estudiante_id")
-	private Persona estudiante;
+	private Estudiante estudiante;
 	private Date fecha_inscripcion;
 	private boolean activa;
 	@OneToMany(targetEntity=EvaluacionTomada.class,mappedBy="inscripcion",fetch=FetchType.LAZY)
@@ -50,10 +54,17 @@ public class Inscripcion implements Serializable
 	public void setCurso_oferta(CursoOferta curso) {
 		this.curso_oferta = curso;
 	}
-	public Persona getEstudiante() {
+	public Estudiante getEstudiante() {
+		log.trace("Soy la inscripcion de id "+this.id);
+		log.trace("El estudiante de id "+estudiante.getId()+" se llama "+estudiante.getNombre());
 		return estudiante;
 	}
-	public void setEstudiante(Persona persona) {
+	public void setEstudiante(Estudiante persona) {
+		if(estudiante==null)
+			log.trace("Estudiante era nulo y ahora es la persona de id "+persona.getId()+" que se llama "+persona.getNombre());
+		else
+			log.trace("Me cambian el estudiante de id "+estudiante.getId()+" por el de id "+persona.getId());
+		
 		this.estudiante = persona;
 	}
 	public Date getFecha_inscripcion() {

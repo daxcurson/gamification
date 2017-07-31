@@ -12,7 +12,7 @@
 <table class="table">
 <tr><th>Estudiante</th><th>Curso</th><th>Fecha evaluaci&oacute;n</th></tr>
 <tr>
-<td><c:out value="${estudiante.nombre}"/></td>
+<td><c:out value="${estudiante_pedido.nombre}"/></td>
 <td><c:out value="${curso.nombre}"/></td>
 <td><c:out value="${evaluacion_tomada.fecha_evaluacion}"/></td>
 </tr>

@@ -50,7 +50,7 @@ public class InstalacionController extends AppController
 		return modelo;
 	}
 	@RequestMapping(value = "/user_add", method = RequestMethod.POST)
-	public ModelAndView addCurso(@ModelAttribute("user")
+	public ModelAndView addUsuarioAdmin(@ModelAttribute("user")
 	User user, BindingResult result,ModelMap model)
 	{
 		if(!user.getPassword().equals(user.getConfirm_password()))

@@ -35,6 +35,7 @@ public class CapacitadorServiceImpl implements CapacitadorService
 		try
 		{
 			capacitador.setUsuario_sistema(true);
+			capacitador.setHabilitada(true);
 			User user=capacitador.getUser();
 			user.setEnabled(1);
 			// Hay que encriptar el password antes de grabarlo!!!

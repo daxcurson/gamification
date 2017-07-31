@@ -6,15 +6,20 @@
 
 	<var name="correccion" class="gamification.model.Correccion"/>
 	<input name="examenTomadoId" type="int" required="true"/>
-
+	<!-- 
+	 input name="personaId" type="int" required="true"/>
+	 -->
 	<on-start>
 		<evaluate expression="correccionExamenComponent.getEvaluacionTomada(examenTomadoId)" result="flowScope.evaluacion_tomada"/>
-		<evaluate expression="evaluacion_tomada.getInscripcion().getEstudiante()" result="flowScope.estudiante"/>
-		<evaluate expression="evaluacion_tomada.getCurso_oferta().getCurso()" result="flowScope.curso"/>
+		<evaluate expression="evaluacion_tomada.getCurso_oferta().getCurso()" result="flowScope.curso" />
+		<evaluate expression="evaluacion_tomada.getInscripcion().getEstudiante().getId()" result="flowScope.estudiante_id" />
 	</on-start>
 
 	<view-state id="mostrar-examen" view="evaluaciones_capacitador_corregir" model="correccion">
 		<secured attributes="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR" />
+		<on-render>
+			<evaluate expression="correccionExamenComponent.getEstudianteById(estudiante_id)" result="viewScope.estudiante_pedido" />
+		</on-render>
 	</view-state>
 
 </flow>

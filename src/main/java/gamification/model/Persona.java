@@ -11,6 +11,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Persona 
 {
+	private static Logger log=LogManager.getLogger(Persona.class);
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -64,9 +68,17 @@ public abstract class Persona
 		this.habilitada = habilitada;
 	}
 	public String getNombre() {
+		log.trace("Soy la persona de id "+id+", mi nombre es "+nombre);
+		/*StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+		for (int i = 1; i < stackTraceElements.length && i<=20; i++) {
+			StackTraceElement stackTraceElement = stackTraceElements[i];
+			log.trace(stackTraceElement.getClassName() + " Method "
+					+ stackTraceElement.getMethodName());
+		}*/
 		return nombre;
 	}
 	public void setNombre(String nombre) {
+		log.trace("Me cambian el nombre "+this.nombre+" por "+nombre);
 		this.nombre = nombre;
 	}
 }

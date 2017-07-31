@@ -41,6 +41,7 @@ public class EstudianteServiceImpl implements EstudianteService
 		{
 			// Todas las personas que se ingresaran van a ser usuarios del sistema.
 			p.setUsuario_sistema(true);
+			p.setHabilitada(true);
 			User user=p.getUser();
 			user.setEnabled(1);
 			// Hay que encriptar el password antes de grabarlo!!!

@@ -1,6 +1,7 @@
 package gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -12,14 +13,13 @@ public class Estudiante extends Persona implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 592800616514661877L;
-
-	/**
-	 * Valores por defecto de persona. No es usuario del sistema y esta habilitada.
-	 */
-	public Estudiante()
-	{
-		this.usuario_sistema=false;
-		this.setHabilitada(true);
+	@OneToMany(mappedBy="estudiante")
+	private List<Inscripcion> inscripciones;
+	public List<Inscripcion> getInscripciones() {
+		return inscripciones;
 	}
-	
+	public void setInscripciones(List<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+
 }

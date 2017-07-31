@@ -1,5 +1,7 @@
 package gamification.service.impl;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,8 @@ import gamification.service.UserDetailsService;
 @Service
 public class InstalacionServiceImpl implements InstalacionService
 {
+	private static Logger log=LogManager.getLogger(InstalacionServiceImpl.class);
+
 	@Autowired
 	private GroupService groupService;
 	@Autowired
@@ -46,12 +50,20 @@ public class InstalacionServiceImpl implements InstalacionService
 		// donde tenemos que dar permisos a los usuarios pero todavia no tenemos
 		// un usuario porque para crear uno hay que entrar a la pantalla de
 		// permisos!!!
-		Group adminGroup=new Group();
-		adminGroup.setGroup_name("Administradores");
-		groupService.save(adminGroup);
-		permissionService.grantOrRevokePermission(adminGroup, "ROLE_ADMIN");
-		permissionService.grantOrRevokePermission(adminGroup, "ROLE_USER");
-		user.setGroup(adminGroup);
-		userService.save(user);
+		try
+		{
+			Group adminGroup=new Group();
+			adminGroup.setVista_principal("menu");
+			adminGroup.setGroup_name("Administradores");
+			groupService.save(adminGroup);
+			permissionService.grantOrRevokePermission(adminGroup, "ROLE_ADMIN");
+			permissionService.grantOrRevokePermission(adminGroup, "ROLE_USER");
+			user.setGroup(adminGroup);
+			userService.save(user);
+		}
+		catch(Exception e)
+		{
+			log.trace("Excepcion al grabar el grupo, "+e.getMessage());
+		}
 	}
 }

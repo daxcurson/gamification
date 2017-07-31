@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,7 +23,12 @@ public class EstudianteDAOImpl implements EstudianteDAO
 	public Estudiante getById(int id) 
 	{
 		log.trace("Estoy en EstudianteDAOImpl.getById, id pedido:"+id);
-		return (Estudiante) sessionFactory.getCurrentSession().createQuery("from Estudiante where id="+id).getSingleResult();
+		Session s=sessionFactory.openSession();
+		Estudiante e=(Estudiante) s.createQuery("from Estudiante where id="+id).getSingleResult();
+		s.close();
+		//Estudiante e= (Estudiante) sessionFactory.getCurrentSession().createQuery("from Estudiante where id="+id).getSingleResult();
+		log.trace("El nombre del estudiante es: "+e.getNombre());
+		return e;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
