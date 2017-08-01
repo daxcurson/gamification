@@ -1,6 +1,7 @@
 package gamification.service.impl;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import gamification.dao.CorreccionDAO;
 import gamification.dao.EvaluacionDAO;
 import gamification.dao.EvaluacionTomadaDAO;
+import gamification.model.Correccion;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Respuesta;
@@ -24,6 +27,8 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	private EvaluacionDAO evaluacionDAO;
 	@Autowired
 	private EvaluacionTomadaDAO evaluacionTomadaDAO;
+	@Autowired
+	private CorreccionDAO correccionDAO;
 	@Override
 	public List<Evaluacion> listarEvaluaciones() 
 	{
@@ -63,10 +68,23 @@ public class EvaluacionServiceImpl implements EvaluacionService
 		// Me voy a asegurar que todas las preguntas de la evaluacion
 		// tengan configurado el link hacia la EvaluacionTomada.
 		List<Respuesta> lista=evaluacion.getRespuestas();
-		for(Respuesta r:lista)
+		Iterator<Respuesta> iterator=lista.iterator();
+		while(iterator.hasNext())
 		{
+			Respuesta r=iterator.next();
 			r.setEvaluacion_tomada(evaluacion);
 			log.trace("La respuesta tiene una pregunta??? Seria esta: "+r.getPregunta());
+			if(r.getPregunta()!=null)
+			{
+				log.trace("El texto de la pregunta es : "+r.getPregunta().getTexto_pregunta()+" y su id es "+r.getPregunta().getId());
+			}
+			else
+			{
+				// Los videos de youtube no tienen una pregunta. Viene una respuesta
+				// para una pregunta nula. Voy a eliminar esa respuesta.
+				log.trace("Respuesta con pregunta nula. Remuevo la respuesta. "+r.getId());
+				iterator.remove();
+			}
 		}
 		evaluacionTomadaDAO.agregar(evaluacion);
 	}
@@ -81,5 +99,13 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	public EvaluacionTomada getEvaluacionTomadaById(int evaluacion_tomada_id) 
 	{
 		return evaluacionTomadaDAO.getById(evaluacion_tomada_id);
+	}
+
+	@Override
+	public void grabarCorreccion(EvaluacionTomada evaluacion_tomada, Correccion correccion) 
+	{
+		correccion.setEvaluacion_tomada(evaluacion_tomada);
+		correccion.setFecha(new Date());
+		correccionDAO.save(correccion);
 	}
 }
