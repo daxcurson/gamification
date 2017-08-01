@@ -17,3 +17,18 @@
 <td><c:out value="${evaluacion_tomada.fecha_evaluacion}"/></td>
 </tr>
 </table>
+
+<p>A continuaci&oacute;n se presentan las preguntas realizadas en el examen
+y las respuestas dadas por el estudiante.</p>
+
+<table>
+<tr><th>Pregunta</th><th>Respuesta</th><th>Acciones</th></tr>
+<c:forEach items="${evaluacion_tomada.respuestas}" var="respuesta">
+<tr>
+<td>${respuesta.pregunta.texto_pregunta}</td><td>${respuesta.valor_respuesta}</td>
+<td>
+<a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a>
+</td>
+</tr>
+</c:forEach>
+</table>

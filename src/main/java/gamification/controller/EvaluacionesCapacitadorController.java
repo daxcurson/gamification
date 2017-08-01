@@ -2,6 +2,7 @@ package gamification.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,20 +12,25 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
+import gamification.model.CorreccionPregunta;
 import gamification.model.EvaluacionTomada;
+import gamification.model.Nota;
+import gamification.model.Respuesta;
 //import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
 
 @Controller
 @RequestMapping(value="evaluaciones_capacitador")
-@SessionAttributes("evaluacion")
+@SessionAttributes({"correccion","evaluacion_tomada"})
 @DescripcionClase("Capacitador: Corregir Evaluaciones")
 public class EvaluacionesCapacitadorController extends AppController
 {
@@ -68,6 +74,19 @@ public class EvaluacionesCapacitadorController extends AppController
 	{
 		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
 		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen);
+		return modelo;
+	}
+	@RequestMapping(value="/mostrar_respuesta/{respuesta_id}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
+	public ModelAndView mostrarRespuesta(@PathVariable("respuesta_id") int respuesta_id,
+			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada)
+	{
+		ModelAndView modelo=new ModelAndView("evaluaciones_capacitador_mostrar_pregunta");
+		modelo.addObject("evaluacion_tomada",evaluacion_tomada);
+		Optional<Respuesta> r=evaluacion_tomada.getRespuestas().stream().filter(resp -> resp.getId() == respuesta_id).findFirst();
+		modelo.addObject("respuesta",r.get());
+		modelo.addObject("notas",Nota.values());
+		modelo.addObject("correccionPregunta",new CorreccionPregunta());
 		return modelo;
 	}
 }

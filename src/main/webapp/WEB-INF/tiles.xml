@@ -152,6 +152,9 @@
 	<definition name="evaluaciones_capacitador_corregir" extends="base.definition">
 		<put-attribute name="content" value="/WEB-INF/jsp/Vista/EvaluacionesCapacitador/corregir.jsp"/>
 	</definition>
+	<definition name="evaluaciones_capacitador_mostrar_pregunta" extends="base.definition">
+		<put-attribute name="content" value="/WEB-INF/jsp/Vista/EvaluacionesCapacitador/mostrar_pregunta.jsp"/>
+	</definition>
 	<definition name="evaluaciones_tomadas_add" extends="base.definition">
 		<put-attribute name="content">
 			<definition template="/WEB-INF/jsp/Vista/EvaluacionesTomadas/add.jsp">

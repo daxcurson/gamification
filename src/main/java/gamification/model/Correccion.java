@@ -2,6 +2,7 @@ package gamification.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,8 @@ public class Correccion implements Serializable
 	@ManyToOne
 	@JoinColumn(name="capacitador_id")
 	private Capacitador capacitador;
+	@OneToMany(targetEntity=CorreccionPregunta.class,mappedBy="correccion")
+	private List<CorreccionPregunta> correcciones;
 	private Date fecha;
 	private int nota;
 	
@@ -63,5 +67,11 @@ public class Correccion implements Serializable
 	}
 	public void setNota(int nota) {
 		this.nota = nota;
+	}
+	public List<CorreccionPregunta> getCorrecciones() {
+		return correcciones;
+	}
+	public void setCorrecciones(List<CorreccionPregunta> correcciones) {
+		this.correcciones = correcciones;
 	}
 }

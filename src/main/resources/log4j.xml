@@ -63,7 +63,12 @@
 		<!-- appender-ref ref="SSB_ROLLING_FILE" /-->
 		<appender-ref ref="STDOUT" />
 	</logger>
-		
+	<!--
+	<logger name="org.springframework.webflow">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	-->
 	<!-- ** -->
 	<logger name="org.hibernate">
 		<level value="ERROR" />

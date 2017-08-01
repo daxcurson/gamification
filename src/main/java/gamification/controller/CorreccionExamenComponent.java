@@ -1,7 +1,10 @@
 package gamification.controller;
 
+import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +13,7 @@ import gamification.model.Curso;
 import gamification.model.Estudiante;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
+import gamification.model.Respuesta;
 import gamification.service.CorreccionService;
 import gamification.service.CursoService;
 import gamification.service.EstudianteService;
@@ -33,7 +37,10 @@ public class CorreccionExamenComponent
 	
 	public EvaluacionTomada getEvaluacionTomada(int evaluacionTomadaId)
 	{
-		return evaluacionService.getEvaluacionTomadaById(evaluacionTomadaId);
+		EvaluacionTomada e= evaluacionService.getEvaluacionTomadaById(evaluacionTomadaId);
+		List<Respuesta> r=e.getRespuestas();
+		Hibernate.initialize(r);
+		return e;
 	}
 	public Estudiante getEstudianteById(int estudianteId)
 	{
