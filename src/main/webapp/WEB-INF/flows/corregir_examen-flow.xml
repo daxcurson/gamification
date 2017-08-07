@@ -19,15 +19,18 @@
 	<view-state id="mostrar-examen" view="evaluaciones_capacitador_corregir" model="correccion">
 		<secured attributes="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR" />
 		<on-render>
-			<evaluate expression="correccionExamenComponent.getEstudianteById(estudiante_id)" result="viewScope.estudiante_pedido" />
+			<evaluate expression="correccionExamenComponent.getEstudianteById(estudiante_id)" result="viewScope.estudiante" />
 		</on-render>
 		<transition on="corregir" to="mostrar-pregunta"/>
 		<transition on="finalizar" to="finalizar"/>
+		<on-exit>
+			<evaluate expression="correccionExamenComponent.buscarRespuesta(requestScope.respuestaId)" result="r" />
+		</on-exit>
 	</view-state>
 	<view-state id="mostrar-pregunta" view="evaluaciones_capacitador_mostrar_pregunta" model="correccionPregunta">
 		<secured attributes="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR" />
 		<on-render>
-			<evaluate expression="evaluacion_tomada.getRespuestas().get(requestScope.respuestaId)" result="respuesta"/>
+			<evaluate expression="evaluacion_tomada.getRespuestas().get(currentEvent.attributes.respuesta)" result="respuesta"/>
 		</on-render>
 		<transition on="grabar" to="grabar-pregunta"/>
 		<transition on="cancelar" to="mostrar-examen"/>

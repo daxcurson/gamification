@@ -1,12 +1,17 @@
 package gamification.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.webflow.core.collection.AttributeMap;
+import org.springframework.webflow.core.collection.LocalAttributeMap;
+import org.springframework.webflow.execution.Event;
 
 import gamification.model.Curso;
 import gamification.model.Estudiante;
@@ -51,5 +56,12 @@ public class CorreccionExamenComponent
 	public Inscripcion getInscripcionById(int inscripcionId)
 	{
 		return inscripcionService.getInscripcionById(inscripcionId);
+	}
+	public Event buscarRespuesta(int respuestaId)
+	{
+		Map<String, Object> map = new HashMap<String,Object>();
+	    map.put("respuesta", new Integer(respuestaId));
+	    AttributeMap<Object> attributeMap = new LocalAttributeMap<Object>(map);
+	    return new Event(this, "success", attributeMap);
 	}
 }

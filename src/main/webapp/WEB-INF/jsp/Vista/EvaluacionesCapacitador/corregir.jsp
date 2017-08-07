@@ -27,12 +27,20 @@ y las respuestas dadas por el estudiante.</p>
 <tr><th>Pregunta</th><th>Respuesta</th><th>Comentario</th><th>Nota</th><th>Acciones</th></tr>
 <c:forEach items="${evaluacion_tomada.respuestas}" var="respuesta">
 	<tr>
-		<td rowspan="${fn:length(respuesta.correcciones)}">
-			${respuesta.pregunta.texto_pregunta}
-		</td>
-		<td rowspan="${fn:length(respuesta.correcciones)}">
-			${respuesta.valor_respuesta}
-		</td>
+		<c:choose>
+			<c:when test="${empty respuesta.correcciones}">
+				<td>${respuesta.pregunta.texto_pregunta}</td>
+				<td>${respuesta.valor_respuesta}</td>
+			</c:when>
+			<c:otherwise>
+				<td rowspan="${fn:length(respuesta.correcciones)}">
+					${respuesta.pregunta.texto_pregunta}
+				</td>
+				<td rowspan="${fn:length(respuesta.correcciones)}">
+					${respuesta.valor_respuesta}
+				</td>
+			</c:otherwise>
+		</c:choose>
 		<c:choose>
 			<c:when test="${empty respuesta.correcciones}">
 				<td></td>
@@ -51,7 +59,12 @@ y las respuestas dadas por el estudiante.</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<td><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a></td>
+		<td><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a>
+		<form method="post">
+		<input type="hidden" name="respuestaId" value="${respuesta.id}"/>
+		<input type="submit" name="corregir" value="Corregir"/>
+		</form>
+		</td>
 	</tr>
 </c:forEach>
 </table>

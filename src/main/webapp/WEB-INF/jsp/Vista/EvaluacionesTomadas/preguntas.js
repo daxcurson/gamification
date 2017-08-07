@@ -1,9 +1,5 @@
 $(document).ready(function()
 {
-	<%
-	//$("#form_evaluacion").conversationalForm({
-	//});
-	%>
 	leer_preguntas();
 });
 /**
