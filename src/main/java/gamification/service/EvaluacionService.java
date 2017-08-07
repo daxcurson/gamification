@@ -2,7 +2,6 @@ package gamification.service;
 
 import java.util.List;
 
-import gamification.model.Correccion;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
 
@@ -16,5 +15,4 @@ public interface EvaluacionService
 	void tomarEvaluacion(EvaluacionTomada evaluacion);
 	List<EvaluacionTomada> listarEvaluacionesCorregir(int curso_id);
 	EvaluacionTomada getEvaluacionTomadaById(int evaluacion_tomada_id);
-	void grabarCorreccion(EvaluacionTomada evaluacion_tomada, Correccion correccion);
 }

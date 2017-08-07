@@ -34,7 +34,7 @@ public class CorreccionPregunta implements Serializable
 	@JoinColumn(name="pregunta_id")
 	private Pregunta pregunta;
 	private String comentarios;
-	private Nota nota;
+	private Nota nota_pregunta;
 	public Correccion getCorreccion() {
 		return correccion;
 	}
@@ -59,10 +59,10 @@ public class CorreccionPregunta implements Serializable
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
 	}
-	public Nota getNota() {
-		return nota;
+	public Nota getNota_pregunta() {
+		return nota_pregunta;
 	}
-	public void setNota(Nota nota) {
-		this.nota = nota;
+	public void setNota_pregunta(Nota nota) {
+		this.nota_pregunta = nota;
 	}
 }

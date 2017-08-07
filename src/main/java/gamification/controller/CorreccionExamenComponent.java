@@ -8,13 +8,11 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import gamification.model.Correccion;
 import gamification.model.Curso;
 import gamification.model.Estudiante;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
 import gamification.model.Respuesta;
-import gamification.service.CorreccionService;
 import gamification.service.CursoService;
 import gamification.service.EstudianteService;
 import gamification.service.EvaluacionService;
@@ -26,8 +24,6 @@ public class CorreccionExamenComponent
 	private static Logger log=LogManager.getLogger(CorreccionExamenComponent.class);
 	@Autowired
 	private EvaluacionService evaluacionService;
-	@Autowired
-	private CorreccionService correccionService;
 	@Autowired
 	private CursoService cursoService;
 	@Autowired 
@@ -55,9 +51,5 @@ public class CorreccionExamenComponent
 	public Inscripcion getInscripcionById(int inscripcionId)
 	{
 		return inscripcionService.getInscripcionById(inscripcionId);
-	}
-	public void save(Correccion correccion)
-	{
-		correccionService.save(correccion);
 	}
 }

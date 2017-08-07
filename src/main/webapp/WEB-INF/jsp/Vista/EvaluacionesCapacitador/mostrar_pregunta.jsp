@@ -7,10 +7,12 @@
 
 <c:out value="${respuesta.valor_respuesta}"/>
 
-<form:form id="correccionPregunta" commandName="correccionPregunta" method="post">
+<form:form id="correccionPregunta" commandName="correccion_pregunta" method="post">
 <form:input path="comentarios" type="text"/>
-<form:select path="nota">
+<form:errors path="comentarios"/>
+<form:select path="nota_pregunta">
 <form:options items="${notas}" itemValue="nota_valor" itemLabel="nota_nombre"/>
 </form:select>
+<form:errors path="nota_pregunta"/>
 <input type="submit" name="_eventId_review" value="Corregir" />
 </form:form>

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,13 +29,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
+import gamification.model.Capacitador;
 import gamification.model.Correccion;
 import gamification.model.CorreccionPregunta;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Nota;
 import gamification.model.Respuesta;
+import gamification.service.CorreccionService;
 //import gamification.service.CursoService;
 import gamification.service.EvaluacionService;
+import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping(value="evaluaciones_capacitador")
@@ -48,6 +52,8 @@ public class EvaluacionesCapacitadorController extends AppController
 	//private CursoService cursoService;
 	@Autowired
 	private EvaluacionService evaluacionService;
+	@Autowired
+	private CorreccionService correccionService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) 
@@ -107,27 +113,32 @@ public class EvaluacionesCapacitadorController extends AppController
 		else
 		{
 			ModelAndView modelo=new ModelAndView("redirect:/menu");
-			evaluacionService.grabarCorreccion(evaluacion_tomada,correccion);
+			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Capacitador c=(Capacitador) user.getUser().getPersona();
+			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
 		}
 	}
-	private ModelAndView cargarFormMostrarRespuesta(int respuesta_id,EvaluacionTomada evaluacion_tomada,CorreccionPregunta correccionPregunta)
+	private ModelAndView cargarFormMostrarRespuesta(int respuesta_id,EvaluacionTomada evaluacion_tomada,Correccion correccion,CorreccionPregunta correccionPregunta)
 	{
 		ModelAndView modelo=new ModelAndView("evaluaciones_capacitador_mostrar_pregunta");
 		modelo.addObject("evaluacion_tomada",evaluacion_tomada);
 		Optional<Respuesta> r=evaluacion_tomada.getRespuestas().stream().filter(resp -> resp.getId() == respuesta_id).findFirst();
 		modelo.addObject("respuesta",r.get());
 		modelo.addObject("notas",Nota.values());
+		modelo.addObject("correccion",correccion);
 		modelo.addObject("correccion_pregunta",correccionPregunta);
 		return modelo;
 	}
 	@RequestMapping(value="/mostrar_respuesta/{respuesta_id}",method=RequestMethod.GET)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
 	public ModelAndView mostrarRespuesta(@PathVariable("respuesta_id") int respuesta_id,
-			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada)
+			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada,
+			@ModelAttribute("correccion") Correccion correccion
+			)
 	{
-		return this.cargarFormMostrarRespuesta(respuesta_id, evaluacion_tomada, new CorreccionPregunta());
+		return this.cargarFormMostrarRespuesta(respuesta_id, evaluacion_tomada,correccion, new CorreccionPregunta());
 	}
 	@RequestMapping(value="/mostrar_respuesta/{respuesta_id}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
@@ -145,7 +156,7 @@ public class EvaluacionesCapacitadorController extends AppController
 			{
 				log.trace("Error: "+i.next().toString());
 			}
-			ModelAndView modelo=this.cargarFormMostrarRespuesta(respuesta_id, evaluacion_tomada, correccion_pregunta);
+			ModelAndView modelo=this.cargarFormMostrarRespuesta(respuesta_id, evaluacion_tomada,correccion, correccion_pregunta);
 			return modelo;
 		}
 		else
@@ -154,6 +165,13 @@ public class EvaluacionesCapacitadorController extends AppController
 			if(correccion.getCorrecciones()==null)
 				correccion.setCorrecciones(new LinkedList<CorreccionPregunta>());
 			correccion.getCorrecciones().add(correccion_pregunta);
+			log.trace("Ahora hay:");
+			Iterator<CorreccionPregunta> i=correccion.getCorrecciones().iterator();
+			while(i.hasNext())
+			{
+				CorreccionPregunta p=i.next();
+				log.trace("Correccion pregunta: "+p.getComentarios());
+			}
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
 		}

@@ -43,6 +43,7 @@ public class CursoDAOImpl implements CursoDAO
 	}
 
 	@Override
+	@Transactional
 	public void grabarCurso(Curso curso) throws CursoExistenteException 
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(curso);

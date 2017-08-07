@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Correccion implements Serializable
 	@ManyToOne
 	@JoinColumn(name="capacitador_id")
 	private Capacitador capacitador;
-	@OneToMany(targetEntity=CorreccionPregunta.class,mappedBy="correccion")
+	@OneToMany(cascade={CascadeType.ALL},targetEntity=CorreccionPregunta.class,mappedBy="correccion")
 	private List<CorreccionPregunta> correcciones;
 	private Date fecha;
 	private int nota;

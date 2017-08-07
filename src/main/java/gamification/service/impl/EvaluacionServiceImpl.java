@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gamification.dao.CorreccionDAO;
 import gamification.dao.EvaluacionDAO;
 import gamification.dao.EvaluacionTomadaDAO;
-import gamification.model.Correccion;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Respuesta;
@@ -27,8 +25,6 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	private EvaluacionDAO evaluacionDAO;
 	@Autowired
 	private EvaluacionTomadaDAO evaluacionTomadaDAO;
-	@Autowired
-	private CorreccionDAO correccionDAO;
 	@Override
 	public List<Evaluacion> listarEvaluaciones() 
 	{
@@ -99,13 +95,5 @@ public class EvaluacionServiceImpl implements EvaluacionService
 	public EvaluacionTomada getEvaluacionTomadaById(int evaluacion_tomada_id) 
 	{
 		return evaluacionTomadaDAO.getById(evaluacion_tomada_id);
-	}
-
-	@Override
-	public void grabarCorreccion(EvaluacionTomada evaluacion_tomada, Correccion correccion) 
-	{
-		correccion.setEvaluacion_tomada(evaluacion_tomada);
-		correccion.setFecha(new Date());
-		correccionDAO.save(correccion);
 	}
 }
