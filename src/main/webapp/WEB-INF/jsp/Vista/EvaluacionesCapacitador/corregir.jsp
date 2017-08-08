@@ -9,8 +9,8 @@
 <%
 // Aqui va la lista de preguntas del examen y las respuestas que dio el estudiante.
 %>
-<form:form commandName="correccion" method="post">
-
+<form:form commandName="correccion" method="post" action="${pageContext.request.contextPath}/evaluaciones_capacitador/corregir/${evaluacion_tomada.id}">
+<form:input type="hidden" path="id" value="${id}"/>
 <table class="table">
 <tr><th>Estudiante</th><th>Curso</th><th>Fecha evaluaci&oacute;n</th></tr>
 <tr>

@@ -91,6 +91,18 @@ public class EvaluacionesCapacitadorController extends AppController
 		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,new Correccion());
 		return modelo;
 	}
+	@RequestMapping(value="/corregir/{evaluacion_tomada_id}/{correccionId}",method=RequestMethod.GET)
+	@Descripcion(value="Capacitador: corregir examen",permission="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
+	public ModelAndView mostrarExamenACorregirConCorreccion(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
+			@PathVariable("correccionId") int correccionId,
+			@ModelAttribute("correccion") Correccion correccion)
+	{
+		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
+		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,correccion);
+		return modelo;
+	}
+
 	@RequestMapping(value="/corregir/{evaluacion_tomada_id}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
 	public ModelAndView grabarCorreccionExamen(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
@@ -165,7 +177,6 @@ public class EvaluacionesCapacitadorController extends AppController
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/corregir/"+evaluacion_tomada.getId());
 			correccion_pregunta.setCorreccion(correccion);
 			correccion_pregunta.setRespuesta(respuesta);
 			log.trace("La respuesta es: "+respuesta.getId()+": "+respuesta.getValor_respuesta());
@@ -182,6 +193,7 @@ public class EvaluacionesCapacitadorController extends AppController
 			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Capacitador c=(Capacitador) user.getUser().getPersona();
 			log.trace("El id de la correccion es: "+correccion.getId());
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/corregir/"+evaluacion_tomada.getId()+"/"+correccion.getId());
 			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
