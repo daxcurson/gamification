@@ -3,7 +3,7 @@ package gamification.dao.hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.CorreccionDAO;
 import gamification.model.Correccion;
@@ -21,7 +21,7 @@ public class CorreccionDAOImpl implements CorreccionDAO
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public void save(Correccion correccion) 
 	{
 		sessionFactory.getCurrentSession().saveOrUpdate(correccion);

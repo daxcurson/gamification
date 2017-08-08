@@ -30,9 +30,6 @@ public class CorreccionPregunta implements Serializable
 	@ManyToOne
 	@JoinColumn(name="respuesta_id")
 	private Respuesta respuesta;
-	@ManyToOne
-	@JoinColumn(name="pregunta_id")
-	private Pregunta pregunta;
 	private String comentarios;
 	private Nota nota_pregunta;
 	public Correccion getCorreccion() {
@@ -46,12 +43,6 @@ public class CorreccionPregunta implements Serializable
 	}
 	public void setRespuesta(Respuesta respuesta) {
 		this.respuesta = respuesta;
-	}
-	public Pregunta getPregunta() {
-		return pregunta;
-	}
-	public void setPregunta(Pregunta pregunta) {
-		this.pregunta = pregunta;
 	}
 	public String getComentarios() {
 		return comentarios;

@@ -42,7 +42,7 @@ import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping(value="evaluaciones_capacitador")
-@SessionAttributes({"correccion","evaluacion_tomada","correccion_pregunta"})
+@SessionAttributes({"correccion","evaluacion_tomada","correccion_pregunta","respuesta"})
 @DescripcionClase("Capacitador: Corregir Evaluaciones")
 public class EvaluacionesCapacitadorController extends AppController
 {
@@ -95,7 +95,6 @@ public class EvaluacionesCapacitadorController extends AppController
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
 	public ModelAndView grabarCorreccionExamen(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
 			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada,
-			@ModelAttribute("correccion_pregunta") CorreccionPregunta correccion_pregunta,
 			@ModelAttribute("correccion") Correccion correccion,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
@@ -115,12 +114,16 @@ public class EvaluacionesCapacitadorController extends AppController
 			ModelAndView modelo=new ModelAndView("redirect:/menu");
 			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Capacitador c=(Capacitador) user.getUser().getPersona();
+			log.trace("El id de la correccion es: "+correccion.getId());
 			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
 		}
 	}
-	private ModelAndView cargarFormMostrarRespuesta(int respuesta_id,EvaluacionTomada evaluacion_tomada,Correccion correccion,CorreccionPregunta correccionPregunta)
+	private ModelAndView cargarFormMostrarRespuesta(int respuesta_id,
+			EvaluacionTomada evaluacion_tomada,
+			Correccion correccion,
+			CorreccionPregunta correccionPregunta)
 	{
 		ModelAndView modelo=new ModelAndView("evaluaciones_capacitador_mostrar_pregunta");
 		modelo.addObject("evaluacion_tomada",evaluacion_tomada);
@@ -146,6 +149,7 @@ public class EvaluacionesCapacitadorController extends AppController
 			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada,
 			@ModelAttribute("correccion_pregunta") CorreccionPregunta correccion_pregunta,
 			@ModelAttribute("correccion") Correccion correccion,
+			@ModelAttribute("respuesta") Respuesta respuesta,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
 		if(result.hasErrors())
@@ -162,6 +166,9 @@ public class EvaluacionesCapacitadorController extends AppController
 		else
 		{
 			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/corregir/"+evaluacion_tomada.getId());
+			correccion_pregunta.setCorreccion(correccion);
+			correccion_pregunta.setRespuesta(respuesta);
+			log.trace("La respuesta es: "+respuesta.getId()+": "+respuesta.getValor_respuesta());
 			if(correccion.getCorrecciones()==null)
 				correccion.setCorrecciones(new LinkedList<CorreccionPregunta>());
 			correccion.getCorrecciones().add(correccion_pregunta);
@@ -172,6 +179,10 @@ public class EvaluacionesCapacitadorController extends AppController
 				CorreccionPregunta p=i.next();
 				log.trace("Correccion pregunta: "+p.getComentarios());
 			}
+			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Capacitador c=(Capacitador) user.getUser().getPersona();
+			log.trace("El id de la correccion es: "+correccion.getId());
+			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
 		}

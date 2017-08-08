@@ -5,7 +5,21 @@
 
 <h1>Pregunta</h1>
 
+<p>Texto de la pregunta:</p>
+
+<p>
+<c:out value="${respuesta.pregunta.texto_pregunta}"/>
+</p>
+
+<p>
+<c:out value="${respuesta.pregunta.texto_ordenar}"/>
+</p>
+
+<p>Respuesta:</p>
+
+<p>
 <c:out value="${respuesta.valor_respuesta}"/>
+</p>
 
 <form:form id="correccionPregunta" commandName="correccion_pregunta" method="post">
 <form:input path="comentarios" type="text"/>

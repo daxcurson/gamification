@@ -53,17 +53,14 @@ y las respuestas dadas por el estudiante.</p>
 						${correccion.comentarios}
 					</td>
 					<td>
-						${correccion.nota.nota_nombre}
+						${correccion.nota_pregunta.nota_nombre}
 					</td>
 					<c:if test="${fila.index >=1}"></tr></c:if>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		<td><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a>
-		<form method="post">
-		<input type="hidden" name="respuestaId" value="${respuesta.id}"/>
-		<input type="submit" name="corregir" value="Corregir"/>
-		</form>
+		<input type="submit" id="corregir" name="_eventId_corregir" value="Corregir"/>
 		</td>
 	</tr>
 </c:forEach>

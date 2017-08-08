@@ -1,6 +1,7 @@
 package gamification.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.webflow.core.collection.AttributeMap;
 import org.springframework.webflow.core.collection.LocalAttributeMap;
 import org.springframework.webflow.execution.Event;
 
+import gamification.model.CorreccionPregunta;
 import gamification.model.Curso;
 import gamification.model.Estudiante;
 import gamification.model.EvaluacionTomada;
@@ -41,6 +43,13 @@ public class CorreccionExamenComponent
 		EvaluacionTomada e= evaluacionService.getEvaluacionTomadaById(evaluacionTomadaId);
 		List<Respuesta> r=e.getRespuestas();
 		Hibernate.initialize(r);
+		Iterator<Respuesta> i=r.iterator();
+		while(i.hasNext())
+		{
+			Respuesta re=i.next();
+			List<CorreccionPregunta> c=re.getCorrecciones();
+			Hibernate.initialize(c);
+		}
 		return e;
 	}
 	public Estudiante getEstudianteById(int estudianteId)
