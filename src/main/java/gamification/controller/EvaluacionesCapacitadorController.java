@@ -92,7 +92,6 @@ public class EvaluacionesCapacitadorController extends AppController
 		return modelo;
 	}
 	@RequestMapping(value="/corregir/{evaluacion_tomada_id}/{correccionId}",method=RequestMethod.GET)
-	@Descripcion(value="Capacitador: corregir examen",permission="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
 	public ModelAndView mostrarExamenACorregirConCorreccion(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
 			@PathVariable("correccionId") int correccionId,
