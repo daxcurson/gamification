@@ -1,6 +1,7 @@
 package gamification.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -31,6 +33,9 @@ public class Curso implements Serializable
 	@ManyToOne
 	@JoinColumn(name="capacitador_id")
 	private Capacitador capacitador;
+	@OneToMany(targetEntity=CursoOferta.class,mappedBy="curso")
+	private List<CursoOferta> ofertas;
+	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +59,12 @@ public class Curso implements Serializable
 	}
 	public void setCapacitador(Capacitador capacitador) {
 		this.capacitador = capacitador;
+	}
+	public List<CursoOferta> getOfertas() {
+		return ofertas;
+	}
+	public void setOfertas(List<CursoOferta> ofertas) {
+		this.ofertas = ofertas;
 	}
 	
 }

@@ -21,4 +21,9 @@
 </form:select>
 <form:errors path="capacitador"/>
 </div>
+<div class="form-group">
+<label for="CursoPuntos">Puntos que otorga</label>
+<form:input id="CursoPuntos" class="form-control" path="puntos"/>
+<form:errors path="puntos"/>
+</div>
 </fieldset>

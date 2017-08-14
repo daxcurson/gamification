@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import gamification.model.Group;
+import gamification.model.User;
 
 public interface UserDetails extends Serializable 
 {
@@ -16,4 +17,5 @@ public interface UserDetails extends Serializable
     boolean isCredentialsNonExpired();
     boolean isEnabled();
 	Group getGroup();
+	User getUser();
 }

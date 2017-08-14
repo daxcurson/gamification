@@ -11,10 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.CorreccionDAO;
 import gamification.model.Capacitador;
+import gamification.model.Configuracion;
 import gamification.model.Correccion;
 //import gamification.model.CorreccionPregunta;
 import gamification.model.EvaluacionTomada;
+import gamification.model.Inscripcion;
+import gamification.service.ConfiguracionService;
 import gamification.service.CorreccionService;
+import gamification.service.InscripcionService;
 
 @Service
 public class CorreccionServiceImpl implements CorreccionService 
@@ -22,6 +26,10 @@ public class CorreccionServiceImpl implements CorreccionService
 	//private static Logger log=LogManager.getLogger(CorreccionServiceImpl.class);
 	@Autowired
 	private CorreccionDAO correccionDAO;
+	@Autowired
+	private ConfiguracionService configuracionService;
+	@Autowired
+	private InscripcionService inscripcionService;
 	@Override
 	public Correccion getCorreccionById(int id) 
 	{
@@ -34,6 +42,21 @@ public class CorreccionServiceImpl implements CorreccionService
 		correccion.setEvaluacion_tomada(evaluacion_tomada);
 		correccion.setFecha(new Date());
 		correccion.setCapacitador(capacitador);
+		// Ahora: si la correccion es mayor a la nota de aprobacion, vamos
+		// a dar por aprobado. Hay que grabar ese dato en la inscripcion
+		// de la persona en este curso.
+		Configuracion nota=configuracionService.buscarConfiguracionNombre("nota_aprobacion");
+		if(nota!=null)
+		{
+			int nota_aprobacion=Integer.parseInt(nota.getConfig_valor());
+			if(correccion.getNota()>=nota_aprobacion)
+			{
+				// Busco la inscripcion del estudiante para aprobarla.
+				Inscripcion insc=evaluacion_tomada.getInscripcion();
+				insc.setAprobada(true);
+				inscripcionService.grabarInscripcion(insc);
+			}
+		}
 		correccionDAO.save(correccion);
 	}
 }

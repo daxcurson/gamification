@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,6 +33,7 @@ import gamification.model.Group;
 import gamification.model.propertyeditor.GroupEditor;
 import gamification.service.CapacitadorService;
 import gamification.service.GroupService;
+import gamification.service.impl.AuthenticationUserDetails;
 
 @Controller
 @RequestMapping(value="capacitadores")
@@ -155,5 +157,24 @@ public class CapacitadoresController extends AppController
 			}
 			return modelo;
 		}
+	}
+	/**
+	 * Muestra el perfil del capacitador
+	 * @param capacitador_id
+	 * @return
+	 */
+	@Descripcion(value="Capacitadores: mostrar perfil",permission="ROLE_CAPACITADORES_MI_PERFIL")
+	@RequestMapping(value="/mi_perfil/{capacitador_id}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_CAPACITADORES_MI_PERFIL')")
+	public ModelAndView mostrarPerfilCapacitador(@PathVariable("capacitador_id") int capacitador_id)
+	{
+		ModelAndView m=new ModelAndView("capacitadores_mi_perfil");
+		// Finalmente es un riesgo de seguridad permitir que el id de la persona
+		// sea leido de la variable de GET. La voy a ignorar, buscando la persona
+		// que corresponde al usuario autenticado.
+		AuthenticationUserDetails user=(AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Capacitador c=(Capacitador)user.getUser().getPersona();
+		m.addObject("capacitador",c);
+		return m;
 	}
 }

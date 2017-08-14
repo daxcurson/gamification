@@ -35,8 +35,11 @@
 				<sec:authorize access="hasRole('ROLE_EVALUACIONES_TOMADAS_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/"><span class="glyphicon glyphicon-user"></span>Mis Evaluaciones</a></li>
 				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_CAPACITADORES_MI_PERFIL')">
+					<li><a href="${pageContext.request.contextPath}/capacitadores/mi_perfil/${persona.id}"><span class="glyphicon glyphicon-user"></span>Mi perfil</a></li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_ESTUDIANTES_MI_PERFIL')">
-					<li><a href="${pageContext.request.contextPath}/estudiantes/mi_perfil"><span class="glyphicon glyphicon-user"></span>Mi perfil</a></li>
+					<li><a href="${pageContext.request.contextPath}/estudiantes/mi_perfil/${persona.id}"><span class="glyphicon glyphicon-user"></span>Mi perfil</a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CONFIGURACION_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/configuracion/"><span class="glyphicon glyphicon-cog"></span>Configuraci&oacute;n</a></li>

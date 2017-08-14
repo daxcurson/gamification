@@ -37,6 +37,8 @@ public class Inscripcion implements Serializable
 	private boolean activa;
 	@OneToMany(targetEntity=EvaluacionTomada.class,mappedBy="inscripcion",fetch=FetchType.LAZY)
 	private List<EvaluacionTomada> evaluaciones;
+	private boolean aprobada;
+	private int puntos;
 	
 	public int getId() {
 		return id;
@@ -73,5 +75,17 @@ public class Inscripcion implements Serializable
 	}
 	public void setEvaluaciones(List<EvaluacionTomada> evaluaciones) {
 		this.evaluaciones = evaluaciones;
+	}
+	public boolean isAprobada() {
+		return aprobada;
+	}
+	public void setAprobada(boolean aprobada) {
+		this.aprobada = aprobada;
+	}
+	public int getPuntos() {
+		return puntos;
+	}
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
 	}
 }

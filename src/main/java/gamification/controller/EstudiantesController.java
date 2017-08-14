@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,9 +29,13 @@ import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
 import gamification.exceptions.EstudianteExistenteException;
 import gamification.model.Group;
+import gamification.model.Inscripcion;
 import gamification.model.Estudiante;
 import gamification.model.propertyeditor.GroupEditor;
 import gamification.service.GroupService;
+import gamification.service.InscripcionService;
+import gamification.service.impl.AuthenticationUserDetails;
+import gamification.service.CursoService;
 import gamification.service.EstudianteService;
 
 @Controller
@@ -43,6 +48,10 @@ public class EstudiantesController extends AppController
 
 	@Autowired
 	private EstudianteService estudianteService;
+	@Autowired
+	private CursoService cursoService;
+	@Autowired
+	private InscripcionService inscripcionService;
 	@Autowired
 	private GroupService groupService;
 	
@@ -158,7 +167,7 @@ public class EstudiantesController extends AppController
 		}
 	}
 	@Descripcion(value="Mostrar perfil de Estudiante",permission="ROLE_ESTUDIANTES_MI_PERFIL")
-	@RequestMapping(value="/mi_perfil/{estudianteId}",method=RequestMethod.POST)
+	@RequestMapping(value="/mi_perfil/{estudianteId}",method=RequestMethod.GET)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_ESTUDIANTES_MI_PERFIL')")
 	public ModelAndView mostrarPerfilEstudiante()
 	{
@@ -167,6 +176,11 @@ public class EstudiantesController extends AppController
 		// mis cursos aprobados,
 		// mis logros,
 		// mis evaluaciones tomadas.
+		AuthenticationUserDetails user=(AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Estudiante e=(Estudiante)user.getUser().getPersona();
+		m.addObject("estudiante",e);
+		List<Inscripcion> inscripciones=inscripcionService.listarInscripcionesEstudiante(e.getId());
+		m.addObject("mis_inscripciones",inscripciones);
 		return m;
 	}
 }

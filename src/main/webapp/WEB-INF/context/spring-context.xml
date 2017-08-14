@@ -27,6 +27,7 @@
 	<mvc:interceptors>
 		<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
 			p:paramName="lang" />
+		<bean id="userIdInterceptor" class="gamification.controller.UserIdInterceptor" />
 	</mvc:interceptors>
 
 	<bean id="tilesViewResolver"

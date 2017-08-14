@@ -88,6 +88,7 @@ public class EvaluacionesCapacitadorController extends AppController
 	public ModelAndView mostrarExamenACorregir(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id)
 	{
 		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
+		log.trace("Estoy en mostrarExamenACorregir, evaluacion_tomada.id vale "+examen.getId());
 		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,new Correccion());
 		return modelo;
 	}
@@ -98,17 +99,19 @@ public class EvaluacionesCapacitadorController extends AppController
 			@ModelAttribute("correccion") Correccion correccion)
 	{
 		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
+		log.trace("Estoy en mostrarExamenACorregirConCorreccion, evaluacion_tomada.id vale "+examen.getId());
 		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,correccion);
 		return modelo;
 	}
 
-	@RequestMapping(value="/corregir/{evaluacion_tomada_id}",method=RequestMethod.POST)
+	@RequestMapping(value="/corregir/{evaluacion_tomada_id}/{correccionId}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
 	public ModelAndView grabarCorreccionExamen(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
 			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada,
 			@ModelAttribute("correccion") Correccion correccion,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
+		log.trace("El id de la evaluacion tomada es: "+evaluacion_tomada.getId());
 		if(result.hasErrors())
 		{
 			List<ObjectError> lista_errores=result.getAllErrors();
@@ -138,6 +141,8 @@ public class EvaluacionesCapacitadorController extends AppController
 	{
 		ModelAndView modelo=new ModelAndView("evaluaciones_capacitador_mostrar_pregunta");
 		modelo.addObject("evaluacion_tomada",evaluacion_tomada);
+		log.trace("Estoy en cargarFormMostrarRespuesta, evaluacion_tomada.id vale: "+evaluacion_tomada.getId());
+
 		Optional<Respuesta> r=evaluacion_tomada.getRespuestas().stream().filter(resp -> resp.getId() == respuesta_id).findFirst();
 		modelo.addObject("respuesta",r.get());
 		modelo.addObject("notas",Nota.values());
@@ -152,6 +157,7 @@ public class EvaluacionesCapacitadorController extends AppController
 			@ModelAttribute("correccion") Correccion correccion
 			)
 	{
+		log.trace("Estoy en mostrarRespuesta, evaluacion_tomada.id vale: "+evaluacion_tomada.getId());
 		return this.cargarFormMostrarRespuesta(respuesta_id, evaluacion_tomada,correccion, new CorreccionPregunta());
 	}
 	@RequestMapping(value="/mostrar_respuesta/{respuesta_id}",method=RequestMethod.POST)
@@ -163,6 +169,7 @@ public class EvaluacionesCapacitadorController extends AppController
 			@ModelAttribute("respuesta") Respuesta respuesta,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
+		log.trace("Estoy en grabarComentarioProfesor, evaluacion_tomada.id vale: "+evaluacion_tomada.getId());
 		if(result.hasErrors())
 		{
 			List<ObjectError> lista_errores=result.getAllErrors();

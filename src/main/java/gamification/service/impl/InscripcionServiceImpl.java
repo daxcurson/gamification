@@ -41,6 +41,9 @@ public class InscripcionServiceImpl implements InscripcionService
 		// registrado en el sistema, sea capacitador o estudiante!
 		AuthenticationUserDetails user=(AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		inscripcion.setEstudiante((Estudiante)user.getUser().getPersona());
+		// Valores por defecto
+		inscripcion.setAprobada(false);
+		inscripcion.setPuntos(0);
 		inscripcionDAO.agregarInscripcion(inscripcion);
 	}
 }

@@ -6,6 +6,7 @@ import gamification.exceptions.CursoExistenteException;
 import gamification.model.Capacitador;
 import gamification.model.Curso;
 import gamification.model.CursoOferta;
+import gamification.model.Estudiante;
 import gamification.model.TemaCurso;
 
 public interface CursoService 
@@ -24,4 +25,5 @@ public interface CursoService
 	public void grabarCursoOferta(CursoOferta oferta);
 	public List<CursoOferta> listarOfertasTodas();
 	public List<Curso> listarCursosCapacitador(Capacitador c);
+	public List<Curso> listarCursosCursados(Estudiante e);
 }

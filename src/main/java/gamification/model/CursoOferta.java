@@ -27,13 +27,16 @@ public class CursoOferta implements Serializable
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne
+	@ManyToOne(targetEntity=Curso.class)
 	@JoinColumn(name="curso_id")
 	private Curso curso;
 	private Date fecha_comienzo;
 	private Date fecha_fin;
 	@OneToMany(mappedBy="curso_oferta")
 	private List<Evaluacion> evaluaciones;
+	@OneToMany(targetEntity=Inscripcion.class,mappedBy="curso_oferta")
+	private List<Inscripcion> inscripciones;
+	
 	public int getId() {
 		return id;
 	}
@@ -64,5 +67,11 @@ public class CursoOferta implements Serializable
 	}
 	public void setEvaluaciones(List<Evaluacion> evaluaciones) {
 		this.evaluaciones = evaluaciones;
+	}
+	public List<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+	public void setInscripciones(List<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
 	}
 }

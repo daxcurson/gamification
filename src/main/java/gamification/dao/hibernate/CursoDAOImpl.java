@@ -56,4 +56,13 @@ public class CursoDAOImpl implements CursoDAO
 		return (List<Curso>) sessionFactory.getCurrentSession().createQuery("from Curso where capacitador_id="+capacitadorId).getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Curso> listarCursosCursados(int id) 
+	{
+		return (List<Curso>) sessionFactory.getCurrentSession().createNativeQuery("select cursos.id,cursos.codigo_curso,cursos.nombre from cursos,curso_ofertas,inscripciones "
+				+ "where cursos.id=curso_ofertas.curso_id and curso_ofertas.id=inscripciones.curso_oferta_id "
+				+ "and inscripciones.estudiante_id="+id).getResultList();
+	}
+
 }

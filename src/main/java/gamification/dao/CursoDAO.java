@@ -12,4 +12,5 @@ public interface CursoDAO
 	void agregarCurso(Curso curso) throws CursoExistenteException;
 	void grabarCurso(Curso curso) throws CursoExistenteException;
 	List<Curso> listarCursosCapacitador(Integer capacitadorId);
+	List<Curso> listarCursosCursados(int id);
 }

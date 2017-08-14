@@ -13,6 +13,7 @@ import gamification.exceptions.CursoExistenteException;
 import gamification.model.Capacitador;
 import gamification.model.Curso;
 import gamification.model.CursoOferta;
+import gamification.model.Estudiante;
 import gamification.model.TemaCurso;
 import gamification.service.CursoService;
 
@@ -111,5 +112,11 @@ public class CursoServiceImpl implements CursoService
 	public List<Curso> listarCursosCapacitador(Capacitador c) 
 	{
 		return cursoDAO.listarCursosCapacitador(c.getId());
+	}
+
+	@Override
+	public List<Curso> listarCursosCursados(Estudiante e) 
+	{
+		return cursoDAO.listarCursosCursados(e.getId());
 	}
 }
