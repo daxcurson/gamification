@@ -5,7 +5,7 @@
 		http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
 
 	<var name="correccion" class="gamification.model.Correccion"/>
-	<var name="correccionPregunta" class="gamification.model.CorreccionPregunta"/>
+	
 	<input name="examenTomadoId" type="int" required="true"/>
 	<!-- 
 	 input name="personaId" type="int" required="true"/>
