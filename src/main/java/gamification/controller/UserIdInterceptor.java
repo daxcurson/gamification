@@ -27,7 +27,8 @@ public class UserIdInterceptor extends HandlerInterceptorAdapter
 				!(auth.getPrincipal() instanceof String))
 		{
 			UserDetails u=(UserDetails) auth.getPrincipal();
-			modelAndView.addObject("persona",u.getUser().getPersona());
+			if(u!=null && u.getUser()!=null && u.getUser().getPersona()!=null && modelAndView!=null)
+				modelAndView.addObject("persona",u.getUser().getPersona());
 		}
 	}
 }

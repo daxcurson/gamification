@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gamification.dao.CorreccionDAO;
+import gamification.dao.CorreccionPreguntaDAO;
 import gamification.model.Capacitador;
 import gamification.model.Configuracion;
 import gamification.model.Correccion;
+import gamification.model.CorreccionPregunta;
 //import gamification.model.CorreccionPregunta;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
@@ -30,6 +32,7 @@ public class CorreccionServiceImpl implements CorreccionService
 	private ConfiguracionService configuracionService;
 	@Autowired
 	private InscripcionService inscripcionService;
+	@Autowired CorreccionPreguntaDAO correccionPreguntaDAO;
 	@Override
 	public Correccion getCorreccionById(int id) 
 	{
@@ -58,5 +61,10 @@ public class CorreccionServiceImpl implements CorreccionService
 			}
 		}
 		correccionDAO.save(correccion);
+	}
+	@Override
+	public CorreccionPregunta obtenerCorreccionPregunta(int respuestaId)
+	{
+		return correccionPreguntaDAO.getByRespuesta(respuestaId);
 	}
 }

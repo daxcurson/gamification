@@ -20,6 +20,7 @@ import gamification.model.Estudiante;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
 import gamification.model.Respuesta;
+import gamification.service.CorreccionService;
 import gamification.service.CursoService;
 import gamification.service.EstudianteService;
 import gamification.service.EvaluacionService;
@@ -37,6 +38,8 @@ public class CorreccionExamenComponent
 	private EstudianteService estudianteService;
 	@Autowired
 	private InscripcionService inscripcionService;
+	@Autowired
+	private CorreccionService correccionService;
 	
 	public EvaluacionTomada getEvaluacionTomada(int evaluacionTomadaId)
 	{
@@ -65,6 +68,14 @@ public class CorreccionExamenComponent
 	public Inscripcion getInscripcionById(int inscripcionId)
 	{
 		return inscripcionService.getInscripcionById(inscripcionId);
+	}
+	public CorreccionPregunta getCorreccionPreguntaFor(int respuestaId)
+	{
+		// Si hay un nulo,
+		CorreccionPregunta p=correccionService.obtenerCorreccionPregunta(respuestaId);
+		if(p==null)
+			p=new CorreccionPregunta();
+		return p;
 	}
 	public Event buscarRespuesta(int respuestaId)
 	{

@@ -30,6 +30,7 @@ public class Curso implements Serializable
 	@NotEmpty
 	private String nombre;
 	private String codigo_curso;
+	private int puntos;
 	@ManyToOne
 	@JoinColumn(name="capacitador_id")
 	private Capacitador capacitador;
@@ -65,6 +66,12 @@ public class Curso implements Serializable
 	}
 	public void setOfertas(List<CursoOferta> ofertas) {
 		this.ofertas = ofertas;
+	}
+	public int getPuntos() {
+		return puntos;
+	}
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
 	}
 	
 }

@@ -59,7 +59,9 @@ y las respuestas dadas por el estudiante.</p>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<td><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a>
+		<td>
+		<a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a> | 
+		<a href="${flowExecutionUrl}&_eventId=corregir&respuesta_id=${respuesta.id}&examenTomadoId=${evaluacion_tomada.id}">Corregir con flow</a> | 
 		<input type="submit" id="corregir" name="_eventId_corregir" value="Corregir"/>
 		</td>
 	</tr>
