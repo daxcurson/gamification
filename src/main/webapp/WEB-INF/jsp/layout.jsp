@@ -22,6 +22,8 @@
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cf-4053.kxcdn.com/conversational-form/0.9.6/conversational-form.min.js"></script>
+    
   </head>
 
   <body>

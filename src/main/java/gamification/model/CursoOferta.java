@@ -55,6 +55,7 @@ public class CursoOferta implements Serializable
 	public void setFecha_fin(Date fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
+	@JsonBackReference
 	public Curso getCurso() {
 		return curso;
 	}

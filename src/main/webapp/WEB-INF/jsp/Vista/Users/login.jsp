@@ -3,6 +3,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page session="false" %>
 
+<script>
+$(document).ready(function()
+		{
+			$("#login-form").conversationalForm({
+				
+			});
+		});
+
+</script>
+
 <div class="row">
 	<h1 class="txt-color-red login-header-big">Acceso al sistema Gamification</h1>
 	<form method="post" action="${pageContext.request.contextPath}/j_spring_security_check" id="login-form">
@@ -10,11 +20,11 @@
 		<fieldset>
 		<div class="form-group">
 			<label for="UserUsername">Login</label>
-			<input type="text" id="UserUsername" class="form-control" name="j_username">
+			<input type="text" id="UserUsername" class="form-control" name="j_username" cf-questions="Hola! </br> Como estas?</br> Veo que estas de vuelta para aprender con nosotros! :) </br> Cuál es tu nombre de usuario?"/>
 		</div>
 		<div class="form-group">
 			<label for="UserPassword">Clave</label>
-			<input type="password" id="UserPassword" class="form-control" name="j_password">
+			<input type="password" id="UserPassword" class="form-control" name="j_password" cf-questions="Bienvenido!</br> Necesitamos saber tu clave ultrasecreta :/ para verificar tu identidad"/>
 		</div>
 		<div class="checkbox">
 			<label>
