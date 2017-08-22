@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="inscripciones")
 public class Inscripcion implements Serializable
@@ -46,12 +48,14 @@ public class Inscripcion implements Serializable
 	public void setId(int id) {
 		this.id = id;
 	}
+	@JsonBackReference
 	public CursoOferta getCurso_oferta() {
 		return curso_oferta;
 	}
 	public void setCurso_oferta(CursoOferta curso) {
 		this.curso_oferta = curso;
 	}
+	@JsonBackReference
 	public Estudiante getEstudiante() {
 		return estudiante;
 	}

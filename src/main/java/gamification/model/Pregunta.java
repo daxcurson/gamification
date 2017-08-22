@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="preguntas")
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -47,6 +49,7 @@ public class Pregunta implements Serializable
 	public void setTipo_pregunta(TipoPregunta tipoPregunta) {
 		this.tipo_pregunta = tipoPregunta;
 	}
+	@JsonBackReference
 	public Evaluacion getEvaluacion() {
 		return evaluacion;
 	}

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -141,5 +142,14 @@ public class EvaluacionesTomadasController
 			redirectAttributes.addFlashAttribute("message","Evaluacion agregada exitosamente");
 			return modelo;
 		}
+	}
+	/**
+	 * Da el json de una pregunta sola, para cargarla por javascript en el formulario.
+	 */
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_TOMADAS_ADD')")
+	@RequestMapping(value = "/pregunta/{preguntaNro}", method = RequestMethod.GET)
+	public @ResponseBody Pregunta preguntaNro(@PathVariable("preguntaNro") int preguntaNro)
+	{
+		return preguntaService.getById(preguntaNro);
 	}
 }

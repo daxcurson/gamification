@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="evaluaciones")
 public class Evaluacion implements Serializable
@@ -38,6 +40,7 @@ public class Evaluacion implements Serializable
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	@JsonBackReference
 	public CursoOferta getCurso_oferta() {
 		return curso_oferta;
 	}
