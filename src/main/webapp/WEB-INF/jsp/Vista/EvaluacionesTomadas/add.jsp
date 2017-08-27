@@ -5,9 +5,6 @@
 
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
-<script type="text/javascript" src="https://cf-4053.kxcdn.com/conversational-form/0.9.6/conversational-form.min.js"></script>
-<%
-%>
 
 <script type="text/javascript">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/preguntas.js" %>
