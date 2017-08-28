@@ -15,8 +15,6 @@ import gamification.model.Capacitador;
 import gamification.model.Configuracion;
 import gamification.model.Correccion;
 import gamification.model.CorreccionPregunta;
-//import gamification.model.CorreccionPregunta;
-import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
 import gamification.service.ConfiguracionService;
 import gamification.service.CorreccionService;
@@ -40,9 +38,8 @@ public class CorreccionServiceImpl implements CorreccionService
 	}
 	@Override
 	@Transactional
-	public void grabarCorreccion(EvaluacionTomada evaluacion_tomada, Correccion correccion,Capacitador capacitador) 
+	public void grabarCorreccion(Correccion correccion,Capacitador capacitador) 
 	{
-		correccion.setEvaluacion_tomada(evaluacion_tomada);
 		correccion.setFecha(new Date());
 		correccion.setCapacitador(capacitador);
 		// Ahora: si la correccion es mayor a la nota de aprobacion, vamos
@@ -52,13 +49,28 @@ public class CorreccionServiceImpl implements CorreccionService
 		if(nota!=null)
 		{
 			int nota_aprobacion=Integer.parseInt(nota.getConfig_valor());
+			Inscripcion insc=correccion.getEvaluacion_tomada().getInscripcion();
+			boolean aprobada_antes=insc.isAprobada();
 			if(correccion.getNota()>=nota_aprobacion)
 			{
 				// Busco la inscripcion del estudiante para aprobarla.
-				Inscripcion insc=evaluacion_tomada.getInscripcion();
-				insc.setAprobada(true);
-				inscripcionService.grabarInscripcion(insc);
+				// Si no esta aprobada, la apruebo y le agrego los puntos del curso. 
+				// Si antes estaba aprobada, y ahora no lo esta, le quito los puntos.
+				if(!aprobada_antes)
+				{
+					insc.setAprobada(true);
+					insc.setPuntos(correccion.getEvaluacion_tomada().getCurso_oferta().getCurso().getPuntos());
+				}
 			}
+			else
+			{
+				if(aprobada_antes)
+				{
+					insc.setAprobada(false);
+					insc.setPuntos(0);
+				}
+			}
+			inscripcionService.grabarInscripcion(insc);
 		}
 		correccionDAO.save(correccion);
 	}

@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,36 +84,25 @@ public class EvaluacionesCapacitadorController extends AppController
 		v.addObject("correccion",correccion);
 		return v;
 	}
-	@RequestMapping(value="/corregir/{evaluacion_tomada_id}",method=RequestMethod.GET)
+	@RequestMapping(value="/nueva_correccion/{evaluacion_tomada_id}",method=RequestMethod.GET)
 	@Descripcion(value="Capacitador: corregir examen",permission="ROLE_EVALUACIONES_CAPACITADOR_CORREGIR")
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
-	public ModelAndView mostrarExamenACorregir(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id)
+	public ModelAndView nuevaCorreccion(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id)
 	{
+		Correccion c=new Correccion();
 		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
-		log.trace("Estoy en mostrarExamenACorregir, evaluacion_tomada.id vale "+examen.getId());
-		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,new Correccion());
-		return modelo;
-	}
-	@RequestMapping(value="/corregir/{evaluacion_tomada_id}/{correccionId}",method=RequestMethod.GET)
-	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
-	public ModelAndView mostrarExamenACorregirConCorreccion(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
-			@PathVariable("correccionId") int correccionId,
-			@ModelAttribute("correccion") Correccion correccion)
-	{
-		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(evaluacion_tomada_id);
-		log.trace("Estoy en mostrarExamenACorregirConCorreccion, evaluacion_tomada.id vale "+examen.getId());
-		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,correccion);
+		c.setEvaluacion_tomada(examen);
+		log.trace("Estoy en nuevaCorreccion, evaluacion_tomada.id vale "+examen.getId());
+		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,c);
 		return modelo;
 	}
 
-	@RequestMapping(value="/corregir/{evaluacion_tomada_id}/{correccionId}",method=RequestMethod.POST)
+	@RequestMapping(value="/nueva_correccion/{evaluacion_tomada_id}",method=RequestMethod.POST)
 	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
-	public ModelAndView grabarCorreccionExamen(@PathVariable("evaluacion_tomada_id") int evaluacion_tomada_id,
-			@ModelAttribute("evaluacion_tomada") EvaluacionTomada evaluacion_tomada,
-			@ModelAttribute("correccion") Correccion correccion,
+	public ModelAndView grabarNuevaCorreccion(
+			@Valid @ModelAttribute("correccion") Correccion correccion,
 			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
 	{
-		log.trace("El id de la evaluacion tomada es: "+evaluacion_tomada.getId());
 		if(result.hasErrors())
 		{
 			List<ObjectError> lista_errores=result.getAllErrors();
@@ -120,20 +111,57 @@ public class EvaluacionesCapacitadorController extends AppController
 			{
 				log.trace("Error: "+i.next().toString());
 			}
-			ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",evaluacion_tomada,correccion);
+			ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",correccion.getEvaluacion_tomada(),correccion);
 			return modelo;
 		}
 		else
 		{
-			ModelAndView modelo=new ModelAndView("redirect:/menu");
 			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Capacitador c=(Capacitador) user.getUser().getPersona();
-			log.trace("El id de la correccion es: "+correccion.getId());
-			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
-			redirectAttributes.addFlashAttribute("message","Comentario agregado");
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/listar/"+correccion.getEvaluacion_tomada().getCurso_oferta().getCurso().getId());
+			correccionService.grabarCorreccion(correccion,c);
+			redirectAttributes.addFlashAttribute("message","Correccion Agregada");
 			return modelo;
 		}
 	}
+	@RequestMapping(value="/editar_correccion/{correccion_id}",method=RequestMethod.GET)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
+	public ModelAndView editarCorreccion(@PathVariable("correccion_id") int correccion_id)
+	{
+		Correccion correccion=correccionService.getCorreccionById(correccion_id);
+		EvaluacionTomada examen=evaluacionService.getEvaluacionTomadaById(correccion.getEvaluacion_tomada().getId());
+		log.trace("Estoy en editarCorreccion, evaluacion_tomada.id vale "+examen.getId());
+		ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",examen,correccion);
+		return modelo;
+	}
+	@RequestMapping(value="/editar_correccion/{correccion_id}",method=RequestMethod.POST)
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_EVALUACIONES_CAPACITADOR_CORREGIR')")
+	public ModelAndView grabarEdicionCorreccion(
+			@Valid @ModelAttribute("correccion") Correccion correccion,
+			BindingResult result,ModelMap model,final RedirectAttributes redirectAttributes)
+	{
+		if(result.hasErrors())
+		{
+			List<ObjectError> lista_errores=result.getAllErrors();
+			Iterator<ObjectError> i=lista_errores.iterator();
+			while(i.hasNext())
+			{
+				log.trace("Error: "+i.next().toString());
+			}
+			ModelAndView modelo=this.cargarExamen("evaluaciones_capacitador_corregir",correccion.getEvaluacion_tomada(),correccion);
+			return modelo;
+		}
+		else
+		{
+			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Capacitador c=(Capacitador) user.getUser().getPersona();
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/listar/"+correccion.getEvaluacion_tomada().getCurso_oferta().getCurso().getId());
+			correccionService.grabarCorreccion(correccion,c);
+			redirectAttributes.addFlashAttribute("message","Correccion Editada");
+			return modelo;
+		}
+	}
+	
 	private ModelAndView cargarFormMostrarRespuesta(int respuesta_id,
 			EvaluacionTomada evaluacion_tomada,
 			Correccion correccion,
@@ -199,8 +227,8 @@ public class EvaluacionesCapacitadorController extends AppController
 			AuthenticationUserDetails user= (AuthenticationUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Capacitador c=(Capacitador) user.getUser().getPersona();
 			log.trace("El id de la correccion es: "+correccion.getId());
-			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/corregir/"+evaluacion_tomada.getId()+"/"+correccion.getId());
-			correccionService.grabarCorreccion(evaluacion_tomada,correccion,c);
+			ModelAndView modelo=new ModelAndView("redirect:/evaluaciones_capacitador/editar_correccion/"+correccion.getId());
+			correccionService.grabarCorreccion(correccion,c);
 			redirectAttributes.addFlashAttribute("message","Comentario agregado");
 			return modelo;
 		}

@@ -2,14 +2,14 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <h2>Corregir examen</h2>
 
 <%
 // Aqui va la lista de preguntas del examen y las respuestas que dio el estudiante.
 %>
-<form:form commandName="correccion" method="post" action="${pageContext.request.contextPath}/evaluaciones_capacitador/corregir/${evaluacion_tomada.id}">
+<form:form commandName="correccion" method="post">
 <form:input type="hidden" path="id" value="${id}"/>
 <table class="table">
 <tr><th>Estudiante</th><th>Curso</th><th>Fecha evaluaci&oacute;n</th></tr>
@@ -60,8 +60,7 @@ y las respuestas dadas por el estudiante.</p>
 			</c:otherwise>
 		</c:choose>
 		<td>
-		<a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a> | 
-		<a href="${flowExecutionUrl}&_eventId=corregir&respuesta_id=${respuesta.id}&examenTomadoId=${evaluacion_tomada.id}">Corregir con flow</a> | 
+		<a href="${pageContext.request.contextPath}/evaluaciones_capacitador/mostrar_respuesta/${respuesta.id}">Corregir</a> 
 		<input type="submit" id="corregir" name="_eventId_corregir" value="Corregir"/>
 		</td>
 	</tr>

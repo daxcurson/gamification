@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="correcciones")
 public class Correccion implements Serializable
@@ -45,6 +47,7 @@ public class Correccion implements Serializable
 	public void setId(int id) {
 		this.id = id;
 	}
+	@JsonBackReference
 	public EvaluacionTomada getEvaluacion_tomada() {
 		return evaluacion_tomada;
 	}

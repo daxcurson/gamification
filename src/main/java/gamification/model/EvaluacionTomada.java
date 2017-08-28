@@ -41,6 +41,8 @@ public class EvaluacionTomada implements Serializable
 	
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="evaluacion_tomada")
 	private List<Respuesta> respuestas=new LinkedList<Respuesta>();
+	@OneToMany(cascade={CascadeType.ALL},mappedBy="evaluacion_tomada")
+	private List<Correccion> correcciones=new LinkedList<Correccion>();
 	
 	public int getId() {
 		return id;
@@ -77,5 +79,11 @@ public class EvaluacionTomada implements Serializable
 	}
 	public void setRespuestas(List<Respuesta> respuestas) {
 		this.respuestas = respuestas;
+	}
+	public List<Correccion> getCorrecciones() {
+		return correcciones;
+	}
+	public void setCorrecciones(List<Correccion> correcciones) {
+		this.correcciones = correcciones;
 	}
 }

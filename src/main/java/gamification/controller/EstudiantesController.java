@@ -35,7 +35,7 @@ import gamification.model.propertyeditor.GroupEditor;
 import gamification.service.GroupService;
 import gamification.service.InscripcionService;
 import gamification.service.impl.AuthenticationUserDetails;
-import gamification.service.CursoService;
+//import gamification.service.CursoService;
 import gamification.service.EstudianteService;
 
 @Controller
@@ -48,8 +48,8 @@ public class EstudiantesController extends AppController
 
 	@Autowired
 	private EstudianteService estudianteService;
-	@Autowired
-	private CursoService cursoService;
+	//@Autowired
+	//private CursoService cursoService;
 	@Autowired
 	private InscripcionService inscripcionService;
 	@Autowired

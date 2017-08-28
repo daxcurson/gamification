@@ -1,5 +1,8 @@
 package gamification.dao.hibernate;
 
+import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import gamification.dao.CorreccionDAO;
 import gamification.model.Correccion;
+import gamification.model.CorreccionPregunta;
 
 @Repository
 public class CorreccionDAOImpl implements CorreccionDAO
@@ -17,7 +21,10 @@ public class CorreccionDAOImpl implements CorreccionDAO
 	@Override
 	public Correccion getById(int correccionId) 
 	{
-		return (Correccion)sessionFactory.getCurrentSession().createQuery("from Correccion where id="+correccionId).getSingleResult();
+		Correccion c= (Correccion)sessionFactory.getCurrentSession().createQuery("from Correccion where id="+correccionId).getSingleResult();
+		List<CorreccionPregunta> cc=c.getCorrecciones();
+		Hibernate.initialize(cc);
+		return c;
 	}
 
 	@Override
