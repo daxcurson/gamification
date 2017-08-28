@@ -11,7 +11,7 @@
 <p>Cursos tomados</p>
 
 <table class="table">
-<tr><th>C&oacute;digo Curso</th><th>Nombre</th><th>Aprobado</th></tr>
+<tr><th>C&oacute;digo Curso</th><th>Nombre</th><th>Aprobado</th><th>Puntos obtenidos</th></tr>
 <c:forEach items="${mis_inscripciones}" var="inscripcion">
 <tr>
 <td><c:out value="${inscripcion.curso_oferta.curso.codigo_curso}"/></td>
@@ -20,6 +20,7 @@
 <img src="${pageContext.request.contextPath}/img/medalla.png" height="50" width="50"/>
 </c:if>
 </td>
+<td><c:out value="${inscripcion.puntos}"/></td>
 </tr>
 </c:forEach>
 </table>

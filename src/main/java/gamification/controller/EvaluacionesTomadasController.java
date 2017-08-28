@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gamification.documentation.Descripcion;
 import gamification.documentation.DescripcionClase;
+import gamification.model.Estudiante;
 import gamification.model.Evaluacion;
 import gamification.model.EvaluacionTomada;
 import gamification.model.Inscripcion;
@@ -79,7 +80,12 @@ public class EvaluacionesTomadasController
 		// pido las evaluaciones que este estudiante haya tomado.
 		AuthenticationUserDetails auth = (AuthenticationUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user=auth.getUser();
-		modelo.addObject("evaluaciones_tomadas",evaluacionService.listarEvaluacionesTomadas(user.getId()));
+		if(user.getPersona() instanceof Estudiante)
+		{
+			// Si soy estudiante, pido las evaluaciones tomadas.
+			Estudiante e=(Estudiante)user.getPersona();
+			modelo.addObject("evaluaciones_tomadas",evaluacionService.listarEvaluacionesTomadas(e.getId()));
+		}
 		return modelo;
 	}
 	/**
