@@ -23,6 +23,7 @@ public class Estudiante extends Persona implements Serializable
 	 * la base de datos. Es el total de los puntos obtenidos por las inscripciones
 	 * aprobadas.
 	 */
+	@Transient
 	@Formula("(select sum(insc.puntos) from inscripciones insc where insc.aprobada=1)")
 	private int puntos;
 	
