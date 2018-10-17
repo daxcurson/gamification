@@ -29,4 +29,7 @@ ${evaluacion.descripcion}
 <c:if test="${pregunta.tipo_pregunta.codigo=='BLOCKLY'}">
 <%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/blockly.jsp" %>
 </c:if>
+<c:if test="${pregunta.tipo_pregunta.codigo=='TEXTO'}">
+<%@include file="/WEB-INF/jsp/Vista/EvaluacionesTomadas/texto.jsp" %>
+</c:if>
 </c:forEach>

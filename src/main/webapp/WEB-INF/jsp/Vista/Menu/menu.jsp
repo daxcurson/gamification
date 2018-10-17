@@ -20,6 +20,9 @@
 <sec:authorize access="hasRole('ROLE_INSCRIPCIONES_MOSTRAR_MENU')">
 <li><a href="${pageContext.request.contextPath}/inscripciones/index">Mis Inscripciones a Cursos</a></li>
 </sec:authorize>
+<sec:authorize access="hasRole('ROLE_EVALUACIONES_CAPACITADOR_MOSTRAR_MENU')">
+<li><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/index">Mis Evaluaciones para Corregir</a></li>
+</sec:authorize>
 <sec:authorize access="hasRole('ROLE_EVALUACIONES_MOSTRAR_MENU')">
 <li><a href="${pageContext.request.contextPath}/evaluaciones/index">Evaluaciones</a></li>
 </sec:authorize>

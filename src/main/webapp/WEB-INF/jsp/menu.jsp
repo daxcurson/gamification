@@ -35,6 +35,9 @@
 				<sec:authorize access="hasRole('ROLE_EVALUACIONES_TOMADAS_MOSTRAR_MENU')">
 					<li><a href="${pageContext.request.contextPath}/evaluaciones_tomadas/"><span class="glyphicon glyphicon-user"></span>Mis Evaluaciones</a></li>
 				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_EVALUACIONES_CAPACITADOR_MOSTRAR_MENU')">
+					<li><a href="${pageContext.request.contextPath}/evaluaciones_capacitador/index">Mis Evaluaciones para Corregir</a></li>
+				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_CAPACITADORES_MI_PERFIL')">
 					<li><a href="${pageContext.request.contextPath}/capacitadores/mi_perfil/${persona.id}"><span class="glyphicon glyphicon-user"></span>Mi perfil</a></li>
 				</sec:authorize>
